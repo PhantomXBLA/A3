@@ -1,0 +1,22 @@
+\hypertarget{_category_8h_source}{}\doxysection{Category.\+h}
+\label{_category_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/Category.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/Category.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{keyword}{namespace }Category}
+\DoxyCodeLine{4 \{}
+\DoxyCodeLine{5     \textcolor{keyword}{enum} Type}
+\DoxyCodeLine{6     \{}
+\DoxyCodeLine{7         \textcolor{comment}{//each category has one bit to set to 1 except None-\/ this allows you to have multiple categories}}
+\DoxyCodeLine{8         \textcolor{comment}{// size\_t anyaircraft = Category::PlayerAircraft || Category::AlliedAircraft || Category::EnemyAircraft}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10         None = 0,}
+\DoxyCodeLine{11         Scene = 1 << 0,}
+\DoxyCodeLine{12         PlayerAircraft = 1 << 1,}
+\DoxyCodeLine{13         AlliedAircraft = 1 << 2,}
+\DoxyCodeLine{14         EnemyAircraft = 1 << 3,}
+\DoxyCodeLine{15     \};}
+\DoxyCodeLine{16 \}}
+
+\end{DoxyCode}

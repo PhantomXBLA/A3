@@ -1,0 +1,64 @@
+\hypertarget{_state_8h_source}{}\doxysection{State.\+h}
+\label{_state_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/State.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/State.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}States.h"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}d3dApp.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}World.h"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{keyword}{class }\mbox{\hyperlink{class_state_stack}{StateStack}};}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{class }\mbox{\hyperlink{class_player}{Player}};}
+\DoxyCodeLine{12 \textcolor{keyword}{class }\mbox{\hyperlink{class_game}{Game}};}
+\DoxyCodeLine{13 \textcolor{keyword}{class }\mbox{\hyperlink{class_world}{World}};}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{class }\mbox{\hyperlink{class_state}{State}}}
+\DoxyCodeLine{16 \{}
+\DoxyCodeLine{17 \textcolor{keyword}{public}:}
+\DoxyCodeLine{18     \textcolor{keyword}{typedef} std::unique\_ptr<State> StatePtr;}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20     \textcolor{keyword}{struct }\mbox{\hyperlink{struct_state_1_1_context}{Context}}}
+\DoxyCodeLine{21     \{}
+\DoxyCodeLine{22         \mbox{\hyperlink{struct_state_1_1_context}{Context}}(\mbox{\hyperlink{class_game}{Game}}* game, \mbox{\hyperlink{class_player}{Player}}* player);}
+\DoxyCodeLine{23         \mbox{\hyperlink{class_game}{Game}}* game;}
+\DoxyCodeLine{24         \mbox{\hyperlink{class_player}{Player}}* player;}
+\DoxyCodeLine{25 }
+\DoxyCodeLine{26         \mbox{\hyperlink{class_world}{World}}* world;}
+\DoxyCodeLine{27         \mbox{\hyperlink{class_scene_node}{SceneNode}}* mSceneGraph;}
+\DoxyCodeLine{28         }
+\DoxyCodeLine{29     \};}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32 \textcolor{keyword}{public}:}
+\DoxyCodeLine{33     \mbox{\hyperlink{class_state}{State}}(\mbox{\hyperlink{class_state_stack}{StateStack}}* stack, \mbox{\hyperlink{struct_state_1_1_context}{Context}}* context);}
+\DoxyCodeLine{34     \textcolor{keyword}{virtual}             \mbox{\hyperlink{class_state}{\string~State}}();}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}        draw() = 0;}
+\DoxyCodeLine{37     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool}        update(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt) = 0;}
+\DoxyCodeLine{38     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool}        handleEvent(WPARAM btnState) = 0;}
+\DoxyCodeLine{39     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool}        handleRealtimeInput() = 0;}
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{keyword}{public}:}
+\DoxyCodeLine{43     }
+\DoxyCodeLine{44     \textcolor{keywordtype}{void}                requestStackPush(States::ID stateID);}
+\DoxyCodeLine{45     \textcolor{keywordtype}{void}                requestStackPop();}
+\DoxyCodeLine{46     \textcolor{keywordtype}{void}                requestStateClear();}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48     \mbox{\hyperlink{struct_state_1_1_context}{Context}}              getContext() \textcolor{keyword}{const};}
+\DoxyCodeLine{49     \mbox{\hyperlink{class_state_stack}{StateStack}}*           mStack;}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51     \mbox{\hyperlink{struct_state_1_1_context}{Context}}*             mContext;}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53     \textcolor{comment}{//std::unique\_ptr<SceneNode> mSceneGraph;}}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55     std::vector<std::unique\_ptr<RenderItem>> mAllRitems;}
+\DoxyCodeLine{56     \mbox{\hyperlink{class_game}{Game}}* game;}
+\DoxyCodeLine{57 \};}
+\DoxyCodeLine{58 }
+
+\end{DoxyCode}

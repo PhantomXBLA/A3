@@ -1,0 +1,69 @@
+\hypertarget{_waves_8h_source}{}\doxysection{Waves.\+h}
+\label{_waves_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/Waves.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/Waves.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//***************************************************************************************}}
+\DoxyCodeLine{2 \textcolor{comment}{// Waves.h by Frank Luna (C) 2011 All Rights Reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{// Performs the calculations for the wave simulation.  After the simulation has been}}
+\DoxyCodeLine{5 \textcolor{comment}{// updated, the client must copy the current solution into vertex buffers for rendering.}}
+\DoxyCodeLine{6 \textcolor{comment}{// This class only does the calculations, it does not do any drawing.}}
+\DoxyCodeLine{7 \textcolor{comment}{//***************************************************************************************}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#ifndef WAVES\_H}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#define WAVES\_H}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <DirectXMath.h>}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{keyword}{class }\mbox{\hyperlink{class_waves}{Waves}}}
+\DoxyCodeLine{16 \{}
+\DoxyCodeLine{17 \textcolor{keyword}{public}:}
+\DoxyCodeLine{18     \mbox{\hyperlink{class_waves}{Waves}}(\textcolor{keywordtype}{int} m, \textcolor{keywordtype}{int} n, \textcolor{keywordtype}{float} dx, \textcolor{keywordtype}{float} dt, \textcolor{keywordtype}{float} speed, \textcolor{keywordtype}{float} damping);}
+\DoxyCodeLine{19     \mbox{\hyperlink{class_waves}{Waves}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_waves}{Waves}}\& rhs) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{20     \mbox{\hyperlink{class_waves}{Waves}}\& operator=(\textcolor{keyword}{const} \mbox{\hyperlink{class_waves}{Waves}}\& rhs) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{21     \mbox{\hyperlink{class_waves}{\string~Waves}}();}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     \textcolor{keywordtype}{int} RowCount()\textcolor{keyword}{const};}
+\DoxyCodeLine{24     \textcolor{keywordtype}{int} ColumnCount()\textcolor{keyword}{const};}
+\DoxyCodeLine{25     \textcolor{keywordtype}{int} VertexCount()\textcolor{keyword}{const};}
+\DoxyCodeLine{26     \textcolor{keywordtype}{int} TriangleCount()\textcolor{keyword}{const};}
+\DoxyCodeLine{27     \textcolor{keywordtype}{float} Width()\textcolor{keyword}{const};}
+\DoxyCodeLine{28     \textcolor{keywordtype}{float} Depth()\textcolor{keyword}{const};}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30     \textcolor{comment}{// Returns the solution at the ith grid point.}}
+\DoxyCodeLine{31     \textcolor{keyword}{const} DirectX::XMFLOAT3\& Position(\textcolor{keywordtype}{int} i)\textcolor{keyword}{const }\{ \textcolor{keywordflow}{return} mCurrSolution[i]; \}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \textcolor{comment}{// Returns the solution normal at the ith grid point.}}
+\DoxyCodeLine{34     \textcolor{keyword}{const} DirectX::XMFLOAT3\& Normal(\textcolor{keywordtype}{int} i)\textcolor{keyword}{const }\{ \textcolor{keywordflow}{return} mNormals[i]; \}}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     \textcolor{comment}{// Returns the unit tangent vector at the ith grid point in the local x-\/axis direction.}}
+\DoxyCodeLine{37     \textcolor{keyword}{const} DirectX::XMFLOAT3\& TangentX(\textcolor{keywordtype}{int} i)\textcolor{keyword}{const }\{ \textcolor{keywordflow}{return} mTangentX[i]; \}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     \textcolor{keywordtype}{void} Update(\textcolor{keywordtype}{float} dt);}
+\DoxyCodeLine{40     \textcolor{keywordtype}{void} Disturb(\textcolor{keywordtype}{int} i, \textcolor{keywordtype}{int} j, \textcolor{keywordtype}{float} magnitude);}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{keyword}{private}:}
+\DoxyCodeLine{43     \textcolor{keywordtype}{int} mNumRows = 0;}
+\DoxyCodeLine{44     \textcolor{keywordtype}{int} mNumCols = 0;}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \textcolor{keywordtype}{int} mVertexCount = 0;}
+\DoxyCodeLine{47     \textcolor{keywordtype}{int} mTriangleCount = 0;}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \textcolor{comment}{// Simulation constants we can precompute.}}
+\DoxyCodeLine{50     \textcolor{keywordtype}{float} mK1 = 0.0f;}
+\DoxyCodeLine{51     \textcolor{keywordtype}{float} mK2 = 0.0f;}
+\DoxyCodeLine{52     \textcolor{keywordtype}{float} mK3 = 0.0f;}
+\DoxyCodeLine{53 }
+\DoxyCodeLine{54     \textcolor{keywordtype}{float} mTimeStep = 0.0f;}
+\DoxyCodeLine{55     \textcolor{keywordtype}{float} mSpatialStep = 0.0f;}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57     std::vector<DirectX::XMFLOAT3> mPrevSolution;}
+\DoxyCodeLine{58     std::vector<DirectX::XMFLOAT3> mCurrSolution;}
+\DoxyCodeLine{59     std::vector<DirectX::XMFLOAT3> mNormals;}
+\DoxyCodeLine{60     std::vector<DirectX::XMFLOAT3> mTangentX;}
+\DoxyCodeLine{61 \};}
+\DoxyCodeLine{62 }
+\DoxyCodeLine{63 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// WAVES\_H}}
+
+\end{DoxyCode}

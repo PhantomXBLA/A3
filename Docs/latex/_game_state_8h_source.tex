@@ -1,0 +1,31 @@
+\hypertarget{_game_state_8h_source}{}\doxysection{Game\+State.\+h}
+\label{_game_state_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/GameState.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/GameState.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include "{}Player.h"{}}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}State.h"{}}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{keyword}{class }\mbox{\hyperlink{class_game_state}{GameState}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_state}{State}}}
+\DoxyCodeLine{8 \{}
+\DoxyCodeLine{9 \textcolor{keyword}{public}:}
+\DoxyCodeLine{10     \mbox{\hyperlink{class_game_state}{GameState}}(\mbox{\hyperlink{class_state_stack}{StateStack}}* stack, \mbox{\hyperlink{struct_state_1_1_context}{Context}}* context);}
+\DoxyCodeLine{11     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_game_state}{\string~GameState}}();}
+\DoxyCodeLine{12     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}        draw() \textcolor{keyword}{override};}
+\DoxyCodeLine{13     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool}        update(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt) \textcolor{keyword}{override};}
+\DoxyCodeLine{14     }
+\DoxyCodeLine{15     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} handleEvent(WPARAM btnState)\textcolor{keyword}{override};}
+\DoxyCodeLine{16     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} handleRealtimeInput()\textcolor{keyword}{override};}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{keyword}{private}:}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21     \textcolor{comment}{//World             mWorld;}}
+\DoxyCodeLine{22     \textcolor{comment}{//Player                mPlayer;}}
+\DoxyCodeLine{23     \textcolor{comment}{//Game*             game;}}
+\DoxyCodeLine{24 \};}
+\DoxyCodeLine{25 }
+
+\end{DoxyCode}

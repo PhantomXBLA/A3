@@ -1,0 +1,71 @@
+\hypertarget{class_player}{}\doxysection{Player Class Reference}
+\label{class_player}\index{Player@{Player}}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_player_a2da5df212d083bbb1460237f34ab0d88}\label{class_player_a2da5df212d083bbb1460237f34ab0d88}} 
+enum {\bfseries Action} \{ \newline
+{\bfseries Move\+Left}
+, {\bfseries Move\+Right}
+, {\bfseries Move\+Up}
+, {\bfseries Move\+Down}
+, \newline
+{\bfseries Get\+Position}
+, {\bfseries Action\+Count}
+, {\bfseries Stop}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_player_a204fbcc8b24629279bb6062e5211b2ec}{handle\+Event}} (\mbox{\hyperlink{class_command_queue}{Command\+Queue}} \&commands, const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&gt)
+\item 
+void \mbox{\hyperlink{class_player_a753fc3041f905738f934db67ce5239d4}{handle\+Realtime\+Input}} (\mbox{\hyperlink{class_command_queue}{Command\+Queue}} \&commands, const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&gt)
+\item 
+\mbox{\Hypertarget{class_player_a0687cf457b6ccccb7132f33858efa8fa}\label{class_player_a0687cf457b6ccccb7132f33858efa8fa}} 
+void {\bfseries assign\+Key} (Action action, std\+::string key)
+\item 
+\mbox{\Hypertarget{class_player_aea50efe2730c0ea39c8b6b23efe2240b}\label{class_player_aea50efe2730c0ea39c8b6b23efe2240b}} 
+std\+::string {\bfseries get\+Assigned\+Key} (Action action) const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_player_a204fbcc8b24629279bb6062e5211b2ec}\label{class_player_a204fbcc8b24629279bb6062e5211b2ec}} 
+\index{Player@{Player}!handleEvent@{handleEvent}}
+\index{handleEvent@{handleEvent}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{handleEvent()}{handleEvent()}}
+{\footnotesize\ttfamily void Player\+::handle\+Event (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_command_queue}{Command\+Queue}} \&}]{commands,  }\item[{const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&}]{gt }\end{DoxyParamCaption})}
+
+Event handling for the command when it is recieved.
+
+
+\begin{DoxyParams}{Parameters}
+{\em (commands)} & the command queue type that passes the command \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+no return type 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_player_a753fc3041f905738f934db67ce5239d4}\label{class_player_a753fc3041f905738f934db67ce5239d4}} 
+\index{Player@{Player}!handleRealtimeInput@{handleRealtimeInput}}
+\index{handleRealtimeInput@{handleRealtimeInput}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{handleRealtimeInput()}{handleRealtimeInput()}}
+{\footnotesize\ttfamily void Player\+::handle\+Realtime\+Input (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{class_command_queue}{Command\+Queue}} \&}]{commands,  }\item[{const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&}]{gt }\end{DoxyParamCaption})}
+
+Event handling for the command when recieved in the current frame
+
+
+\begin{DoxyParams}{Parameters}
+{\em (commands)} & the command telling the \mbox{\hyperlink{class_player_a204fbcc8b24629279bb6062e5211b2ec}{handle\+Event()}} which command is being called \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+no return type 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+A2-\/main/101251005\+\_\+101248866 -\/ lab assignment 2/101251005\+\_\+101248866 -\/ lab assignment 1/Player.\+h\item 
+A2-\/main/101251005\+\_\+101248866 -\/ lab assignment 2/101251005\+\_\+101248866 -\/ lab assignment 1/Player.\+cpp\end{DoxyCompactItemize}

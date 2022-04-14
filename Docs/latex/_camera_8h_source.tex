@@ -1,0 +1,106 @@
+\hypertarget{_camera_8h_source}{}\doxysection{Camera.\+h}
+\label{_camera_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/Camera.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/Camera.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//***************************************************************************************}}
+\DoxyCodeLine{2 \textcolor{comment}{// Camera.h }}
+\DoxyCodeLine{3 \textcolor{comment}{//   }}
+\DoxyCodeLine{4 \textcolor{comment}{// Simple first person style camera class that lets the viewer explore the 3D scene.}}
+\DoxyCodeLine{5 \textcolor{comment}{//   -\/It keeps track of the camera coordinate system relative to the world space}}
+\DoxyCodeLine{6 \textcolor{comment}{//    so that the view matrix can be constructed.  }}
+\DoxyCodeLine{7 \textcolor{comment}{//   -\/It keeps track of the viewing frustum of the camera so that the projection}}
+\DoxyCodeLine{8 \textcolor{comment}{//    matrix can be obtained.}}
+\DoxyCodeLine{9 \textcolor{comment}{//***************************************************************************************}}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#ifndef CAMERA\_H}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#define CAMERA\_H}}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include "{}d3dUtil.h"{}}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{keyword}{class }\mbox{\hyperlink{class_camera}{Camera}}}
+\DoxyCodeLine{17 \{}
+\DoxyCodeLine{18 \textcolor{keyword}{public}:}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20     \mbox{\hyperlink{class_camera}{Camera}}();}
+\DoxyCodeLine{21     \mbox{\hyperlink{class_camera}{\string~Camera}}();}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     \textcolor{comment}{// Get/Set world camera position.}}
+\DoxyCodeLine{24     DirectX::XMVECTOR GetPosition()\textcolor{keyword}{const};}
+\DoxyCodeLine{25     DirectX::XMFLOAT3 GetPosition3f()\textcolor{keyword}{const};}
+\DoxyCodeLine{26     \textcolor{keywordtype}{void} SetPosition(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y, \textcolor{keywordtype}{float} z);}
+\DoxyCodeLine{27     \textcolor{keywordtype}{void} SetPosition(\textcolor{keyword}{const} DirectX::XMFLOAT3\& v);}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     \textcolor{comment}{// Get camera basis vectors.}}
+\DoxyCodeLine{30     DirectX::XMVECTOR GetRight()\textcolor{keyword}{const};}
+\DoxyCodeLine{31     DirectX::XMFLOAT3 GetRight3f()\textcolor{keyword}{const};}
+\DoxyCodeLine{32     DirectX::XMVECTOR GetUp()\textcolor{keyword}{const};}
+\DoxyCodeLine{33     DirectX::XMFLOAT3 GetUp3f()\textcolor{keyword}{const};}
+\DoxyCodeLine{34     DirectX::XMVECTOR GetLook()\textcolor{keyword}{const};}
+\DoxyCodeLine{35     DirectX::XMFLOAT3 GetLook3f()\textcolor{keyword}{const};}
+\DoxyCodeLine{36 }
+\DoxyCodeLine{37     \textcolor{comment}{// Get frustum properties.}}
+\DoxyCodeLine{38     \textcolor{keywordtype}{float} GetNearZ()\textcolor{keyword}{const};}
+\DoxyCodeLine{39     \textcolor{keywordtype}{float} GetFarZ()\textcolor{keyword}{const};}
+\DoxyCodeLine{40     \textcolor{keywordtype}{float} GetAspect()\textcolor{keyword}{const};}
+\DoxyCodeLine{41     \textcolor{keywordtype}{float} GetFovY()\textcolor{keyword}{const};}
+\DoxyCodeLine{42     \textcolor{keywordtype}{float} GetFovX()\textcolor{keyword}{const};}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44     \textcolor{comment}{// Get near and far plane dimensions in view space coordinates.}}
+\DoxyCodeLine{45     \textcolor{keywordtype}{float} GetNearWindowWidth()\textcolor{keyword}{const};}
+\DoxyCodeLine{46     \textcolor{keywordtype}{float} GetNearWindowHeight()\textcolor{keyword}{const};}
+\DoxyCodeLine{47     \textcolor{keywordtype}{float} GetFarWindowWidth()\textcolor{keyword}{const};}
+\DoxyCodeLine{48     \textcolor{keywordtype}{float} GetFarWindowHeight()\textcolor{keyword}{const};}
+\DoxyCodeLine{49 }
+\DoxyCodeLine{50     \textcolor{comment}{// Set frustum.}}
+\DoxyCodeLine{51     \textcolor{keywordtype}{void} SetLens(\textcolor{keywordtype}{float} fovY, \textcolor{keywordtype}{float} aspect, \textcolor{keywordtype}{float} zn, \textcolor{keywordtype}{float} zf);}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53     \textcolor{comment}{// Define camera space via LookAt parameters.}}
+\DoxyCodeLine{54     \textcolor{keywordtype}{void} LookAt(DirectX::FXMVECTOR pos, DirectX::FXMVECTOR target, DirectX::FXMVECTOR worldUp);}
+\DoxyCodeLine{55     \textcolor{keywordtype}{void} LookAt(\textcolor{keyword}{const} DirectX::XMFLOAT3\& pos, \textcolor{keyword}{const} DirectX::XMFLOAT3\& target, \textcolor{keyword}{const} DirectX::XMFLOAT3\& up);}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57     \textcolor{comment}{// Get View/Proj matrices.}}
+\DoxyCodeLine{58     DirectX::XMMATRIX GetView()\textcolor{keyword}{const};}
+\DoxyCodeLine{59     DirectX::XMMATRIX GetProj()\textcolor{keyword}{const};}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     DirectX::XMFLOAT4X4 GetView4x4f()\textcolor{keyword}{const};}
+\DoxyCodeLine{62     DirectX::XMFLOAT4X4 GetProj4x4f()\textcolor{keyword}{const};}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64     \textcolor{comment}{// Strafe/Walk the camera a distance d.}}
+\DoxyCodeLine{65     \textcolor{keywordtype}{void} Strafe(\textcolor{keywordtype}{float} d);}
+\DoxyCodeLine{66     \textcolor{keywordtype}{void} Walk(\textcolor{keywordtype}{float} d);}
+\DoxyCodeLine{67     \textcolor{keywordtype}{void} Pedestal(\textcolor{keywordtype}{float} d);}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     \textcolor{comment}{// Rotate the camera.}}
+\DoxyCodeLine{70     \textcolor{keywordtype}{void} Pitch(\textcolor{keywordtype}{float} angle);}
+\DoxyCodeLine{71     \textcolor{keywordtype}{void} RotateY(\textcolor{keywordtype}{float} angle);}
+\DoxyCodeLine{72     \textcolor{keywordtype}{void} Roll(\textcolor{keywordtype}{float} angle);}
+\DoxyCodeLine{73 }
+\DoxyCodeLine{74     \textcolor{comment}{// After modifying camera position/orientation, call to rebuild the view matrix.}}
+\DoxyCodeLine{75     \textcolor{keywordtype}{void} UpdateViewMatrix();}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77 \textcolor{keyword}{private}:}
+\DoxyCodeLine{78 }
+\DoxyCodeLine{79     \textcolor{comment}{// Camera coordinate system with coordinates relative to world space.}}
+\DoxyCodeLine{80     DirectX::XMFLOAT3 mPosition = \{ 0.0f, 0.0f, 0.0f \};}
+\DoxyCodeLine{81     DirectX::XMFLOAT3 mRight = \{ 1.0f, 0.0f, 0.0f \};}
+\DoxyCodeLine{82     DirectX::XMFLOAT3 mUp = \{ 0.0f, 1.0f, 0.0f \};}
+\DoxyCodeLine{83     DirectX::XMFLOAT3 mLook = \{ 0.0f, 0.0f, 1.0f \};}
+\DoxyCodeLine{84 }
+\DoxyCodeLine{85     \textcolor{comment}{// Cache frustum properties.}}
+\DoxyCodeLine{86     \textcolor{keywordtype}{float} mNearZ = 0.0f;}
+\DoxyCodeLine{87     \textcolor{keywordtype}{float} mFarZ = 0.0f;}
+\DoxyCodeLine{88     \textcolor{keywordtype}{float} mAspect = 0.0f;}
+\DoxyCodeLine{89     \textcolor{keywordtype}{float} mFovY = 0.0f;}
+\DoxyCodeLine{90     \textcolor{keywordtype}{float} mNearWindowHeight = 0.0f;}
+\DoxyCodeLine{91     \textcolor{keywordtype}{float} mFarWindowHeight = 0.0f;}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93     \textcolor{keywordtype}{bool} mViewDirty = \textcolor{keyword}{true};}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     \textcolor{comment}{// Cache View/Proj matrices.}}
+\DoxyCodeLine{96     DirectX::XMFLOAT4X4 mView = MathHelper::Identity4x4();}
+\DoxyCodeLine{97     DirectX::XMFLOAT4X4 mProj = MathHelper::Identity4x4();}
+\DoxyCodeLine{98 \};}
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// CAMERA\_H}}
+
+\end{DoxyCode}

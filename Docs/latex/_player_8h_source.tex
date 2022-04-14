@@ -1,0 +1,47 @@
+\hypertarget{_player_8h_source}{}\doxysection{Player.\+h}
+\label{_player_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/Player.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/Player.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include "{}Command.h"{}}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <map>}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{keyword}{class }\mbox{\hyperlink{class_command_queue}{CommandQueue}};}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{class }\mbox{\hyperlink{class_player}{Player}}}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 \textcolor{keyword}{public}:}
+\DoxyCodeLine{12     \mbox{\hyperlink{class_player}{Player}}();}
+\DoxyCodeLine{17     \textcolor{keywordtype}{void}                    \mbox{\hyperlink{class_player_a204fbcc8b24629279bb6062e5211b2ec}{handleEvent}}(\mbox{\hyperlink{class_command_queue}{CommandQueue}}\& commands, \textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt);}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{23     \textcolor{keywordtype}{void}                    \mbox{\hyperlink{class_player_a753fc3041f905738f934db67ce5239d4}{handleRealtimeInput}}(\mbox{\hyperlink{class_command_queue}{CommandQueue}}\& commands, \textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt);}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#pragma region step 1}}
+\DoxyCodeLine{26     \textcolor{comment}{//static const float        PlayerSpeed;}}
+\DoxyCodeLine{27     \textcolor{keyword}{enum} Action}
+\DoxyCodeLine{28     \{}
+\DoxyCodeLine{29         MoveLeft,}
+\DoxyCodeLine{30         MoveRight,}
+\DoxyCodeLine{31         MoveUp,}
+\DoxyCodeLine{32         MoveDown,}
+\DoxyCodeLine{33         GetPosition,}
+\DoxyCodeLine{34         ActionCount,}
+\DoxyCodeLine{35         Stop}
+\DoxyCodeLine{36     \};}
+\DoxyCodeLine{37     \textcolor{keywordtype}{void}                        assignKey(Action action, std::string key);}
+\DoxyCodeLine{38     std::string                 getAssignedKey(Action action) \textcolor{keyword}{const};}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 \textcolor{keyword}{private}:}
+\DoxyCodeLine{41     \textcolor{keywordtype}{void}                    initializeActions();}
+\DoxyCodeLine{42     \textcolor{keyword}{static} \textcolor{keywordtype}{bool}             isRealtimeAction(Action action);}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{keyword}{private}:}
+\DoxyCodeLine{45     std::map<std::string, Action>           mKeyBinding;}
+\DoxyCodeLine{46     std::map<Action, Command>               mActionBinding;}
+\DoxyCodeLine{47 \textcolor{preprocessor}{\#pragma endregion}}
+\DoxyCodeLine{48 \};}
+\DoxyCodeLine{49 }
+
+\end{DoxyCode}

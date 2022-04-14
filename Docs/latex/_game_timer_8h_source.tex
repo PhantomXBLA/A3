@@ -1,0 +1,40 @@
+\hypertarget{_game_timer_8h_source}{}\doxysection{Game\+Timer.\+h}
+\label{_game_timer_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/GameTimer.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/GameTimer.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//***************************************************************************************}}
+\DoxyCodeLine{2 \textcolor{comment}{// GameTimer.h by Frank Luna (C) 2011 All Rights Reserved.}}
+\DoxyCodeLine{3 \textcolor{comment}{//***************************************************************************************}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#ifndef GAMETIMER\_H}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define GAMETIMER\_H}}
+\DoxyCodeLine{7 }
+\DoxyCodeLine{8 \textcolor{keyword}{class }\mbox{\hyperlink{class_game_timer}{GameTimer}}}
+\DoxyCodeLine{9 \{}
+\DoxyCodeLine{10 \textcolor{keyword}{public}:}
+\DoxyCodeLine{11     \mbox{\hyperlink{class_game_timer}{GameTimer}}();}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13     \textcolor{keywordtype}{float} TotalTime()\textcolor{keyword}{const}; \textcolor{comment}{// in seconds}}
+\DoxyCodeLine{14     \textcolor{keywordtype}{float} DeltaTime()\textcolor{keyword}{const}; \textcolor{comment}{// in seconds}}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16     \textcolor{keywordtype}{void} Reset(); \textcolor{comment}{// Call before message loop.}}
+\DoxyCodeLine{17     \textcolor{keywordtype}{void} Start(); \textcolor{comment}{// Call when unpaused.}}
+\DoxyCodeLine{18     \textcolor{keywordtype}{void} Stop();  \textcolor{comment}{// Call when paused.}}
+\DoxyCodeLine{19     \textcolor{keywordtype}{void} Tick();  \textcolor{comment}{// Call every frame.}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{keyword}{private}:}
+\DoxyCodeLine{22     \textcolor{keywordtype}{double} mSecondsPerCount;}
+\DoxyCodeLine{23     \textcolor{keywordtype}{double} mDeltaTime;}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25     \_\_int64 mBaseTime;}
+\DoxyCodeLine{26     \_\_int64 mPausedTime;}
+\DoxyCodeLine{27     \_\_int64 mStopTime;}
+\DoxyCodeLine{28     \_\_int64 mPrevTime;}
+\DoxyCodeLine{29     \_\_int64 mCurrTime;}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     \textcolor{keywordtype}{bool} mStopped;}
+\DoxyCodeLine{32 \};}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// GAMETIMER\_H}}
+
+\end{DoxyCode}

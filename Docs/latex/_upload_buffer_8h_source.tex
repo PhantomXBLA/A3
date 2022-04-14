@@ -1,0 +1,70 @@
+\hypertarget{_upload_buffer_8h_source}{}\doxysection{Upload\+Buffer.\+h}
+\label{_upload_buffer_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/UploadBuffer.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/UploadBuffer.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}d3dUtil.h"{}}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{6 \textcolor{keyword}{class }\mbox{\hyperlink{class_upload_buffer}{UploadBuffer}}}
+\DoxyCodeLine{7 \{}
+\DoxyCodeLine{8 \textcolor{keyword}{public}:}
+\DoxyCodeLine{9     \mbox{\hyperlink{class_upload_buffer}{UploadBuffer}}(ID3D12Device* device, UINT elementCount, \textcolor{keywordtype}{bool} isConstantBuffer) :}
+\DoxyCodeLine{10         mIsConstantBuffer(isConstantBuffer)}
+\DoxyCodeLine{11     \{}
+\DoxyCodeLine{12         mElementByteSize = \textcolor{keyword}{sizeof}(T);}
+\DoxyCodeLine{13 }
+\DoxyCodeLine{14         \textcolor{comment}{// Constant buffer elements need to be multiples of 256 bytes.}}
+\DoxyCodeLine{15         \textcolor{comment}{// This is because the hardware can only view constant data }}
+\DoxyCodeLine{16         \textcolor{comment}{// at m*256 byte offsets and of n*256 byte lengths. }}
+\DoxyCodeLine{17         \textcolor{comment}{// typedef struct D3D12\_CONSTANT\_BUFFER\_VIEW\_DESC \{}}
+\DoxyCodeLine{18         \textcolor{comment}{// UINT64 OffsetInBytes; // multiple of 256}}
+\DoxyCodeLine{19         \textcolor{comment}{// UINT   SizeInBytes;   // multiple of 256}}
+\DoxyCodeLine{20         \textcolor{comment}{// \} D3D12\_CONSTANT\_BUFFER\_VIEW\_DESC;}}
+\DoxyCodeLine{21         \textcolor{keywordflow}{if} (isConstantBuffer)}
+\DoxyCodeLine{22             mElementByteSize = d3dUtil::CalcConstantBufferByteSize(\textcolor{keyword}{sizeof}(T));}
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24         ThrowIfFailed(device-\/>CreateCommittedResource(}
+\DoxyCodeLine{25             \&CD3DX12\_HEAP\_PROPERTIES(D3D12\_HEAP\_TYPE\_UPLOAD),}
+\DoxyCodeLine{26             D3D12\_HEAP\_FLAG\_NONE,}
+\DoxyCodeLine{27             \&CD3DX12\_RESOURCE\_DESC::Buffer(mElementByteSize * elementCount),}
+\DoxyCodeLine{28             D3D12\_RESOURCE\_STATE\_GENERIC\_READ,}
+\DoxyCodeLine{29             \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{30             IID\_PPV\_ARGS(\&mUploadBuffer)));}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32         ThrowIfFailed(mUploadBuffer-\/>Map(0, \textcolor{keyword}{nullptr}, \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{void}**\textcolor{keyword}{>}(\&mMappedData)));}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34         \textcolor{comment}{// We do not need to unmap until we are done with the resource.  However, we must not write to}}
+\DoxyCodeLine{35         \textcolor{comment}{// the resource while it is in use by the GPU (so we must use synchronization techniques).}}
+\DoxyCodeLine{36     \}}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \mbox{\hyperlink{class_upload_buffer}{UploadBuffer}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_upload_buffer}{UploadBuffer}}\& rhs) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{39     \mbox{\hyperlink{class_upload_buffer}{UploadBuffer}}\& operator=(\textcolor{keyword}{const} \mbox{\hyperlink{class_upload_buffer}{UploadBuffer}}\& rhs) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{40     \mbox{\hyperlink{class_upload_buffer}{\string~UploadBuffer}}()}
+\DoxyCodeLine{41     \{}
+\DoxyCodeLine{42         \textcolor{keywordflow}{if} (mUploadBuffer != \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{43             mUploadBuffer-\/>Unmap(0, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45         mMappedData = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{46     \}}
+\DoxyCodeLine{47 }
+\DoxyCodeLine{48     ID3D12Resource* Resource()\textcolor{keyword}{const}}
+\DoxyCodeLine{49 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{50         \textcolor{keywordflow}{return} mUploadBuffer.Get();}
+\DoxyCodeLine{51     \}}
+\DoxyCodeLine{52 }
+\DoxyCodeLine{53     \textcolor{keywordtype}{void} CopyData(\textcolor{keywordtype}{int} elementIndex, \textcolor{keyword}{const} T\& data)}
+\DoxyCodeLine{54     \{}
+\DoxyCodeLine{55         memcpy(\&mMappedData[elementIndex * mElementByteSize], \&data, \textcolor{keyword}{sizeof}(T));}
+\DoxyCodeLine{56     \}}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58 \textcolor{keyword}{private}:}
+\DoxyCodeLine{59     Microsoft::WRL::ComPtr<ID3D12Resource> mUploadBuffer;}
+\DoxyCodeLine{60     BYTE* mMappedData = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{61 }
+\DoxyCodeLine{62     UINT mElementByteSize = 0;}
+\DoxyCodeLine{63     \textcolor{keywordtype}{bool} mIsConstantBuffer = \textcolor{keyword}{false};}
+\DoxyCodeLine{64 \};}
+
+\end{DoxyCode}

@@ -1,0 +1,42 @@
+\hypertarget{_aircraft_8h_source}{}\doxysection{Aircraft.\+h}
+\label{_aircraft_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/Aircraft.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/Aircraft.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include "{}Entity.h"{}}}
+\DoxyCodeLine{3 }
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{keyword}{class }\mbox{\hyperlink{class_aircraft}{Aircraft}} : \textcolor{keyword}{public} \mbox{\hyperlink{class_entity}{Entity}}}
+\DoxyCodeLine{6 \{}
+\DoxyCodeLine{7 \textcolor{keyword}{public}:}
+\DoxyCodeLine{8     }
+\DoxyCodeLine{12     \textcolor{keyword}{enum} \mbox{\hyperlink{class_aircraft_a7dae28542933e088032b753600046acd}{Type}}}
+\DoxyCodeLine{13     \{}
+\DoxyCodeLine{14         Eagle,}
+\DoxyCodeLine{15         Raptor,}
+\DoxyCodeLine{16     \};}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{keyword}{public}:}
+\DoxyCodeLine{23     \mbox{\hyperlink{class_aircraft_ae9d52b44a62c33bf411185829158fba4}{Aircraft}}(\mbox{\hyperlink{class_aircraft_a7dae28542933e088032b753600046acd}{Type}} type, \mbox{\hyperlink{class_game}{Game}}* game);}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{29     \textcolor{keyword}{virtual} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} \mbox{\hyperlink{class_aircraft_a01f9042934c08ef18b62351e6bca320d}{getCategory}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{30     }
+\DoxyCodeLine{31     }
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{keyword}{private}:}
+\DoxyCodeLine{34     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}        drawCurrent() \textcolor{keyword}{const};}
+\DoxyCodeLine{35     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}        buildCurrent();}
+\DoxyCodeLine{36     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}        updateCurrent();}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40 }
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42 \textcolor{keyword}{private}:}
+\DoxyCodeLine{43     \mbox{\hyperlink{class_aircraft_a7dae28542933e088032b753600046acd}{Type}}                mType;}
+\DoxyCodeLine{44     std::string         materialName;}
+\DoxyCodeLine{45     \mbox{\hyperlink{struct_render_item}{RenderItem}}*           mDesertRitem = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{46 \};}
+\DoxyCodeLine{47 }
+
+\end{DoxyCode}

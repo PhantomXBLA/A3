@@ -1,0 +1,136 @@
+\hypertarget{d3d_app_8h_source}{}\doxysection{d3d\+App.\+h}
+\label{d3d_app_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/d3dApp.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/d3dApp.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#if defined(DEBUG) || defined(\_DEBUG)}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#define \_CRTDBG\_MAP\_ALLOC}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <crtdbg.h>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include "{}d3dUtil.h"{}}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include "{}GameTimer.h"{}}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{comment}{// Link necessary d3d12 libraries.}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#pragma comment(lib,"{}d3dcompiler.lib"{}})}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#pragma comment(lib, "{}D3D12.lib"{}})}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#pragma comment(lib, "{}dxgi.lib"{}})}
+\DoxyCodeLine{17 }
+\DoxyCodeLine{18 \textcolor{keyword}{class }\mbox{\hyperlink{class_d3_d_app}{D3DApp}}}
+\DoxyCodeLine{19 \{}
+\DoxyCodeLine{20 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22     \mbox{\hyperlink{class_d3_d_app}{D3DApp}}(HINSTANCE hInstance);}
+\DoxyCodeLine{23     \mbox{\hyperlink{class_d3_d_app}{D3DApp}}(\textcolor{keyword}{const} \mbox{\hyperlink{class_d3_d_app}{D3DApp}}\& rhs) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{24     \mbox{\hyperlink{class_d3_d_app}{D3DApp}}\& operator=(\textcolor{keyword}{const} \mbox{\hyperlink{class_d3_d_app}{D3DApp}}\& rhs) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{25     \textcolor{keyword}{virtual} \mbox{\hyperlink{class_d3_d_app}{\string~D3DApp}}();}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{keyword}{public}:}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29     \textcolor{keyword}{static} \mbox{\hyperlink{class_d3_d_app}{D3DApp}}* GetApp();}
+\DoxyCodeLine{30 }
+\DoxyCodeLine{31     HINSTANCE AppInst()\textcolor{keyword}{const};}
+\DoxyCodeLine{32     HWND      MainWnd()\textcolor{keyword}{const};}
+\DoxyCodeLine{33     \textcolor{keywordtype}{float}     AspectRatio()\textcolor{keyword}{const};}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35     \textcolor{keywordtype}{bool} Get4xMsaaState()\textcolor{keyword}{const};}
+\DoxyCodeLine{36     \textcolor{keywordtype}{void} Set4xMsaaState(\textcolor{keywordtype}{bool} value);}
+\DoxyCodeLine{37 }
+\DoxyCodeLine{38     \textcolor{keywordtype}{int} Run();}
+\DoxyCodeLine{39 }
+\DoxyCodeLine{40     \textcolor{keyword}{virtual} \textcolor{keywordtype}{bool} Initialize();}
+\DoxyCodeLine{41     \textcolor{keyword}{virtual} LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);}
+\DoxyCodeLine{42     Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> mCommandList;}
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44     \textcolor{keywordtype}{void} FlushCommandQueue();}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{47     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} CreateRtvAndDsvDescriptorHeaps();}
+\DoxyCodeLine{48     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} OnResize();}
+\DoxyCodeLine{49     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} Update(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt) = 0;}
+\DoxyCodeLine{50     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} Draw(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt) = 0;}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52     \textcolor{comment}{// Convenience overrides for handling mouse input.}}
+\DoxyCodeLine{53     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} OnMouseDown(WPARAM btnState, \textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y) \{ \}}
+\DoxyCodeLine{54     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} OnMouseUp(WPARAM btnState, \textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y) \{ \}}
+\DoxyCodeLine{55     \textcolor{keyword}{virtual} \textcolor{keywordtype}{void} OnMouseMove(WPARAM btnState, \textcolor{keywordtype}{int} x, \textcolor{keywordtype}{int} y) \{ \}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59     \textcolor{keywordtype}{bool} InitMainWindow();}
+\DoxyCodeLine{60     \textcolor{keywordtype}{bool} InitDirect3D();}
+\DoxyCodeLine{61     \textcolor{keywordtype}{void} CreateCommandObjects();}
+\DoxyCodeLine{62     \textcolor{keywordtype}{void} CreateSwapChain();}
+\DoxyCodeLine{63 }
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65 }
+\DoxyCodeLine{66     ID3D12Resource* CurrentBackBuffer()\textcolor{keyword}{const};}
+\DoxyCodeLine{67     D3D12\_CPU\_DESCRIPTOR\_HANDLE CurrentBackBufferView()\textcolor{keyword}{const};}
+\DoxyCodeLine{68     D3D12\_CPU\_DESCRIPTOR\_HANDLE DepthStencilView()\textcolor{keyword}{const};}
+\DoxyCodeLine{69 }
+\DoxyCodeLine{70     \textcolor{keywordtype}{void} CalculateFrameStats();}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72     \textcolor{keywordtype}{void} LogAdapters();}
+\DoxyCodeLine{73     \textcolor{keywordtype}{void} LogAdapterOutputs(IDXGIAdapter* adapter);}
+\DoxyCodeLine{74     \textcolor{keywordtype}{void} LogOutputDisplayModes(IDXGIOutput* output, DXGI\_FORMAT format);}
+\DoxyCodeLine{75 }
+\DoxyCodeLine{76 \textcolor{keyword}{protected}:}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78     \textcolor{keyword}{static} \mbox{\hyperlink{class_d3_d_app}{D3DApp}}* mApp;}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80     HINSTANCE mhAppInst = \textcolor{keyword}{nullptr}; \textcolor{comment}{// application instance handle}}
+\DoxyCodeLine{81     HWND      mhMainWnd = \textcolor{keyword}{nullptr}; \textcolor{comment}{// main window handle}}
+\DoxyCodeLine{82     \textcolor{keywordtype}{bool}      mAppPaused = \textcolor{keyword}{false};  \textcolor{comment}{// is the application paused?}}
+\DoxyCodeLine{83     \textcolor{keywordtype}{bool}      mMinimized = \textcolor{keyword}{false};  \textcolor{comment}{// is the application minimized?}}
+\DoxyCodeLine{84     \textcolor{keywordtype}{bool}      mMaximized = \textcolor{keyword}{false};  \textcolor{comment}{// is the application maximized?}}
+\DoxyCodeLine{85     \textcolor{keywordtype}{bool}      mResizing = \textcolor{keyword}{false};   \textcolor{comment}{// are the resize bars being dragged?}}
+\DoxyCodeLine{86     \textcolor{keywordtype}{bool}      mFullscreenState = \textcolor{keyword}{false};\textcolor{comment}{// fullscreen enabled}}
+\DoxyCodeLine{87 }
+\DoxyCodeLine{88     \textcolor{comment}{// Set true to use 4X MSAA (§4.1.8).  The default is false.}}
+\DoxyCodeLine{89     \textcolor{keywordtype}{bool}      m4xMsaaState = \textcolor{keyword}{false};    \textcolor{comment}{// 4X MSAA enabled}}
+\DoxyCodeLine{90     UINT      m4xMsaaQuality = 0;      \textcolor{comment}{// quality level of 4X MSAA}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92     \textcolor{comment}{// Used to keep track of the “delta-\/time” and Game time (§4.4).}}
+\DoxyCodeLine{93     \mbox{\hyperlink{class_game_timer}{GameTimer}} mTimer;}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     Microsoft::WRL::ComPtr<IDXGIFactory4> mdxgiFactory;}
+\DoxyCodeLine{96     Microsoft::WRL::ComPtr<IDXGISwapChain> mSwapChain;}
+\DoxyCodeLine{97     Microsoft::WRL::ComPtr<ID3D12Device> md3dDevice;}
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99     Microsoft::WRL::ComPtr<ID3D12Fence> mFence;}
+\DoxyCodeLine{100     UINT64 mCurrentFence = 0;}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102     Microsoft::WRL::ComPtr<ID3D12CommandQueue> mCommandQueue;}
+\DoxyCodeLine{103     Microsoft::WRL::ComPtr<ID3D12CommandAllocator> mDirectCmdListAlloc;}
+\DoxyCodeLine{104 }
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106 }
+\DoxyCodeLine{107     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{int} SwapChainBufferCount = 2;}
+\DoxyCodeLine{108     \textcolor{keywordtype}{int} mCurrBackBuffer = 0;}
+\DoxyCodeLine{109     Microsoft::WRL::ComPtr<ID3D12Resource> mSwapChainBuffer[SwapChainBufferCount];}
+\DoxyCodeLine{110     Microsoft::WRL::ComPtr<ID3D12Resource> mDepthStencilBuffer;}
+\DoxyCodeLine{111 }
+\DoxyCodeLine{112     Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> mRtvHeap;}
+\DoxyCodeLine{113     Microsoft::WRL::ComPtr<ID3D12DescriptorHeap> mDsvHeap;}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     D3D12\_VIEWPORT mScreenViewport;}
+\DoxyCodeLine{116     D3D12\_RECT mScissorRect;}
+\DoxyCodeLine{117 }
+\DoxyCodeLine{118     UINT mRtvDescriptorSize = 0;}
+\DoxyCodeLine{119     UINT mDsvDescriptorSize = 0;}
+\DoxyCodeLine{120     UINT mCbvSrvUavDescriptorSize = 0;}
+\DoxyCodeLine{121 }
+\DoxyCodeLine{122     \textcolor{comment}{// Derived class should set these in derived constructor to customize starting values.}}
+\DoxyCodeLine{123     std::wstring mMainWndCaption = L\textcolor{stringliteral}{"{}d3d App"{}};}
+\DoxyCodeLine{124     D3D\_DRIVER\_TYPE md3dDriverType = D3D\_DRIVER\_TYPE\_HARDWARE;}
+\DoxyCodeLine{125     DXGI\_FORMAT mBackBufferFormat = DXGI\_FORMAT\_R8G8B8A8\_UNORM;}
+\DoxyCodeLine{126     DXGI\_FORMAT mDepthStencilFormat = DXGI\_FORMAT\_D24\_UNORM\_S8\_UINT;}
+\DoxyCodeLine{127     \textcolor{keywordtype}{int} mClientWidth = 800;}
+\DoxyCodeLine{128     \textcolor{keywordtype}{int} mClientHeight = 600;}
+\DoxyCodeLine{129 \};}
+\DoxyCodeLine{130 }
+
+\end{DoxyCode}

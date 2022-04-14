@@ -1,0 +1,111 @@
+\hypertarget{_scene_node_8h_source}{}\doxysection{Scene\+Node.\+h}
+\label{_scene_node_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/SceneNode.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/SceneNode.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}d3dApp.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}FrameResource.h"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}MathHelper.h"{}}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}UploadBuffer.h"{}}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include "{}GeometryGenerator.h"{}}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include "{}Category.h"{}}}
+\DoxyCodeLine{10 \textcolor{comment}{//\#include "{}d3dUtil.h"{}}}
+\DoxyCodeLine{11 }
+\DoxyCodeLine{12 \textcolor{keyword}{using} Microsoft::WRL::ComPtr;}
+\DoxyCodeLine{13 \textcolor{keyword}{using namespace }DirectX;}
+\DoxyCodeLine{14 \textcolor{keyword}{using namespace }DirectX::PackedVector;}
+\DoxyCodeLine{15 }
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#pragma comment(lib, "{}d3dcompiler.lib"{}})}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#pragma comment(lib, "{}D3D12.lib"{}})}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{19 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_render_item}{RenderItem}}}
+\DoxyCodeLine{20 \{}
+\DoxyCodeLine{21     \mbox{\hyperlink{struct_render_item}{RenderItem}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23     \textcolor{comment}{// World matrix of the shape that describes the object's local space}}
+\DoxyCodeLine{24     \textcolor{comment}{// relative to the world space, which defines the position, orientation,}}
+\DoxyCodeLine{25     \textcolor{comment}{// and scale of the object in the world.}}
+\DoxyCodeLine{26     XMFLOAT4X4 \mbox{\hyperlink{class_world}{World}} = MathHelper::Identity4x4();}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28     XMFLOAT4X4 TexTransform = MathHelper::Identity4x4();}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30     \textcolor{comment}{// Dirty flag indicating the object data has changed and we need to update the constant buffer.}}
+\DoxyCodeLine{31     \textcolor{comment}{// Because we have an object cbuffer for each FrameResource, we have to apply the}}
+\DoxyCodeLine{32     \textcolor{comment}{// update to each FrameResource.  Thus, when we modify obect data we should set }}
+\DoxyCodeLine{33     \textcolor{comment}{// NumFramesDirty = gNumFrameResources so that each frame resource gets the update.}}
+\DoxyCodeLine{34     \textcolor{keywordtype}{int} NumFramesDirty = gNumFrameResources;}
+\DoxyCodeLine{35 }
+\DoxyCodeLine{36     \textcolor{comment}{// Index into GPU constant buffer corresponding to the ObjectCB for this render item.}}
+\DoxyCodeLine{37     UINT ObjCBIndex = -\/1;}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     \mbox{\hyperlink{struct_material}{Material}}* Mat = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{40     \mbox{\hyperlink{struct_mesh_geometry}{MeshGeometry}}* Geo = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{41 }
+\DoxyCodeLine{42     \textcolor{comment}{// Primitive topology.}}
+\DoxyCodeLine{43     D3D12\_PRIMITIVE\_TOPOLOGY PrimitiveType = D3D11\_PRIMITIVE\_TOPOLOGY\_TRIANGLELIST;}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \textcolor{comment}{// DrawIndexedInstanced parameters.}}
+\DoxyCodeLine{46     UINT IndexCount = 0;}
+\DoxyCodeLine{47     UINT StartIndexLocation = 0;}
+\DoxyCodeLine{48     \textcolor{keywordtype}{int} BaseVertexLocation = 0;}
+\DoxyCodeLine{49 \};}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51 \textcolor{keyword}{class }\mbox{\hyperlink{class_game}{Game}};}
+\DoxyCodeLine{52 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_command}{Command}};}
+\DoxyCodeLine{53 \textcolor{keyword}{class }\mbox{\hyperlink{class_state}{State}};}
+\DoxyCodeLine{54 }
+\DoxyCodeLine{55 \textcolor{keyword}{class }\mbox{\hyperlink{class_scene_node}{SceneNode}}}
+\DoxyCodeLine{56 \{}
+\DoxyCodeLine{57     \textcolor{keyword}{public}:}
+\DoxyCodeLine{58         \textcolor{keyword}{typedef} std::unique\_ptr<SceneNode> Ptr;}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     \textcolor{keyword}{public}:}
+\DoxyCodeLine{61         \mbox{\hyperlink{class_scene_node}{SceneNode}}(\mbox{\hyperlink{class_game}{Game}}* game);}
+\DoxyCodeLine{62         \textcolor{keywordtype}{void} attachChild (Ptr child);}
+\DoxyCodeLine{63         Ptr detachChild(\textcolor{keyword}{const} \mbox{\hyperlink{class_scene_node}{SceneNode}}\& node);}
+\DoxyCodeLine{64 }
+\DoxyCodeLine{65         \textcolor{keywordtype}{void} update(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt);}
+\DoxyCodeLine{66         \textcolor{keywordtype}{void} draw() \textcolor{keyword}{const};}
+\DoxyCodeLine{67         \textcolor{keywordtype}{void} build();}
+\DoxyCodeLine{68     }
+\DoxyCodeLine{69         \textcolor{comment}{//RenderItem* renderItem;}}
+\DoxyCodeLine{70 }
+\DoxyCodeLine{71         DirectX::XMFLOAT4X4 getWorldPosition() \textcolor{keyword}{const};}
+\DoxyCodeLine{72         DirectX::XMFLOAT4X4 getWorldTransform() \textcolor{keyword}{const};}
+\DoxyCodeLine{73         DirectX::XMFLOAT4X4 getTransform() \textcolor{keyword}{const};}
+\DoxyCodeLine{74         }
+\DoxyCodeLine{75         \textcolor{keyword}{virtual} \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}    getCategory() \textcolor{keyword}{const};}
+\DoxyCodeLine{76         \textcolor{keywordtype}{void}                    onCommand(\textcolor{keyword}{const} \mbox{\hyperlink{struct_command}{Command}}\& command, \textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt);}
+\DoxyCodeLine{77         XMFLOAT2 mPosition;}
+\DoxyCodeLine{78         \mbox{\hyperlink{class_game}{Game}}* game;}
+\DoxyCodeLine{79 }
+\DoxyCodeLine{80         }
+\DoxyCodeLine{81 }
+\DoxyCodeLine{82     \textcolor{keyword}{private}:}
+\DoxyCodeLine{83         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}            updateCurrent(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt);}
+\DoxyCodeLine{84         \textcolor{keywordtype}{void}                    updateChildren(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt);}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}            drawCurrent() \textcolor{keyword}{const};}
+\DoxyCodeLine{88         \textcolor{keywordtype}{void}                    drawChildren() \textcolor{keyword}{const};}
+\DoxyCodeLine{89 }
+\DoxyCodeLine{90         \textcolor{keyword}{virtual} \textcolor{keywordtype}{void}            buildCurrent();}
+\DoxyCodeLine{91         \textcolor{keywordtype}{void}                    buildChildren();}
+\DoxyCodeLine{92     }
+\DoxyCodeLine{93         std::vector<Ptr> mChildren;}
+\DoxyCodeLine{94         \mbox{\hyperlink{class_scene_node}{SceneNode}}* mParent;}
+\DoxyCodeLine{95 }
+\DoxyCodeLine{96         }
+\DoxyCodeLine{97         }
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 }
+\DoxyCodeLine{100     \textcolor{keyword}{protected}:}
+\DoxyCodeLine{101 }
+\DoxyCodeLine{102         \mbox{\hyperlink{struct_render_item}{RenderItem}}* mRenderItem;}
+\DoxyCodeLine{103     }
+\DoxyCodeLine{104 \};}
+\DoxyCodeLine{105 }
+
+\end{DoxyCode}

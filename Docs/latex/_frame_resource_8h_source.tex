@@ -1,0 +1,81 @@
+\hypertarget{_frame_resource_8h_source}{}\doxysection{Frame\+Resource.\+h}
+\label{_frame_resource_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/FrameResource.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/FrameResource.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}d3dUtil.h"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}MathHelper.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}UploadBuffer.h"{}}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_object_constants}{ObjectConstants}}}
+\DoxyCodeLine{8 \{}
+\DoxyCodeLine{9     DirectX::XMFLOAT4X4 \mbox{\hyperlink{class_world}{World}} = MathHelper::Identity4x4();}
+\DoxyCodeLine{10     DirectX::XMFLOAT4X4 TexTransform = MathHelper::Identity4x4();}
+\DoxyCodeLine{11 \};}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_pass_constants}{PassConstants}}}
+\DoxyCodeLine{14 \{}
+\DoxyCodeLine{15     DirectX::XMFLOAT4X4 View = MathHelper::Identity4x4();}
+\DoxyCodeLine{16     DirectX::XMFLOAT4X4 InvView = MathHelper::Identity4x4();}
+\DoxyCodeLine{17     DirectX::XMFLOAT4X4 Proj = MathHelper::Identity4x4();}
+\DoxyCodeLine{18     DirectX::XMFLOAT4X4 InvProj = MathHelper::Identity4x4();}
+\DoxyCodeLine{19     DirectX::XMFLOAT4X4 ViewProj = MathHelper::Identity4x4();}
+\DoxyCodeLine{20     DirectX::XMFLOAT4X4 InvViewProj = MathHelper::Identity4x4();}
+\DoxyCodeLine{21     DirectX::XMFLOAT3 EyePosW = \{ 0.0f, 0.0f, 0.0f \};}
+\DoxyCodeLine{22     \textcolor{keywordtype}{float} cbPerObjectPad1 = 0.0f;}
+\DoxyCodeLine{23     DirectX::XMFLOAT2 RenderTargetSize = \{ 0.0f, 0.0f \};}
+\DoxyCodeLine{24     DirectX::XMFLOAT2 InvRenderTargetSize = \{ 0.0f, 0.0f \};}
+\DoxyCodeLine{25     \textcolor{keywordtype}{float} NearZ = 0.0f;}
+\DoxyCodeLine{26     \textcolor{keywordtype}{float} FarZ = 0.0f;}
+\DoxyCodeLine{27     \textcolor{keywordtype}{float} TotalTime = 0.0f;}
+\DoxyCodeLine{28     \textcolor{keywordtype}{float} DeltaTime = 0.0f;}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30     DirectX::XMFLOAT4 AmbientLight = \{ 0.0f, 0.0f, 0.0f, 1.0f \};}
+\DoxyCodeLine{31 }
+\DoxyCodeLine{32     \textcolor{comment}{// Indices [0, NUM\_DIR\_LIGHTS) are directional lights;}}
+\DoxyCodeLine{33     \textcolor{comment}{// indices [NUM\_DIR\_LIGHTS, NUM\_DIR\_LIGHTS+NUM\_POINT\_LIGHTS) are point lights;}}
+\DoxyCodeLine{34     \textcolor{comment}{// indices [NUM\_DIR\_LIGHTS+NUM\_POINT\_LIGHTS, NUM\_DIR\_LIGHTS+NUM\_POINT\_LIGHT+NUM\_SPOT\_LIGHTS)}}
+\DoxyCodeLine{35     \textcolor{comment}{// are spot lights for a maximum of MaxLights per object.}}
+\DoxyCodeLine{36     \mbox{\hyperlink{struct_light}{Light}} Lights[MaxLights];}
+\DoxyCodeLine{37 \};}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_vertex}{Vertex}}}
+\DoxyCodeLine{40 \{}
+\DoxyCodeLine{41     DirectX::XMFLOAT3 Pos;}
+\DoxyCodeLine{42     DirectX::XMFLOAT3 Normal;}
+\DoxyCodeLine{43     DirectX::XMFLOAT2 TexC;}
+\DoxyCodeLine{44 \};}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46 \textcolor{comment}{// Stores the resources needed for the CPU to build the command lists}}
+\DoxyCodeLine{47 \textcolor{comment}{// for a frame.  }}
+\DoxyCodeLine{48 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_frame_resource}{FrameResource}}}
+\DoxyCodeLine{49 \{}
+\DoxyCodeLine{50 \textcolor{keyword}{public}:}
+\DoxyCodeLine{51     }
+\DoxyCodeLine{52     \mbox{\hyperlink{struct_frame_resource}{FrameResource}}(ID3D12Device* device, UINT passCount, UINT objectCount, UINT materialCount, UINT waveVertCount);}
+\DoxyCodeLine{53     \mbox{\hyperlink{struct_frame_resource}{FrameResource}}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_frame_resource}{FrameResource}}\& rhs) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{54     \mbox{\hyperlink{struct_frame_resource}{FrameResource}}\& operator=(\textcolor{keyword}{const} \mbox{\hyperlink{struct_frame_resource}{FrameResource}}\& rhs) = \textcolor{keyword}{delete};}
+\DoxyCodeLine{55     \mbox{\hyperlink{struct_frame_resource}{\string~FrameResource}}();}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57     \textcolor{comment}{// We cannot reset the allocator until the GPU is done processing the commands.}}
+\DoxyCodeLine{58     \textcolor{comment}{// So each frame needs their own allocator.}}
+\DoxyCodeLine{59     Microsoft::WRL::ComPtr<ID3D12CommandAllocator> CmdListAlloc;}
+\DoxyCodeLine{60 }
+\DoxyCodeLine{61     \textcolor{comment}{// We cannot update a cbuffer until the GPU is done processing the commands}}
+\DoxyCodeLine{62     \textcolor{comment}{// that reference it.  So each frame needs their own cbuffers.}}
+\DoxyCodeLine{63    \textcolor{comment}{// std::unique\_ptr<UploadBuffer<FrameConstants>> FrameCB = nullptr;}}
+\DoxyCodeLine{64     std::unique\_ptr<UploadBuffer<PassConstants>> PassCB = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{65     std::unique\_ptr<UploadBuffer<MaterialConstants>> MaterialCB = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{66     std::unique\_ptr<UploadBuffer<ObjectConstants>> ObjectCB = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68     \textcolor{comment}{// We cannot update a dynamic vertex buffer until the GPU is done processing}}
+\DoxyCodeLine{69     \textcolor{comment}{// the commands that reference it.  So each frame needs their own.}}
+\DoxyCodeLine{70     std::unique\_ptr<UploadBuffer<Vertex>> WavesVB = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{71 }
+\DoxyCodeLine{72     \textcolor{comment}{// vvvvv value to mark commands up to this fence point.  This lets us}}
+\DoxyCodeLine{73     \textcolor{comment}{// check if these frame resources are still in use by the GPU.}}
+\DoxyCodeLine{74     UINT64 Fence = 0;}
+\DoxyCodeLine{75 \};}
+
+\end{DoxyCode}

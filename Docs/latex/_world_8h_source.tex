@@ -1,0 +1,60 @@
+\hypertarget{_world_8h_source}{}\doxysection{World.\+h}
+\label{_world_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/World.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/World.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{comment}{//\#include "{}Game.h"{}}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}Aircraft.h"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}FrameResource.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include "{}CommandQueue.h"{}}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include "{}Command.h"{}}}
+\DoxyCodeLine{7 \textcolor{comment}{//\#include "{}Waves.h"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{keyword}{class }\mbox{\hyperlink{class_world}{World}}}
+\DoxyCodeLine{10 \{}
+\DoxyCodeLine{11 \textcolor{keyword}{public}:}
+\DoxyCodeLine{12     \mbox{\hyperlink{class_world}{World}}(\mbox{\hyperlink{class_game}{Game}}* game);}
+\DoxyCodeLine{13     \textcolor{keywordtype}{void}                                update(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt);}
+\DoxyCodeLine{14     \textcolor{keywordtype}{void}                                drawOcean(\mbox{\hyperlink{class_game}{Game}}* gameRef);}
+\DoxyCodeLine{15     \textcolor{keywordtype}{void}                                buildScene();}
+\DoxyCodeLine{16     \textcolor{keywordtype}{void}                                draw();}
+\DoxyCodeLine{17     \mbox{\hyperlink{class_command_queue}{CommandQueue}}\&                       getCommandQueue();}
+\DoxyCodeLine{18     \mbox{\hyperlink{class_command_queue}{CommandQueue}}                        mCommandQueue;}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20     \textcolor{comment}{//RenderItem* mWavesRitem = nullptr;}}
+\DoxyCodeLine{21     \textcolor{comment}{//std::unique\_ptr<Waves> mWaves;}}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{keyword}{private}:}
+\DoxyCodeLine{25     \textcolor{keywordtype}{void}                                loadTextures();}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27     \textcolor{keywordtype}{void}                                UpdateWaves(\textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt);}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#pragma region step 3}}
+\DoxyCodeLine{30     \textcolor{keywordtype}{void}                                adaptPlayerPosition();}
+\DoxyCodeLine{31     \textcolor{keywordtype}{void}                                adaptPlayerVelocity();}
+\DoxyCodeLine{32 \textcolor{preprocessor}{\#pragma endregion}}
+\DoxyCodeLine{33 }
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{keyword}{private}:}
+\DoxyCodeLine{36     \textcolor{keyword}{enum} Layer}
+\DoxyCodeLine{37     \{}
+\DoxyCodeLine{38         \mbox{\hyperlink{class_background}{Background}},}
+\DoxyCodeLine{39         Air,}
+\DoxyCodeLine{40         LayerCount}
+\DoxyCodeLine{41     \};}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 }
+\DoxyCodeLine{44 \textcolor{keyword}{private}:}
+\DoxyCodeLine{45 }
+\DoxyCodeLine{46     \mbox{\hyperlink{class_scene_node}{SceneNode}}*                         mSceneGraph;}
+\DoxyCodeLine{47     std::array<SceneNode*, LayerCount>  mSceneLayers;}
+\DoxyCodeLine{48 }
+\DoxyCodeLine{49     \textcolor{comment}{//sf::FloatRect                     mWorldBounds;}}
+\DoxyCodeLine{50     \mbox{\hyperlink{class_aircraft}{Aircraft}}* mPlayerAircraft;}
+\DoxyCodeLine{51     \mbox{\hyperlink{class_game}{Game}}* mGame;}
+\DoxyCodeLine{52     \mbox{\hyperlink{class_state}{State}}* mState;}
+\DoxyCodeLine{53     \textcolor{comment}{//State* state;}}
+\DoxyCodeLine{54 \};}
+
+\end{DoxyCode}

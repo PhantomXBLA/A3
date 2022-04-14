@@ -1,0 +1,322 @@
+\hypertarget{d3d_util_8h_source}{}\doxysection{d3d\+Util.\+h}
+\label{d3d_util_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/d3dUtil.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/d3dUtil.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <windows.h>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <wrl.h>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include <dxgi1\_4.h>}}
+\DoxyCodeLine{8 \textcolor{preprocessor}{\#include <d3d12.h>}}
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <D3Dcompiler.h>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <DirectXMath.h>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <DirectXPackedVector.h>}}
+\DoxyCodeLine{12 \textcolor{preprocessor}{\#include <DirectXColors.h>}}
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include <DirectXCollision.h>}}
+\DoxyCodeLine{14 \textcolor{preprocessor}{\#include <string>}}
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#include <memory>}}
+\DoxyCodeLine{16 \textcolor{preprocessor}{\#include <algorithm>}}
+\DoxyCodeLine{17 \textcolor{preprocessor}{\#include <vector>}}
+\DoxyCodeLine{18 \textcolor{preprocessor}{\#include <array>}}
+\DoxyCodeLine{19 \textcolor{preprocessor}{\#include <unordered\_map>}}
+\DoxyCodeLine{20 \textcolor{preprocessor}{\#include <cstdint>}}
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#include <fstream>}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#include <sstream>}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#include <cassert>}}
+\DoxyCodeLine{24 \textcolor{preprocessor}{\#include "{}d3dx12.h"{}}}
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#include "{}DDSTextureLoader.h"{}}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#include "{}MathHelper.h"{}}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28 \textcolor{keyword}{extern} \textcolor{keyword}{const} \textcolor{keywordtype}{int} gNumFrameResources;}
+\DoxyCodeLine{29 }
+\DoxyCodeLine{30 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} d3dSetDebugName(IDXGIObject* obj, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* name)}
+\DoxyCodeLine{31 \{}
+\DoxyCodeLine{32     \textcolor{keywordflow}{if} (obj)}
+\DoxyCodeLine{33     \{}
+\DoxyCodeLine{34         obj-\/>SetPrivateData(WKPDID\_D3DDebugObjectName, lstrlenA(name), name);}
+\DoxyCodeLine{35     \}}
+\DoxyCodeLine{36 \}}
+\DoxyCodeLine{37 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} d3dSetDebugName(ID3D12Device* obj, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* name)}
+\DoxyCodeLine{38 \{}
+\DoxyCodeLine{39     \textcolor{keywordflow}{if} (obj)}
+\DoxyCodeLine{40     \{}
+\DoxyCodeLine{41         obj-\/>SetPrivateData(WKPDID\_D3DDebugObjectName, lstrlenA(name), name);}
+\DoxyCodeLine{42     \}}
+\DoxyCodeLine{43 \}}
+\DoxyCodeLine{44 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} d3dSetDebugName(ID3D12DeviceChild* obj, \textcolor{keyword}{const} \textcolor{keywordtype}{char}* name)}
+\DoxyCodeLine{45 \{}
+\DoxyCodeLine{46     \textcolor{keywordflow}{if} (obj)}
+\DoxyCodeLine{47     \{}
+\DoxyCodeLine{48         obj-\/>SetPrivateData(WKPDID\_D3DDebugObjectName, lstrlenA(name), name);}
+\DoxyCodeLine{49     \}}
+\DoxyCodeLine{50 \}}
+\DoxyCodeLine{51 }
+\DoxyCodeLine{52 \textcolor{keyword}{inline} std::wstring AnsiToWString(\textcolor{keyword}{const} std::string\& str)}
+\DoxyCodeLine{53 \{}
+\DoxyCodeLine{54     WCHAR buffer[512];}
+\DoxyCodeLine{55     MultiByteToWideChar(CP\_ACP, 0, str.c\_str(), -\/1, buffer, 512);}
+\DoxyCodeLine{56     \textcolor{keywordflow}{return} std::wstring(buffer);}
+\DoxyCodeLine{57 \}}
+\DoxyCodeLine{58 }
+\DoxyCodeLine{59 \textcolor{comment}{/*}}
+\DoxyCodeLine{60 \textcolor{comment}{\#if defined(\_DEBUG)}}
+\DoxyCodeLine{61 \textcolor{comment}{    \#ifndef Assert}}
+\DoxyCodeLine{62 \textcolor{comment}{    \#define Assert(x, description)                                  \(\backslash\)}}
+\DoxyCodeLine{63 \textcolor{comment}{    \{                                                               \(\backslash\)}}
+\DoxyCodeLine{64 \textcolor{comment}{        static bool ignoreAssert = false;                           \(\backslash\)}}
+\DoxyCodeLine{65 \textcolor{comment}{        if(!ignoreAssert \&\& !(x))                                   \(\backslash\)}}
+\DoxyCodeLine{66 \textcolor{comment}{        \{                                                           \(\backslash\)}}
+\DoxyCodeLine{67 \textcolor{comment}{            Debug::AssertResult result = Debug::ShowAssertDialog(   \(\backslash\)}}
+\DoxyCodeLine{68 \textcolor{comment}{            (L\#x), description, AnsiToWString(\_\_FILE\_\_), \_\_LINE\_\_); \(\backslash\)}}
+\DoxyCodeLine{69 \textcolor{comment}{        if(result == Debug::AssertIgnore)                           \(\backslash\)}}
+\DoxyCodeLine{70 \textcolor{comment}{        \{                                                           \(\backslash\)}}
+\DoxyCodeLine{71 \textcolor{comment}{            ignoreAssert = true;                                    \(\backslash\)}}
+\DoxyCodeLine{72 \textcolor{comment}{        \}                                                           \(\backslash\)}}
+\DoxyCodeLine{73 \textcolor{comment}{                    else if(result == Debug::AssertBreak)           \(\backslash\)}}
+\DoxyCodeLine{74 \textcolor{comment}{        \{                                                           \(\backslash\)}}
+\DoxyCodeLine{75 \textcolor{comment}{            \_\_debugbreak();                                         \(\backslash\)}}
+\DoxyCodeLine{76 \textcolor{comment}{        \}                                                           \(\backslash\)}}
+\DoxyCodeLine{77 \textcolor{comment}{        \}                                                           \(\backslash\)}}
+\DoxyCodeLine{78 \textcolor{comment}{    \}}}
+\DoxyCodeLine{79 \textcolor{comment}{    \#endif}}
+\DoxyCodeLine{80 \textcolor{comment}{\#else}}
+\DoxyCodeLine{81 \textcolor{comment}{    \#ifndef Assert}}
+\DoxyCodeLine{82 \textcolor{comment}{    \#define Assert(x, description)}}
+\DoxyCodeLine{83 \textcolor{comment}{    \#endif}}
+\DoxyCodeLine{84 \textcolor{comment}{\#endif}}
+\DoxyCodeLine{85 \textcolor{comment}{    */}}
+\DoxyCodeLine{86 }
+\DoxyCodeLine{87 \textcolor{keyword}{class }\mbox{\hyperlink{classd3d_util}{d3dUtil}}}
+\DoxyCodeLine{88 \{}
+\DoxyCodeLine{89 \textcolor{keyword}{public}:}
+\DoxyCodeLine{90 }
+\DoxyCodeLine{91     \textcolor{keyword}{static} \textcolor{keywordtype}{bool} IsKeyDown(\textcolor{keywordtype}{int} vkeyCode);}
+\DoxyCodeLine{92 }
+\DoxyCodeLine{93     \textcolor{keyword}{static} std::string ToString(HRESULT hr);}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     \textcolor{keyword}{static} UINT CalcConstantBufferByteSize(UINT byteSize)}
+\DoxyCodeLine{96     \{}
+\DoxyCodeLine{97         \textcolor{comment}{// Constant buffers must be a multiple of the minimum hardware}}
+\DoxyCodeLine{98         \textcolor{comment}{// allocation size (usually 256 bytes).  So round up to nearest}}
+\DoxyCodeLine{99         \textcolor{comment}{// multiple of 256.  We do this by adding 255 and then masking off}}
+\DoxyCodeLine{100         \textcolor{comment}{// the lower 2 bytes which store all bits < 256.}}
+\DoxyCodeLine{101         \textcolor{comment}{// Example: Suppose byteSize = 300.}}
+\DoxyCodeLine{102         \textcolor{comment}{// (300 + 255) \& \string~255}}
+\DoxyCodeLine{103         \textcolor{comment}{// 555 \& \string~255}}
+\DoxyCodeLine{104         \textcolor{comment}{// 0x022B \& \string~0x00ff}}
+\DoxyCodeLine{105         \textcolor{comment}{// 0x022B \& 0xff00}}
+\DoxyCodeLine{106         \textcolor{comment}{// 0x0200}}
+\DoxyCodeLine{107         \textcolor{comment}{// 512}}
+\DoxyCodeLine{108         \textcolor{keywordflow}{return} (byteSize + 255) \& \string~255;}
+\DoxyCodeLine{109     \}}
+\DoxyCodeLine{110 }
+\DoxyCodeLine{111     \textcolor{keyword}{static} Microsoft::WRL::ComPtr<ID3DBlob> LoadBinary(\textcolor{keyword}{const} std::wstring\& filename);}
+\DoxyCodeLine{112 }
+\DoxyCodeLine{113     \textcolor{keyword}{static} Microsoft::WRL::ComPtr<ID3D12Resource> CreateDefaultBuffer(}
+\DoxyCodeLine{114         ID3D12Device* device,}
+\DoxyCodeLine{115         ID3D12GraphicsCommandList* cmdList,}
+\DoxyCodeLine{116         \textcolor{keyword}{const} \textcolor{keywordtype}{void}* initData,}
+\DoxyCodeLine{117         UINT64 byteSize,}
+\DoxyCodeLine{118         Microsoft::WRL::ComPtr<ID3D12Resource>\& uploadBuffer);}
+\DoxyCodeLine{119 }
+\DoxyCodeLine{120     \textcolor{keyword}{static} Microsoft::WRL::ComPtr<ID3DBlob> CompileShader(}
+\DoxyCodeLine{121         \textcolor{keyword}{const} std::wstring\& filename,}
+\DoxyCodeLine{122         \textcolor{keyword}{const} D3D\_SHADER\_MACRO* defines,}
+\DoxyCodeLine{123         \textcolor{keyword}{const} std::string\& entrypoint,}
+\DoxyCodeLine{124         \textcolor{keyword}{const} std::string\& target);}
+\DoxyCodeLine{125 \};}
+\DoxyCodeLine{126 }
+\DoxyCodeLine{127 \textcolor{keyword}{class }\mbox{\hyperlink{class_dx_exception}{DxException}}}
+\DoxyCodeLine{128 \{}
+\DoxyCodeLine{129 \textcolor{keyword}{public}:}
+\DoxyCodeLine{130     \mbox{\hyperlink{class_dx_exception}{DxException}}() = \textcolor{keywordflow}{default};}
+\DoxyCodeLine{131     \mbox{\hyperlink{class_dx_exception}{DxException}}(HRESULT hr, \textcolor{keyword}{const} std::wstring\& functionName, \textcolor{keyword}{const} std::wstring\& filename, \textcolor{keywordtype}{int} lineNumber);}
+\DoxyCodeLine{132 }
+\DoxyCodeLine{133     std::wstring ToString()\textcolor{keyword}{const};}
+\DoxyCodeLine{134 }
+\DoxyCodeLine{135     HRESULT ErrorCode = S\_OK;}
+\DoxyCodeLine{136     std::wstring FunctionName;}
+\DoxyCodeLine{137     std::wstring Filename;}
+\DoxyCodeLine{138     \textcolor{keywordtype}{int} LineNumber = -\/1;}
+\DoxyCodeLine{139 \};}
+\DoxyCodeLine{140 }
+\DoxyCodeLine{141 \textcolor{comment}{// Defines a subrange of geometry in a MeshGeometry.  This is for when multiple}}
+\DoxyCodeLine{142 \textcolor{comment}{// geometries are stored in one vertex and index buffer.  It provides the offsets}}
+\DoxyCodeLine{143 \textcolor{comment}{// and data needed to draw a subset of geometry stores in the vertex and index }}
+\DoxyCodeLine{144 \textcolor{comment}{// buffers so that we can implement the technique described by Figure 6.3.}}
+\DoxyCodeLine{145 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_submesh_geometry}{SubmeshGeometry}}}
+\DoxyCodeLine{146 \{}
+\DoxyCodeLine{147     UINT IndexCount = 0;}
+\DoxyCodeLine{148     UINT StartIndexLocation = 0;}
+\DoxyCodeLine{149     INT BaseVertexLocation = 0;}
+\DoxyCodeLine{150 }
+\DoxyCodeLine{151     \textcolor{comment}{// Bounding box of the geometry defined by this submesh. }}
+\DoxyCodeLine{152     \textcolor{comment}{// This is used in later chapters of the book.}}
+\DoxyCodeLine{153     DirectX::BoundingBox Bounds;}
+\DoxyCodeLine{154 \};}
+\DoxyCodeLine{155 }
+\DoxyCodeLine{156 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_mesh_geometry}{MeshGeometry}}}
+\DoxyCodeLine{157 }
+\DoxyCodeLine{158 \{}
+\DoxyCodeLine{159     \textcolor{comment}{// Give it a name so we can look it up by name.}}
+\DoxyCodeLine{160     std::string Name;}
+\DoxyCodeLine{161 }
+\DoxyCodeLine{162     \textcolor{comment}{// System memory copies.  Use Blobs because the vertex/index format can be generic.}}
+\DoxyCodeLine{163     \textcolor{comment}{// It is up to the client to cast appropriately. }}
+\DoxyCodeLine{164 }
+\DoxyCodeLine{165     Microsoft::WRL::ComPtr<ID3DBlob> VertexBufferCPU = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{166     Microsoft::WRL::ComPtr<ID3DBlob> IndexBufferCPU = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{167     Microsoft::WRL::ComPtr<ID3DBlob> ColorBufferCPU = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{168 }
+\DoxyCodeLine{169 }
+\DoxyCodeLine{170     Microsoft::WRL::ComPtr<ID3D12Resource> VertexBufferGPU = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{171     Microsoft::WRL::ComPtr<ID3D12Resource> IndexBufferGPU = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{172     Microsoft::WRL::ComPtr<ID3D12Resource> ColorBufferGPU = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{173 }
+\DoxyCodeLine{174 }
+\DoxyCodeLine{175     Microsoft::WRL::ComPtr<ID3D12Resource> VertexBufferUploader = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{176     Microsoft::WRL::ComPtr<ID3D12Resource> IndexBufferUploader = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{177     Microsoft::WRL::ComPtr<ID3D12Resource> ColorBufferUploader = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{178 }
+\DoxyCodeLine{179 }
+\DoxyCodeLine{180 }
+\DoxyCodeLine{181     \textcolor{comment}{// Data about the buffers.}}
+\DoxyCodeLine{182     UINT VertexByteStride = 0;}
+\DoxyCodeLine{183     UINT VertexBufferByteSize = 0;}
+\DoxyCodeLine{184     DXGI\_FORMAT IndexFormat = DXGI\_FORMAT\_R16\_UINT;}
+\DoxyCodeLine{185     UINT IndexBufferByteSize = 0;}
+\DoxyCodeLine{186     UINT ColorByteStride = 0;}
+\DoxyCodeLine{187     UINT ColorBufferByteSize = 0;}
+\DoxyCodeLine{188 }
+\DoxyCodeLine{189 }
+\DoxyCodeLine{190     \textcolor{comment}{// A MeshGeometry may store multiple geometries in one vertex/index buffer.}}
+\DoxyCodeLine{191     \textcolor{comment}{// Use this container to define the Submesh geometries so we can draw}}
+\DoxyCodeLine{192     \textcolor{comment}{// the Submeshes individually.}}
+\DoxyCodeLine{193 }
+\DoxyCodeLine{194     std::unordered\_map<std::string, SubmeshGeometry> DrawArgs;}
+\DoxyCodeLine{195 }
+\DoxyCodeLine{196     D3D12\_VERTEX\_BUFFER\_VIEW VertexBufferView()\textcolor{keyword}{const}}
+\DoxyCodeLine{197 \textcolor{keyword}{}}
+\DoxyCodeLine{198 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{199         D3D12\_VERTEX\_BUFFER\_VIEW vbv;}
+\DoxyCodeLine{200         vbv.BufferLocation = VertexBufferGPU-\/>GetGPUVirtualAddress();}
+\DoxyCodeLine{201         vbv.StrideInBytes = VertexByteStride;}
+\DoxyCodeLine{202         vbv.SizeInBytes = VertexBufferByteSize;}
+\DoxyCodeLine{203 }
+\DoxyCodeLine{204         \textcolor{keywordflow}{return} vbv;}
+\DoxyCodeLine{205     \}}
+\DoxyCodeLine{206 }
+\DoxyCodeLine{207     D3D12\_INDEX\_BUFFER\_VIEW IndexBufferView()\textcolor{keyword}{const}}
+\DoxyCodeLine{208 \textcolor{keyword}{}}
+\DoxyCodeLine{209 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{210         D3D12\_INDEX\_BUFFER\_VIEW ibv;}
+\DoxyCodeLine{211         ibv.BufferLocation = IndexBufferGPU-\/>GetGPUVirtualAddress();}
+\DoxyCodeLine{212         ibv.Format = IndexFormat;}
+\DoxyCodeLine{213         ibv.SizeInBytes = IndexBufferByteSize;}
+\DoxyCodeLine{214 }
+\DoxyCodeLine{215         \textcolor{keywordflow}{return} ibv;}
+\DoxyCodeLine{216     \}}
+\DoxyCodeLine{217 }
+\DoxyCodeLine{218     D3D12\_VERTEX\_BUFFER\_VIEW ColorBufferView()\textcolor{keyword}{const}}
+\DoxyCodeLine{219 \textcolor{keyword}{}}
+\DoxyCodeLine{220 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{221         D3D12\_VERTEX\_BUFFER\_VIEW cbv;}
+\DoxyCodeLine{222         cbv.BufferLocation = ColorBufferGPU-\/>GetGPUVirtualAddress();}
+\DoxyCodeLine{223         cbv.StrideInBytes = ColorByteStride;}
+\DoxyCodeLine{224         cbv.SizeInBytes = ColorBufferByteSize;}
+\DoxyCodeLine{225 }
+\DoxyCodeLine{226         \textcolor{keywordflow}{return} cbv;}
+\DoxyCodeLine{227     \}}
+\DoxyCodeLine{228 }
+\DoxyCodeLine{229 }
+\DoxyCodeLine{230     \textcolor{comment}{// We can free this memory after we finish upload to the GPU.}}
+\DoxyCodeLine{231     \textcolor{keywordtype}{void} DisposeUploaders()}
+\DoxyCodeLine{232     \{}
+\DoxyCodeLine{233         VertexBufferUploader = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{234         IndexBufferUploader = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{235         ColorBufferUploader = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{236     \}}
+\DoxyCodeLine{237 \};}
+\DoxyCodeLine{238 }
+\DoxyCodeLine{239 }
+\DoxyCodeLine{240 }
+\DoxyCodeLine{241 }
+\DoxyCodeLine{242 }
+\DoxyCodeLine{243 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_light}{Light}}}
+\DoxyCodeLine{244 \{}
+\DoxyCodeLine{245     DirectX::XMFLOAT3 Strength = \{ 0.5f, 0.5f, 0.5f \};}
+\DoxyCodeLine{246     \textcolor{keywordtype}{float} FalloffStart = 1.0f;                          \textcolor{comment}{// point/spot light only}}
+\DoxyCodeLine{247     DirectX::XMFLOAT3 Direction = \{ 0.0f, -\/1.0f, 0.0f \};\textcolor{comment}{// directional/spot light only}}
+\DoxyCodeLine{248     \textcolor{keywordtype}{float} FalloffEnd = 10.0f;                           \textcolor{comment}{// point/spot light only}}
+\DoxyCodeLine{249     DirectX::XMFLOAT3 Position = \{ 0.0f, 0.0f, 0.0f \};  \textcolor{comment}{// point/spot light only}}
+\DoxyCodeLine{250     \textcolor{keywordtype}{float} SpotPower = 64.0f;                            \textcolor{comment}{// spot light only}}
+\DoxyCodeLine{251 \};}
+\DoxyCodeLine{252 }
+\DoxyCodeLine{253 \textcolor{preprocessor}{\#define MaxLights 16}}
+\DoxyCodeLine{254 }
+\DoxyCodeLine{255 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_material_constants}{MaterialConstants}}}
+\DoxyCodeLine{256 \{}
+\DoxyCodeLine{257     DirectX::XMFLOAT4 DiffuseAlbedo = \{ 1.0f, 1.0f, 1.0f, 1.0f \};}
+\DoxyCodeLine{258     DirectX::XMFLOAT3 FresnelR0 = \{ 0.01f, 0.01f, 0.01f \};}
+\DoxyCodeLine{259     \textcolor{keywordtype}{float} Roughness = 0.25f;}
+\DoxyCodeLine{260 }
+\DoxyCodeLine{261     \textcolor{comment}{// Used in texture mapping.}}
+\DoxyCodeLine{262     DirectX::XMFLOAT4X4 MatTransform = MathHelper::Identity4x4();}
+\DoxyCodeLine{263 \};}
+\DoxyCodeLine{264 }
+\DoxyCodeLine{265 \textcolor{comment}{// Simple struct to represent a material for our demos.  A production 3D engine}}
+\DoxyCodeLine{266 \textcolor{comment}{// would likely create a class hierarchy of Materials.}}
+\DoxyCodeLine{267 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_material}{Material}}}
+\DoxyCodeLine{268 \{}
+\DoxyCodeLine{269     \textcolor{comment}{// Unique material name for lookup.}}
+\DoxyCodeLine{270     std::string Name;}
+\DoxyCodeLine{271 }
+\DoxyCodeLine{272     \textcolor{comment}{// Index into constant buffer corresponding to this material.}}
+\DoxyCodeLine{273     \textcolor{keywordtype}{int} MatCBIndex = -\/1;}
+\DoxyCodeLine{274 }
+\DoxyCodeLine{275     \textcolor{comment}{// Index into SRV heap for diffuse texture.}}
+\DoxyCodeLine{276     \textcolor{keywordtype}{int} DiffuseSrvHeapIndex = -\/1;}
+\DoxyCodeLine{277 }
+\DoxyCodeLine{278     \textcolor{comment}{// Index into SRV heap for normal texture.}}
+\DoxyCodeLine{279     \textcolor{keywordtype}{int} NormalSrvHeapIndex = -\/1;}
+\DoxyCodeLine{280 }
+\DoxyCodeLine{281     \textcolor{comment}{// Dirty flag indicating the material has changed and we need to update the constant buffer.}}
+\DoxyCodeLine{282     \textcolor{comment}{// Because we have a material constant buffer for each FrameResource, we have to apply the}}
+\DoxyCodeLine{283     \textcolor{comment}{// update to each FrameResource.  Thus, when we modify a material we should set }}
+\DoxyCodeLine{284     \textcolor{comment}{// NumFramesDirty = gNumFrameResources so that each frame resource gets the update.}}
+\DoxyCodeLine{285     \textcolor{keywordtype}{int} NumFramesDirty = gNumFrameResources;}
+\DoxyCodeLine{286 }
+\DoxyCodeLine{287     \textcolor{comment}{// Material constant buffer data used for shading.}}
+\DoxyCodeLine{288     DirectX::XMFLOAT4 DiffuseAlbedo = \{ 1.0f, 1.0f, 1.0f, 1.0f \};}
+\DoxyCodeLine{289     DirectX::XMFLOAT3 FresnelR0 = \{ 0.01f, 0.01f, 0.01f \};}
+\DoxyCodeLine{290     \textcolor{keywordtype}{float} Roughness = .25f;}
+\DoxyCodeLine{291     DirectX::XMFLOAT4X4 MatTransform = MathHelper::Identity4x4();}
+\DoxyCodeLine{292 \};}
+\DoxyCodeLine{293 }
+\DoxyCodeLine{294 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_texture}{Texture}}}
+\DoxyCodeLine{295 \{}
+\DoxyCodeLine{296     \textcolor{comment}{// Unique material name for lookup.}}
+\DoxyCodeLine{297     std::string Name;}
+\DoxyCodeLine{298 }
+\DoxyCodeLine{299     std::wstring Filename;}
+\DoxyCodeLine{300 }
+\DoxyCodeLine{301     Microsoft::WRL::ComPtr<ID3D12Resource> Resource = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{302     Microsoft::WRL::ComPtr<ID3D12Resource> UploadHeap = \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{303 \};}
+\DoxyCodeLine{304 }
+\DoxyCodeLine{305 \textcolor{preprocessor}{\#ifndef ThrowIfFailed}}
+\DoxyCodeLine{306 \textcolor{preprocessor}{\#define ThrowIfFailed(x)                                              \(\backslash\)}}
+\DoxyCodeLine{307 \textcolor{preprocessor}{\{                                                                     \(\backslash\)}}
+\DoxyCodeLine{308 \textcolor{preprocessor}{    HRESULT hr\_\_ = (x);                                               \(\backslash\)}}
+\DoxyCodeLine{309 \textcolor{preprocessor}{    std::wstring wfn = AnsiToWString(\_\_FILE\_\_);                       \(\backslash\)}}
+\DoxyCodeLine{310 \textcolor{preprocessor}{    if(FAILED(hr\_\_)) \{ throw DxException(hr\_\_, L\#x, wfn, \_\_LINE\_\_); \} \(\backslash\)}}
+\DoxyCodeLine{311 \textcolor{preprocessor}{\}}}
+\DoxyCodeLine{312 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{313 }
+\DoxyCodeLine{314 \textcolor{preprocessor}{\#ifndef ReleaseCom}}
+\DoxyCodeLine{315 \textcolor{preprocessor}{\#define ReleaseCom(x) \{ if(x)\{ x-\/>Release(); x = 0; \} \}}}
+\DoxyCodeLine{316 \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

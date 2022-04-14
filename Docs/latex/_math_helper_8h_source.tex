@@ -1,0 +1,106 @@
+\hypertarget{_math_helper_8h_source}{}\doxysection{Math\+Helper.\+h}
+\label{_math_helper_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/MathHelper.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/MathHelper.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//***************************************************************************************}}
+\DoxyCodeLine{2 \textcolor{comment}{// MathHelper.h }}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{// Helper math class.}}
+\DoxyCodeLine{5 \textcolor{comment}{//***************************************************************************************}}
+\DoxyCodeLine{6 }
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{preprocessor}{\#include <Windows.h>}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#include <DirectXMath.h>}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#include <cstdint>}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{keyword}{class }\mbox{\hyperlink{class_math_helper}{MathHelper}}}
+\DoxyCodeLine{14 \{}
+\DoxyCodeLine{15 \textcolor{keyword}{public}:}
+\DoxyCodeLine{16     \textcolor{comment}{// Returns random float in [0, 1).}}
+\DoxyCodeLine{17     \textcolor{keyword}{static} \textcolor{keywordtype}{float} RandF()}
+\DoxyCodeLine{18     \{}
+\DoxyCodeLine{19         \textcolor{keywordflow}{return} (\textcolor{keywordtype}{float})(rand()) / (\textcolor{keywordtype}{float})RAND\_MAX;}
+\DoxyCodeLine{20     \}}
+\DoxyCodeLine{21 }
+\DoxyCodeLine{22     \textcolor{comment}{// Returns random float in [a, b).}}
+\DoxyCodeLine{23     \textcolor{keyword}{static} \textcolor{keywordtype}{float} RandF(\textcolor{keywordtype}{float} a, \textcolor{keywordtype}{float} b)}
+\DoxyCodeLine{24     \{}
+\DoxyCodeLine{25         \textcolor{keywordflow}{return} a + RandF() * (b -\/ a);}
+\DoxyCodeLine{26     \}}
+\DoxyCodeLine{27 }
+\DoxyCodeLine{28     \textcolor{keyword}{static} \textcolor{keywordtype}{int} Rand(\textcolor{keywordtype}{int} a, \textcolor{keywordtype}{int} b)}
+\DoxyCodeLine{29     \{}
+\DoxyCodeLine{30         \textcolor{keywordflow}{return} a + rand() \% ((b -\/ a) + 1);}
+\DoxyCodeLine{31     \}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33     \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{34     \textcolor{keyword}{static} T Min(\textcolor{keyword}{const} T\& a, \textcolor{keyword}{const} T\& b)}
+\DoxyCodeLine{35     \{}
+\DoxyCodeLine{36         \textcolor{keywordflow}{return} a < b ? a : b;}
+\DoxyCodeLine{37     \}}
+\DoxyCodeLine{38 }
+\DoxyCodeLine{39     \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{40     \textcolor{keyword}{static} T Max(\textcolor{keyword}{const} T\& a, \textcolor{keyword}{const} T\& b)}
+\DoxyCodeLine{41     \{}
+\DoxyCodeLine{42         \textcolor{keywordflow}{return} a > b ? a : b;}
+\DoxyCodeLine{43     \}}
+\DoxyCodeLine{44 }
+\DoxyCodeLine{45     \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{46     \textcolor{keyword}{static} T Lerp(\textcolor{keyword}{const} T\& a, \textcolor{keyword}{const} T\& b, \textcolor{keywordtype}{float} t)}
+\DoxyCodeLine{47     \{}
+\DoxyCodeLine{48         \textcolor{keywordflow}{return} a + (b -\/ a) * t;}
+\DoxyCodeLine{49     \}}
+\DoxyCodeLine{50 }
+\DoxyCodeLine{51     \textcolor{keyword}{template}<\textcolor{keyword}{typename} T>}
+\DoxyCodeLine{52     \textcolor{keyword}{static} T Clamp(\textcolor{keyword}{const} T\& x, \textcolor{keyword}{const} T\& low, \textcolor{keyword}{const} T\& high)}
+\DoxyCodeLine{53     \{}
+\DoxyCodeLine{54         \textcolor{keywordflow}{return} x < low ? low : (x > high ? high : x);}
+\DoxyCodeLine{55     \}}
+\DoxyCodeLine{56 }
+\DoxyCodeLine{57     \textcolor{comment}{// Returns the polar angle of the point (x,y) in [0, 2*PI).}}
+\DoxyCodeLine{58     \textcolor{keyword}{static} \textcolor{keywordtype}{float} AngleFromXY(\textcolor{keywordtype}{float} x, \textcolor{keywordtype}{float} y);}
+\DoxyCodeLine{59 }
+\DoxyCodeLine{60     \textcolor{keyword}{static} DirectX::XMVECTOR SphericalToCartesian(\textcolor{keywordtype}{float} radius, \textcolor{keywordtype}{float} theta, \textcolor{keywordtype}{float} phi)}
+\DoxyCodeLine{61     \{}
+\DoxyCodeLine{62         \textcolor{keywordflow}{return} DirectX::XMVectorSet(}
+\DoxyCodeLine{63             radius * sinf(phi) * cosf(theta),}
+\DoxyCodeLine{64             radius * cosf(phi),}
+\DoxyCodeLine{65             radius * sinf(phi) * sinf(theta),}
+\DoxyCodeLine{66             1.0f);}
+\DoxyCodeLine{67     \}}
+\DoxyCodeLine{68 }
+\DoxyCodeLine{69     \textcolor{keyword}{static} DirectX::XMMATRIX InverseTranspose(DirectX::CXMMATRIX M)}
+\DoxyCodeLine{70     \{}
+\DoxyCodeLine{71         \textcolor{comment}{// Inverse-\/transpose is just applied to normals.  So zero out }}
+\DoxyCodeLine{72         \textcolor{comment}{// translation row so that it doesn't get into our inverse-\/transpose}}
+\DoxyCodeLine{73         \textcolor{comment}{// calculation-\/-\/we don't want the inverse-\/transpose of the translation.}}
+\DoxyCodeLine{74         DirectX::XMMATRIX A = M;}
+\DoxyCodeLine{75         A.r[3] = DirectX::XMVectorSet(0.0f, 0.0f, 0.0f, 1.0f);}
+\DoxyCodeLine{76 }
+\DoxyCodeLine{77         DirectX::XMVECTOR det = DirectX::XMMatrixDeterminant(A);}
+\DoxyCodeLine{78         \textcolor{keywordflow}{return} DirectX::XMMatrixTranspose(DirectX::XMMatrixInverse(\&det, A));}
+\DoxyCodeLine{79     \}}
+\DoxyCodeLine{80 }
+\DoxyCodeLine{81     \textcolor{keyword}{static} DirectX::XMFLOAT4X4 Identity4x4()}
+\DoxyCodeLine{82     \{}
+\DoxyCodeLine{83         \textcolor{keyword}{static} DirectX::XMFLOAT4X4 I(}
+\DoxyCodeLine{84             1.0f, 0.0f, 0.0f, 0.0f,}
+\DoxyCodeLine{85             0.0f, 1.0f, 0.0f, 0.0f,}
+\DoxyCodeLine{86             0.0f, 0.0f, 1.0f, 0.0f,}
+\DoxyCodeLine{87             0.0f, 0.0f, 0.0f, 1.0f);}
+\DoxyCodeLine{88 }
+\DoxyCodeLine{89         \textcolor{keywordflow}{return} I;}
+\DoxyCodeLine{90     \}}
+\DoxyCodeLine{91 }
+\DoxyCodeLine{92     \textcolor{keyword}{static} DirectX::XMVECTOR RandUnitVec3();}
+\DoxyCodeLine{93     \textcolor{keyword}{static} DirectX::XMVECTOR RandHemisphereUnitVec3(DirectX::XMVECTOR n);}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{float} Infinity;}
+\DoxyCodeLine{96     \textcolor{keyword}{static} \textcolor{keyword}{const} \textcolor{keywordtype}{float} Pi;}
+\DoxyCodeLine{97 }
+\DoxyCodeLine{98 }
+\DoxyCodeLine{99 \};}
+\DoxyCodeLine{100 }
+
+\end{DoxyCode}

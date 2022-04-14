@@ -1,0 +1,178 @@
+\hypertarget{_d_d_s_texture_loader_8h_source}{}\doxysection{DDSTexture\+Loader.\+h}
+\label{_d_d_s_texture_loader_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/DDSTextureLoader.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/DDSTextureLoader.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{2 \textcolor{comment}{// File: DDSTextureLoader.h}}
+\DoxyCodeLine{3 \textcolor{comment}{//}}
+\DoxyCodeLine{4 \textcolor{comment}{// Functions for loading a DDS texture and creating a Direct3D 11 runtime resource for it}}
+\DoxyCodeLine{5 \textcolor{comment}{//}}
+\DoxyCodeLine{6 \textcolor{comment}{// Note these functions are useful as a light-\/weight runtime loader for DDS files. For}}
+\DoxyCodeLine{7 \textcolor{comment}{// a full-\/featured DDS file reader, writer, and texture processing pipeline see}}
+\DoxyCodeLine{8 \textcolor{comment}{// the 'Texconv' sample and the 'DirectXTex' library.}}
+\DoxyCodeLine{9 \textcolor{comment}{//}}
+\DoxyCodeLine{10 \textcolor{comment}{// THIS CODE AND INFORMATION IS PROVIDED "{}AS IS"{} WITHOUT WARRANTY OF}}
+\DoxyCodeLine{11 \textcolor{comment}{// ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO}}
+\DoxyCodeLine{12 \textcolor{comment}{// THE IMPLIED WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A}}
+\DoxyCodeLine{13 \textcolor{comment}{// PARTICULAR PURPOSE.}}
+\DoxyCodeLine{14 \textcolor{comment}{//}}
+\DoxyCodeLine{15 \textcolor{comment}{// Copyright (c) Microsoft Corporation. All rights reserved.}}
+\DoxyCodeLine{16 \textcolor{comment}{//}}
+\DoxyCodeLine{17 \textcolor{comment}{// http://go.microsoft.com/fwlink/?LinkId=248926}}
+\DoxyCodeLine{18 \textcolor{comment}{// http://go.microsoft.com/fwlink/?LinkId=248929}}
+\DoxyCodeLine{19 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{preprocessor}{\#ifdef \_MSC\_VER}}
+\DoxyCodeLine{22 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{23 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{24 }
+\DoxyCodeLine{25 \textcolor{preprocessor}{\#include <wrl.h>}}
+\DoxyCodeLine{26 \textcolor{preprocessor}{\#include <d3d11\_1.h>}}
+\DoxyCodeLine{27 \textcolor{preprocessor}{\#include "{}d3dx12.h"{}}}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29 \textcolor{preprocessor}{\#pragma warning(push)}}
+\DoxyCodeLine{30 \textcolor{preprocessor}{\#pragma warning(disable : 4005)}}
+\DoxyCodeLine{31 \textcolor{preprocessor}{\#include <stdint.h>}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{preprocessor}{\#pragma warning(pop)}}
+\DoxyCodeLine{34 }
+\DoxyCodeLine{35 \textcolor{preprocessor}{\#if defined(\_MSC\_VER) \&\& (\_MSC\_VER<1610) \&\& !defined(\_In\_reads\_)}}
+\DoxyCodeLine{36 \textcolor{preprocessor}{\#define \_In\_reads\_(exp)}}
+\DoxyCodeLine{37 \textcolor{preprocessor}{\#define \_Out\_writes\_(exp)}}
+\DoxyCodeLine{38 \textcolor{preprocessor}{\#define \_In\_reads\_bytes\_(exp)}}
+\DoxyCodeLine{39 \textcolor{preprocessor}{\#define \_In\_reads\_opt\_(exp)}}
+\DoxyCodeLine{40 \textcolor{preprocessor}{\#define \_Outptr\_opt\_}}
+\DoxyCodeLine{41 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{42 }
+\DoxyCodeLine{43 \textcolor{preprocessor}{\#ifndef \_Use\_decl\_annotations\_}}
+\DoxyCodeLine{44 \textcolor{preprocessor}{\#define \_Use\_decl\_annotations\_}}
+\DoxyCodeLine{45 \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{46 }
+\DoxyCodeLine{47 \textcolor{keyword}{namespace }DirectX}
+\DoxyCodeLine{48 \{}
+\DoxyCodeLine{49     \textcolor{keyword}{enum} DDS\_ALPHA\_MODE}
+\DoxyCodeLine{50     \{}
+\DoxyCodeLine{51         DDS\_ALPHA\_MODE\_UNKNOWN = 0,}
+\DoxyCodeLine{52         DDS\_ALPHA\_MODE\_STRAIGHT = 1,}
+\DoxyCodeLine{53         DDS\_ALPHA\_MODE\_PREMULTIPLIED = 2,}
+\DoxyCodeLine{54         DDS\_ALPHA\_MODE\_OPAQUE = 3,}
+\DoxyCodeLine{55         DDS\_ALPHA\_MODE\_CUSTOM = 4,}
+\DoxyCodeLine{56     \};}
+\DoxyCodeLine{57 }
+\DoxyCodeLine{58     \textcolor{comment}{// Standard version}}
+\DoxyCodeLine{59     HRESULT CreateDDSTextureFromMemory(\_In\_ ID3D11Device* d3dDevice,}
+\DoxyCodeLine{60         \_In\_reads\_bytes\_(ddsDataSize) \textcolor{keyword}{const} uint8\_t* ddsData,}
+\DoxyCodeLine{61         \_In\_ \textcolor{keywordtype}{size\_t} ddsDataSize,}
+\DoxyCodeLine{62         \_Outptr\_opt\_ ID3D11Resource** texture,}
+\DoxyCodeLine{63         \_Outptr\_opt\_ ID3D11ShaderResourceView** textureView,}
+\DoxyCodeLine{64         \_In\_ \textcolor{keywordtype}{size\_t} maxsize = 0,}
+\DoxyCodeLine{65         \_Out\_opt\_ DDS\_ALPHA\_MODE* alphaMode = \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{66     );}
+\DoxyCodeLine{67 }
+\DoxyCodeLine{68     HRESULT CreateDDSTextureFromMemory12(\_In\_ ID3D12Device* device,}
+\DoxyCodeLine{69         \_In\_ ID3D12GraphicsCommandList* cmdList,}
+\DoxyCodeLine{70         \_In\_reads\_bytes\_(ddsDataSize) \textcolor{keyword}{const} uint8\_t* ddsData,}
+\DoxyCodeLine{71         \_In\_ \textcolor{keywordtype}{size\_t} ddsDataSize,}
+\DoxyCodeLine{72         \_Out\_ Microsoft::WRL::ComPtr<ID3D12Resource>\& texture,}
+\DoxyCodeLine{73         \_Out\_ Microsoft::WRL::ComPtr<ID3D12Resource>\& textureUploadHeap,}
+\DoxyCodeLine{74         \_In\_ \textcolor{keywordtype}{size\_t} maxsize = 0,}
+\DoxyCodeLine{75         \_Out\_opt\_ DDS\_ALPHA\_MODE* alphaMode = \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{76     );}
+\DoxyCodeLine{77 }
+\DoxyCodeLine{78     HRESULT CreateDDSTextureFromFile(\_In\_ ID3D11Device* d3dDevice,}
+\DoxyCodeLine{79         \_In\_z\_ \textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t}* szFileName,}
+\DoxyCodeLine{80         \_Outptr\_opt\_ ID3D11Resource** texture,}
+\DoxyCodeLine{81         \_Outptr\_opt\_ ID3D11ShaderResourceView** textureView,}
+\DoxyCodeLine{82         \_In\_ \textcolor{keywordtype}{size\_t} maxsize = 0,}
+\DoxyCodeLine{83         \_Out\_opt\_ DDS\_ALPHA\_MODE* alphaMode = \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{84     );}
+\DoxyCodeLine{85 }
+\DoxyCodeLine{86     HRESULT CreateDDSTextureFromFile12(\_In\_ ID3D12Device* device,}
+\DoxyCodeLine{87         \_In\_ ID3D12GraphicsCommandList* cmdList,}
+\DoxyCodeLine{88         \_In\_z\_ \textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t}* szFileName,}
+\DoxyCodeLine{89         \_Out\_ Microsoft::WRL::ComPtr<ID3D12Resource>\& texture,}
+\DoxyCodeLine{90         \_Out\_ Microsoft::WRL::ComPtr<ID3D12Resource>\& textureUploadHeap,}
+\DoxyCodeLine{91         \_In\_ \textcolor{keywordtype}{size\_t} maxsize = 0,}
+\DoxyCodeLine{92         \_Out\_opt\_ DDS\_ALPHA\_MODE* alphaMode = \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{93     );}
+\DoxyCodeLine{94 }
+\DoxyCodeLine{95     \textcolor{comment}{// Standard version with optional auto-\/gen mipmap support}}
+\DoxyCodeLine{96     HRESULT CreateDDSTextureFromMemory(\_In\_ ID3D11Device* d3dDevice,}
+\DoxyCodeLine{97         \_In\_opt\_ ID3D11DeviceContext* d3dContext,}
+\DoxyCodeLine{98         \_In\_reads\_bytes\_(ddsDataSize) \textcolor{keyword}{const} uint8\_t* ddsData,}
+\DoxyCodeLine{99         \_In\_ \textcolor{keywordtype}{size\_t} ddsDataSize,}
+\DoxyCodeLine{100         \_Outptr\_opt\_ ID3D11Resource** texture,}
+\DoxyCodeLine{101         \_Outptr\_opt\_ ID3D11ShaderResourceView** textureView,}
+\DoxyCodeLine{102         \_In\_ \textcolor{keywordtype}{size\_t} maxsize = 0,}
+\DoxyCodeLine{103         \_Out\_opt\_ DDS\_ALPHA\_MODE* alphaMode = \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{104     );}
+\DoxyCodeLine{105 }
+\DoxyCodeLine{106     HRESULT CreateDDSTextureFromFile(\_In\_ ID3D11Device* d3dDevice,}
+\DoxyCodeLine{107         \_In\_opt\_ ID3D11DeviceContext* d3dContext,}
+\DoxyCodeLine{108         \_In\_z\_ \textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t}* szFileName,}
+\DoxyCodeLine{109         \_Outptr\_opt\_ ID3D11Resource** texture,}
+\DoxyCodeLine{110         \_Outptr\_opt\_ ID3D11ShaderResourceView** textureView,}
+\DoxyCodeLine{111         \_In\_ \textcolor{keywordtype}{size\_t} maxsize = 0,}
+\DoxyCodeLine{112         \_Out\_opt\_ DDS\_ALPHA\_MODE* alphaMode = \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{113     );}
+\DoxyCodeLine{114 }
+\DoxyCodeLine{115     \textcolor{comment}{// Extended version}}
+\DoxyCodeLine{116     HRESULT CreateDDSTextureFromMemoryEx(\_In\_ ID3D11Device* d3dDevice,}
+\DoxyCodeLine{117         \_In\_reads\_bytes\_(ddsDataSize) \textcolor{keyword}{const} uint8\_t* ddsData,}
+\DoxyCodeLine{118         \_In\_ \textcolor{keywordtype}{size\_t} ddsDataSize,}
+\DoxyCodeLine{119         \_In\_ \textcolor{keywordtype}{size\_t} maxsize,}
+\DoxyCodeLine{120         \_In\_ D3D11\_USAGE usage,}
+\DoxyCodeLine{121         \_In\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} bindFlags,}
+\DoxyCodeLine{122         \_In\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} cpuAccessFlags,}
+\DoxyCodeLine{123         \_In\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} miscFlags,}
+\DoxyCodeLine{124         \_In\_ \textcolor{keywordtype}{bool} forceSRGB,}
+\DoxyCodeLine{125         \_Outptr\_opt\_ ID3D11Resource** texture,}
+\DoxyCodeLine{126         \_Outptr\_opt\_ ID3D11ShaderResourceView** textureView,}
+\DoxyCodeLine{127         \_Out\_opt\_ DDS\_ALPHA\_MODE* alphaMode = \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{128     );}
+\DoxyCodeLine{129 }
+\DoxyCodeLine{130     HRESULT CreateDDSTextureFromFileEx(\_In\_ ID3D11Device* d3dDevice,}
+\DoxyCodeLine{131         \_In\_z\_ \textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t}* szFileName,}
+\DoxyCodeLine{132         \_In\_ \textcolor{keywordtype}{size\_t} maxsize,}
+\DoxyCodeLine{133         \_In\_ D3D11\_USAGE usage,}
+\DoxyCodeLine{134         \_In\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} bindFlags,}
+\DoxyCodeLine{135         \_In\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} cpuAccessFlags,}
+\DoxyCodeLine{136         \_In\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} miscFlags,}
+\DoxyCodeLine{137         \_In\_ \textcolor{keywordtype}{bool} forceSRGB,}
+\DoxyCodeLine{138         \_Outptr\_opt\_ ID3D11Resource** texture,}
+\DoxyCodeLine{139         \_Outptr\_opt\_ ID3D11ShaderResourceView** textureView,}
+\DoxyCodeLine{140         \_Out\_opt\_ DDS\_ALPHA\_MODE* alphaMode = \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{141     );}
+\DoxyCodeLine{142 }
+\DoxyCodeLine{143     \textcolor{comment}{// Extended version with optional auto-\/gen mipmap support}}
+\DoxyCodeLine{144     HRESULT CreateDDSTextureFromMemoryEx(\_In\_ ID3D11Device* d3dDevice,}
+\DoxyCodeLine{145         \_In\_opt\_ ID3D11DeviceContext* d3dContext,}
+\DoxyCodeLine{146         \_In\_reads\_bytes\_(ddsDataSize) \textcolor{keyword}{const} uint8\_t* ddsData,}
+\DoxyCodeLine{147         \_In\_ \textcolor{keywordtype}{size\_t} ddsDataSize,}
+\DoxyCodeLine{148         \_In\_ \textcolor{keywordtype}{size\_t} maxsize,}
+\DoxyCodeLine{149         \_In\_ D3D11\_USAGE usage,}
+\DoxyCodeLine{150         \_In\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} bindFlags,}
+\DoxyCodeLine{151         \_In\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} cpuAccessFlags,}
+\DoxyCodeLine{152         \_In\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} miscFlags,}
+\DoxyCodeLine{153         \_In\_ \textcolor{keywordtype}{bool} forceSRGB,}
+\DoxyCodeLine{154         \_Outptr\_opt\_ ID3D11Resource** texture,}
+\DoxyCodeLine{155         \_Outptr\_opt\_ ID3D11ShaderResourceView** textureView,}
+\DoxyCodeLine{156         \_Out\_opt\_ DDS\_ALPHA\_MODE* alphaMode = \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{157     );}
+\DoxyCodeLine{158 }
+\DoxyCodeLine{159     HRESULT CreateDDSTextureFromFileEx(\_In\_ ID3D11Device* d3dDevice,}
+\DoxyCodeLine{160         \_In\_opt\_ ID3D11DeviceContext* d3dContext,}
+\DoxyCodeLine{161         \_In\_z\_ \textcolor{keyword}{const} \textcolor{keywordtype}{wchar\_t}* szFileName,}
+\DoxyCodeLine{162         \_In\_ \textcolor{keywordtype}{size\_t} maxsize,}
+\DoxyCodeLine{163         \_In\_ D3D11\_USAGE usage,}
+\DoxyCodeLine{164         \_In\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} bindFlags,}
+\DoxyCodeLine{165         \_In\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} cpuAccessFlags,}
+\DoxyCodeLine{166         \_In\_ \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int} miscFlags,}
+\DoxyCodeLine{167         \_In\_ \textcolor{keywordtype}{bool} forceSRGB,}
+\DoxyCodeLine{168         \_Outptr\_opt\_ ID3D11Resource** texture,}
+\DoxyCodeLine{169         \_Outptr\_opt\_ ID3D11ShaderResourceView** textureView,}
+\DoxyCodeLine{170         \_Out\_opt\_ DDS\_ALPHA\_MODE* alphaMode = \textcolor{keyword}{nullptr}}
+\DoxyCodeLine{171     );}
+\DoxyCodeLine{172 \}}
+
+\end{DoxyCode}

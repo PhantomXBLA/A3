@@ -1,0 +1,38 @@
+\hypertarget{_command_8h_source}{}\doxysection{Command.\+h}
+\label{_command_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/Command.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/Command.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 }
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include "{}Category.h"{}}}
+\DoxyCodeLine{4 \textcolor{preprocessor}{\#include "{}d3dApp.h"{}}}
+\DoxyCodeLine{5 \textcolor{preprocessor}{\#include <functional>}}
+\DoxyCodeLine{6 \textcolor{preprocessor}{\#include <cassert>}}
+\DoxyCodeLine{7 \textcolor{preprocessor}{\#include "{}GameTimer.h"{}}}
+\DoxyCodeLine{8 }
+\DoxyCodeLine{9 \textcolor{keyword}{class }\mbox{\hyperlink{class_scene_node}{SceneNode}};}
+\DoxyCodeLine{10 }
+\DoxyCodeLine{11 }
+\DoxyCodeLine{13 \textcolor{keyword}{struct }\mbox{\hyperlink{struct_command}{Command}}}
+\DoxyCodeLine{14 \{}
+\DoxyCodeLine{15     \mbox{\hyperlink{struct_command}{Command}}();}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17     std::function<void(\mbox{\hyperlink{class_scene_node}{SceneNode}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt)>  action;}
+\DoxyCodeLine{18     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{int}                                            category;}
+\DoxyCodeLine{19 \};}
+\DoxyCodeLine{20 }
+\DoxyCodeLine{21 \textcolor{keyword}{template} <\textcolor{keyword}{typename} GameObject, \textcolor{keyword}{typename} Function>}
+\DoxyCodeLine{22 std::function<void(\mbox{\hyperlink{class_scene_node}{SceneNode}}\&, \textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}}\& gt)> derivedAction(Function fn)}
+\DoxyCodeLine{23 \{}
+\DoxyCodeLine{24     \textcolor{keywordflow}{return} [=](\mbox{\hyperlink{class_scene_node}{SceneNode}}\& node, \textcolor{keyword}{const} \mbox{\hyperlink{class_game_timer}{GameTimer}} gt)}
+\DoxyCodeLine{25     \{}
+\DoxyCodeLine{26         \textcolor{comment}{// Check if cast is safe}}
+\DoxyCodeLine{27         assert(\textcolor{keyword}{dynamic\_cast<}GameObject*\textcolor{keyword}{>}(\&node) != \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{28 }
+\DoxyCodeLine{29         \textcolor{comment}{// Downcast node and invoke function on it}}
+\DoxyCodeLine{30         fn(\textcolor{keyword}{static\_cast<}GameObject\&\textcolor{keyword}{>}(node), gt);}
+\DoxyCodeLine{31     \};}
+\DoxyCodeLine{32 \}}
+\DoxyCodeLine{33 }
+
+\end{DoxyCode}

@@ -1,0 +1,26 @@
+\hypertarget{_command_queue_8h_source}{}\doxysection{Command\+Queue.\+h}
+\label{_command_queue_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/CommandQueue.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/CommandQueue.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 \textcolor{preprocessor}{\#pragma once}}
+\DoxyCodeLine{2 \textcolor{preprocessor}{\#include "{}Command.h"{}}}
+\DoxyCodeLine{3 \textcolor{preprocessor}{\#include <queue>}}
+\DoxyCodeLine{4 }
+\DoxyCodeLine{5 }
+\DoxyCodeLine{6 \textcolor{keyword}{class }\mbox{\hyperlink{class_command_queue}{CommandQueue}}}
+\DoxyCodeLine{7 \{}
+\DoxyCodeLine{8 \textcolor{keyword}{public}:}
+\DoxyCodeLine{9 }
+\DoxyCodeLine{13     \textcolor{keywordtype}{void}                        \mbox{\hyperlink{class_command_queue_ad444e0d7af45d9e09b834f0cec1e1f43}{push}}(\textcolor{keyword}{const} \mbox{\hyperlink{struct_command}{Command}}\& command);}
+\DoxyCodeLine{14     }
+\DoxyCodeLine{17     \mbox{\hyperlink{struct_command}{Command}}                      \mbox{\hyperlink{class_command_queue_ac2dde510222b8df393b55978f4594194}{pop}}();}
+\DoxyCodeLine{18 }
+\DoxyCodeLine{21     \textcolor{keywordtype}{bool}                        \mbox{\hyperlink{class_command_queue_a3a6eb6a7c83d9b20ad7a6cac63795ec1}{isEmpty}}() \textcolor{keyword}{const};}
+\DoxyCodeLine{22 }
+\DoxyCodeLine{23 }
+\DoxyCodeLine{24 \textcolor{keyword}{private}:}
+\DoxyCodeLine{25     std::queue<Command>         mQueue;}
+\DoxyCodeLine{26 \};}
+\DoxyCodeLine{27 }
+
+\end{DoxyCode}

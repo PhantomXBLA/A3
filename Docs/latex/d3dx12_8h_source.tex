@@ -1,0 +1,1537 @@
+\hypertarget{d3dx12_8h_source}{}\doxysection{d3dx12.\+h}
+\label{d3dx12_8h_source}\index{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/d3dx12.h@{A2-\/main/101251005\_101248866 -\/ lab assignment 2/101251005\_101248866 -\/ lab assignment 1/d3dx12.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{1 }
+\DoxyCodeLine{2 \textcolor{comment}{//}}
+\DoxyCodeLine{3 \textcolor{comment}{//  Copyright (C) Microsoft Corporation.  All Rights Reserved.}}
+\DoxyCodeLine{4 \textcolor{comment}{//}}
+\DoxyCodeLine{5 \textcolor{comment}{//  File:       d3dx12.h}}
+\DoxyCodeLine{6 \textcolor{comment}{//  Content:    D3DX12 utility library}}
+\DoxyCodeLine{7 \textcolor{comment}{//}}
+\DoxyCodeLine{9 \textcolor{comment}{}}
+\DoxyCodeLine{10 \textcolor{preprocessor}{\#ifndef \_\_D3DX12\_H\_\_}}
+\DoxyCodeLine{11 \textcolor{preprocessor}{\#define \_\_D3DX12\_H\_\_}}
+\DoxyCodeLine{12 }
+\DoxyCodeLine{13 \textcolor{preprocessor}{\#include "{}d3d12.h"{}}}
+\DoxyCodeLine{14 }
+\DoxyCodeLine{15 \textcolor{preprocessor}{\#if defined( \_\_cplusplus )}}
+\DoxyCodeLine{16 }
+\DoxyCodeLine{17 \textcolor{keyword}{struct }CD3DX12\_DEFAULT \{\};}
+\DoxyCodeLine{18 \textcolor{keyword}{extern} \textcolor{keyword}{const} DECLSPEC\_SELECTANY CD3DX12\_DEFAULT D3D12\_DEFAULT;}
+\DoxyCodeLine{19 }
+\DoxyCodeLine{20 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{21 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} operator==(\textcolor{keyword}{const} D3D12\_VIEWPORT\& l, \textcolor{keyword}{const} D3D12\_VIEWPORT\& r)}
+\DoxyCodeLine{22 \{}
+\DoxyCodeLine{23     \textcolor{keywordflow}{return} l.TopLeftX == r.TopLeftX \&\& l.TopLeftY == r.TopLeftY \&\& l.Width == r.Width \&\&}
+\DoxyCodeLine{24         l.Height == r.Height \&\& l.MinDepth == r.MinDepth \&\& l.MaxDepth == r.MaxDepth;}
+\DoxyCodeLine{25 \}}
+\DoxyCodeLine{26 }
+\DoxyCodeLine{27 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{28 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} operator!=(\textcolor{keyword}{const} D3D12\_VIEWPORT\& l, \textcolor{keyword}{const} D3D12\_VIEWPORT\& r)}
+\DoxyCodeLine{29 \{}
+\DoxyCodeLine{30     \textcolor{keywordflow}{return} !(l == r);}
+\DoxyCodeLine{31 \}}
+\DoxyCodeLine{32 }
+\DoxyCodeLine{33 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{34 \textcolor{keyword}{struct }CD3DX12\_RECT : \textcolor{keyword}{public} D3D12\_RECT}
+\DoxyCodeLine{35 \{}
+\DoxyCodeLine{36     CD3DX12\_RECT()}
+\DoxyCodeLine{37     \{\}}
+\DoxyCodeLine{38     \textcolor{keyword}{explicit} CD3DX12\_RECT(\textcolor{keyword}{const} D3D12\_RECT\& o) :}
+\DoxyCodeLine{39         D3D12\_RECT(o)}
+\DoxyCodeLine{40     \{\}}
+\DoxyCodeLine{41     \textcolor{keyword}{explicit} CD3DX12\_RECT(}
+\DoxyCodeLine{42         LONG Left,}
+\DoxyCodeLine{43         LONG Top,}
+\DoxyCodeLine{44         LONG Right,}
+\DoxyCodeLine{45         LONG Bottom)}
+\DoxyCodeLine{46     \{}
+\DoxyCodeLine{47         left = Left;}
+\DoxyCodeLine{48         top = Top;}
+\DoxyCodeLine{49         right = Right;}
+\DoxyCodeLine{50         bottom = Bottom;}
+\DoxyCodeLine{51     \}}
+\DoxyCodeLine{52     \string~CD3DX12\_RECT() \{\}}
+\DoxyCodeLine{53     \textcolor{keyword}{operator} \textcolor{keyword}{const} D3D12\_RECT\& () \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{54 \};}
+\DoxyCodeLine{55 }
+\DoxyCodeLine{56 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{57 \textcolor{keyword}{struct }CD3DX12\_BOX : \textcolor{keyword}{public} D3D12\_BOX}
+\DoxyCodeLine{58 \{}
+\DoxyCodeLine{59     CD3DX12\_BOX()}
+\DoxyCodeLine{60     \{\}}
+\DoxyCodeLine{61     \textcolor{keyword}{explicit} CD3DX12\_BOX(\textcolor{keyword}{const} D3D12\_BOX\& o) :}
+\DoxyCodeLine{62         D3D12\_BOX(o)}
+\DoxyCodeLine{63     \{\}}
+\DoxyCodeLine{64     \textcolor{keyword}{explicit} CD3DX12\_BOX(}
+\DoxyCodeLine{65         LONG Left,}
+\DoxyCodeLine{66         LONG Right)}
+\DoxyCodeLine{67     \{}
+\DoxyCodeLine{68         left = Left;}
+\DoxyCodeLine{69         top = 0;}
+\DoxyCodeLine{70         front = 0;}
+\DoxyCodeLine{71         right = Right;}
+\DoxyCodeLine{72         bottom = 1;}
+\DoxyCodeLine{73         back = 1;}
+\DoxyCodeLine{74     \}}
+\DoxyCodeLine{75     \textcolor{keyword}{explicit} CD3DX12\_BOX(}
+\DoxyCodeLine{76         LONG Left,}
+\DoxyCodeLine{77         LONG Top,}
+\DoxyCodeLine{78         LONG Right,}
+\DoxyCodeLine{79         LONG Bottom)}
+\DoxyCodeLine{80     \{}
+\DoxyCodeLine{81         left = Left;}
+\DoxyCodeLine{82         top = Top;}
+\DoxyCodeLine{83         front = 0;}
+\DoxyCodeLine{84         right = Right;}
+\DoxyCodeLine{85         bottom = Bottom;}
+\DoxyCodeLine{86         back = 1;}
+\DoxyCodeLine{87     \}}
+\DoxyCodeLine{88     \textcolor{keyword}{explicit} CD3DX12\_BOX(}
+\DoxyCodeLine{89         LONG Left,}
+\DoxyCodeLine{90         LONG Top,}
+\DoxyCodeLine{91         LONG Front,}
+\DoxyCodeLine{92         LONG Right,}
+\DoxyCodeLine{93         LONG Bottom,}
+\DoxyCodeLine{94         LONG Back)}
+\DoxyCodeLine{95     \{}
+\DoxyCodeLine{96         left = Left;}
+\DoxyCodeLine{97         top = Top;}
+\DoxyCodeLine{98         front = Front;}
+\DoxyCodeLine{99         right = Right;}
+\DoxyCodeLine{100         bottom = Bottom;}
+\DoxyCodeLine{101         back = Back;}
+\DoxyCodeLine{102     \}}
+\DoxyCodeLine{103     \string~CD3DX12\_BOX() \{\}}
+\DoxyCodeLine{104     \textcolor{keyword}{operator} \textcolor{keyword}{const} D3D12\_BOX\& () \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{105 \};}
+\DoxyCodeLine{106 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} operator==(\textcolor{keyword}{const} D3D12\_BOX\& l, \textcolor{keyword}{const} D3D12\_BOX\& r)}
+\DoxyCodeLine{107 \{}
+\DoxyCodeLine{108     \textcolor{keywordflow}{return} l.left == r.left \&\& l.top == r.top \&\& l.front == r.front \&\&}
+\DoxyCodeLine{109         l.right == r.right \&\& l.bottom == r.bottom \&\& l.back == r.back;}
+\DoxyCodeLine{110 \}}
+\DoxyCodeLine{111 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} operator!=(\textcolor{keyword}{const} D3D12\_BOX\& l, \textcolor{keyword}{const} D3D12\_BOX\& r)}
+\DoxyCodeLine{112 \{}
+\DoxyCodeLine{113     \textcolor{keywordflow}{return} !(l == r);}
+\DoxyCodeLine{114 \}}
+\DoxyCodeLine{115 }
+\DoxyCodeLine{116 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{117 \textcolor{keyword}{struct }CD3DX12\_DEPTH\_STENCIL\_DESC : \textcolor{keyword}{public} D3D12\_DEPTH\_STENCIL\_DESC}
+\DoxyCodeLine{118 \{}
+\DoxyCodeLine{119     CD3DX12\_DEPTH\_STENCIL\_DESC()}
+\DoxyCodeLine{120     \{\}}
+\DoxyCodeLine{121     \textcolor{keyword}{explicit} CD3DX12\_DEPTH\_STENCIL\_DESC(\textcolor{keyword}{const} D3D12\_DEPTH\_STENCIL\_DESC\& o) :}
+\DoxyCodeLine{122         D3D12\_DEPTH\_STENCIL\_DESC(o)}
+\DoxyCodeLine{123     \{\}}
+\DoxyCodeLine{124     \textcolor{keyword}{explicit} CD3DX12\_DEPTH\_STENCIL\_DESC(CD3DX12\_DEFAULT)}
+\DoxyCodeLine{125     \{}
+\DoxyCodeLine{126         DepthEnable = TRUE;}
+\DoxyCodeLine{127         DepthWriteMask = D3D12\_DEPTH\_WRITE\_MASK\_ALL;}
+\DoxyCodeLine{128         DepthFunc = D3D12\_COMPARISON\_FUNC\_LESS;}
+\DoxyCodeLine{129         StencilEnable = FALSE;}
+\DoxyCodeLine{130         StencilReadMask = D3D12\_DEFAULT\_STENCIL\_READ\_MASK;}
+\DoxyCodeLine{131         StencilWriteMask = D3D12\_DEFAULT\_STENCIL\_WRITE\_MASK;}
+\DoxyCodeLine{132         \textcolor{keyword}{const} D3D12\_DEPTH\_STENCILOP\_DESC defaultStencilOp =}
+\DoxyCodeLine{133         \{ D3D12\_STENCIL\_OP\_KEEP, D3D12\_STENCIL\_OP\_KEEP, D3D12\_STENCIL\_OP\_KEEP, D3D12\_COMPARISON\_FUNC\_ALWAYS \};}
+\DoxyCodeLine{134         FrontFace = defaultStencilOp;}
+\DoxyCodeLine{135         BackFace = defaultStencilOp;}
+\DoxyCodeLine{136     \}}
+\DoxyCodeLine{137     \textcolor{keyword}{explicit} CD3DX12\_DEPTH\_STENCIL\_DESC(}
+\DoxyCodeLine{138         BOOL depthEnable,}
+\DoxyCodeLine{139         D3D12\_DEPTH\_WRITE\_MASK depthWriteMask,}
+\DoxyCodeLine{140         D3D12\_COMPARISON\_FUNC depthFunc,}
+\DoxyCodeLine{141         BOOL stencilEnable,}
+\DoxyCodeLine{142         UINT8 stencilReadMask,}
+\DoxyCodeLine{143         UINT8 stencilWriteMask,}
+\DoxyCodeLine{144         D3D12\_STENCIL\_OP frontStencilFailOp,}
+\DoxyCodeLine{145         D3D12\_STENCIL\_OP frontStencilDepthFailOp,}
+\DoxyCodeLine{146         D3D12\_STENCIL\_OP frontStencilPassOp,}
+\DoxyCodeLine{147         D3D12\_COMPARISON\_FUNC frontStencilFunc,}
+\DoxyCodeLine{148         D3D12\_STENCIL\_OP backStencilFailOp,}
+\DoxyCodeLine{149         D3D12\_STENCIL\_OP backStencilDepthFailOp,}
+\DoxyCodeLine{150         D3D12\_STENCIL\_OP backStencilPassOp,}
+\DoxyCodeLine{151         D3D12\_COMPARISON\_FUNC backStencilFunc)}
+\DoxyCodeLine{152     \{}
+\DoxyCodeLine{153         DepthEnable = depthEnable;}
+\DoxyCodeLine{154         DepthWriteMask = depthWriteMask;}
+\DoxyCodeLine{155         DepthFunc = depthFunc;}
+\DoxyCodeLine{156         StencilEnable = stencilEnable;}
+\DoxyCodeLine{157         StencilReadMask = stencilReadMask;}
+\DoxyCodeLine{158         StencilWriteMask = stencilWriteMask;}
+\DoxyCodeLine{159         FrontFace.StencilFailOp = frontStencilFailOp;}
+\DoxyCodeLine{160         FrontFace.StencilDepthFailOp = frontStencilDepthFailOp;}
+\DoxyCodeLine{161         FrontFace.StencilPassOp = frontStencilPassOp;}
+\DoxyCodeLine{162         FrontFace.StencilFunc = frontStencilFunc;}
+\DoxyCodeLine{163         BackFace.StencilFailOp = backStencilFailOp;}
+\DoxyCodeLine{164         BackFace.StencilDepthFailOp = backStencilDepthFailOp;}
+\DoxyCodeLine{165         BackFace.StencilPassOp = backStencilPassOp;}
+\DoxyCodeLine{166         BackFace.StencilFunc = backStencilFunc;}
+\DoxyCodeLine{167     \}}
+\DoxyCodeLine{168     \string~CD3DX12\_DEPTH\_STENCIL\_DESC() \{\}}
+\DoxyCodeLine{169     \textcolor{keyword}{operator} \textcolor{keyword}{const} D3D12\_DEPTH\_STENCIL\_DESC\& () \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{170 \};}
+\DoxyCodeLine{171 }
+\DoxyCodeLine{172 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{173 \textcolor{keyword}{struct }CD3DX12\_BLEND\_DESC : \textcolor{keyword}{public} D3D12\_BLEND\_DESC}
+\DoxyCodeLine{174 \{}
+\DoxyCodeLine{175     CD3DX12\_BLEND\_DESC()}
+\DoxyCodeLine{176     \{\}}
+\DoxyCodeLine{177     \textcolor{keyword}{explicit} CD3DX12\_BLEND\_DESC(\textcolor{keyword}{const} D3D12\_BLEND\_DESC\& o) :}
+\DoxyCodeLine{178         D3D12\_BLEND\_DESC(o)}
+\DoxyCodeLine{179     \{\}}
+\DoxyCodeLine{180     \textcolor{keyword}{explicit} CD3DX12\_BLEND\_DESC(CD3DX12\_DEFAULT)}
+\DoxyCodeLine{181     \{}
+\DoxyCodeLine{182         AlphaToCoverageEnable = FALSE;}
+\DoxyCodeLine{183         IndependentBlendEnable = FALSE;}
+\DoxyCodeLine{184         \textcolor{keyword}{const} D3D12\_RENDER\_TARGET\_BLEND\_DESC defaultRenderTargetBlendDesc =}
+\DoxyCodeLine{185         \{}
+\DoxyCodeLine{186             FALSE,FALSE,}
+\DoxyCodeLine{187             D3D12\_BLEND\_ONE, D3D12\_BLEND\_ZERO, D3D12\_BLEND\_OP\_ADD,}
+\DoxyCodeLine{188             D3D12\_BLEND\_ONE, D3D12\_BLEND\_ZERO, D3D12\_BLEND\_OP\_ADD,}
+\DoxyCodeLine{189             D3D12\_LOGIC\_OP\_NOOP,}
+\DoxyCodeLine{190             D3D12\_COLOR\_WRITE\_ENABLE\_ALL,}
+\DoxyCodeLine{191         \};}
+\DoxyCodeLine{192         \textcolor{keywordflow}{for} (UINT i = 0; i < D3D12\_SIMULTANEOUS\_RENDER\_TARGET\_COUNT; ++i)}
+\DoxyCodeLine{193             RenderTarget[i] = defaultRenderTargetBlendDesc;}
+\DoxyCodeLine{194     \}}
+\DoxyCodeLine{195     \string~CD3DX12\_BLEND\_DESC() \{\}}
+\DoxyCodeLine{196     \textcolor{keyword}{operator} \textcolor{keyword}{const} D3D12\_BLEND\_DESC\& () \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{197 \};}
+\DoxyCodeLine{198 }
+\DoxyCodeLine{199 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{200 \textcolor{keyword}{struct }CD3DX12\_RASTERIZER\_DESC : \textcolor{keyword}{public} D3D12\_RASTERIZER\_DESC}
+\DoxyCodeLine{201 \{}
+\DoxyCodeLine{202     CD3DX12\_RASTERIZER\_DESC()}
+\DoxyCodeLine{203     \{\}}
+\DoxyCodeLine{204     \textcolor{keyword}{explicit} CD3DX12\_RASTERIZER\_DESC(\textcolor{keyword}{const} D3D12\_RASTERIZER\_DESC\& o) :}
+\DoxyCodeLine{205         D3D12\_RASTERIZER\_DESC(o)}
+\DoxyCodeLine{206     \{\}}
+\DoxyCodeLine{207     \textcolor{keyword}{explicit} CD3DX12\_RASTERIZER\_DESC(CD3DX12\_DEFAULT)}
+\DoxyCodeLine{208     \{}
+\DoxyCodeLine{209         FillMode = D3D12\_FILL\_MODE\_SOLID;}
+\DoxyCodeLine{210         CullMode = D3D12\_CULL\_MODE\_BACK;}
+\DoxyCodeLine{211         FrontCounterClockwise = FALSE;}
+\DoxyCodeLine{212         DepthBias = D3D12\_DEFAULT\_DEPTH\_BIAS;}
+\DoxyCodeLine{213         DepthBiasClamp = D3D12\_DEFAULT\_DEPTH\_BIAS\_CLAMP;}
+\DoxyCodeLine{214         SlopeScaledDepthBias = D3D12\_DEFAULT\_SLOPE\_SCALED\_DEPTH\_BIAS;}
+\DoxyCodeLine{215         DepthClipEnable = TRUE;}
+\DoxyCodeLine{216         MultisampleEnable = FALSE;}
+\DoxyCodeLine{217         AntialiasedLineEnable = FALSE;}
+\DoxyCodeLine{218         ForcedSampleCount = 0;}
+\DoxyCodeLine{219         ConservativeRaster = D3D12\_CONSERVATIVE\_RASTERIZATION\_MODE\_OFF;}
+\DoxyCodeLine{220     \}}
+\DoxyCodeLine{221     \textcolor{keyword}{explicit} CD3DX12\_RASTERIZER\_DESC(}
+\DoxyCodeLine{222         D3D12\_FILL\_MODE fillMode,}
+\DoxyCodeLine{223         D3D12\_CULL\_MODE cullMode,}
+\DoxyCodeLine{224         BOOL frontCounterClockwise,}
+\DoxyCodeLine{225         INT depthBias,}
+\DoxyCodeLine{226         FLOAT depthBiasClamp,}
+\DoxyCodeLine{227         FLOAT slopeScaledDepthBias,}
+\DoxyCodeLine{228         BOOL depthClipEnable,}
+\DoxyCodeLine{229         BOOL multisampleEnable,}
+\DoxyCodeLine{230         BOOL antialiasedLineEnable,}
+\DoxyCodeLine{231         UINT forcedSampleCount,}
+\DoxyCodeLine{232         D3D12\_CONSERVATIVE\_RASTERIZATION\_MODE conservativeRaster)}
+\DoxyCodeLine{233     \{}
+\DoxyCodeLine{234         FillMode = fillMode;}
+\DoxyCodeLine{235         CullMode = cullMode;}
+\DoxyCodeLine{236         FrontCounterClockwise = frontCounterClockwise;}
+\DoxyCodeLine{237         DepthBias = depthBias;}
+\DoxyCodeLine{238         DepthBiasClamp = depthBiasClamp;}
+\DoxyCodeLine{239         SlopeScaledDepthBias = slopeScaledDepthBias;}
+\DoxyCodeLine{240         DepthClipEnable = depthClipEnable;}
+\DoxyCodeLine{241         MultisampleEnable = multisampleEnable;}
+\DoxyCodeLine{242         AntialiasedLineEnable = antialiasedLineEnable;}
+\DoxyCodeLine{243         ForcedSampleCount = forcedSampleCount;}
+\DoxyCodeLine{244         ConservativeRaster = conservativeRaster;}
+\DoxyCodeLine{245     \}}
+\DoxyCodeLine{246     \string~CD3DX12\_RASTERIZER\_DESC() \{\}}
+\DoxyCodeLine{247     \textcolor{keyword}{operator} \textcolor{keyword}{const} D3D12\_RASTERIZER\_DESC\& () \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{248 \};}
+\DoxyCodeLine{249 }
+\DoxyCodeLine{250 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{251 \textcolor{keyword}{struct }CD3DX12\_RESOURCE\_ALLOCATION\_INFO : \textcolor{keyword}{public} D3D12\_RESOURCE\_ALLOCATION\_INFO}
+\DoxyCodeLine{252 \{}
+\DoxyCodeLine{253     CD3DX12\_RESOURCE\_ALLOCATION\_INFO()}
+\DoxyCodeLine{254     \{\}}
+\DoxyCodeLine{255     \textcolor{keyword}{explicit} CD3DX12\_RESOURCE\_ALLOCATION\_INFO(\textcolor{keyword}{const} D3D12\_RESOURCE\_ALLOCATION\_INFO\& o) :}
+\DoxyCodeLine{256         D3D12\_RESOURCE\_ALLOCATION\_INFO(o)}
+\DoxyCodeLine{257     \{\}}
+\DoxyCodeLine{258     CD3DX12\_RESOURCE\_ALLOCATION\_INFO(}
+\DoxyCodeLine{259         UINT64 size,}
+\DoxyCodeLine{260         UINT64 alignment)}
+\DoxyCodeLine{261     \{}
+\DoxyCodeLine{262         SizeInBytes = size;}
+\DoxyCodeLine{263         Alignment = alignment;}
+\DoxyCodeLine{264     \}}
+\DoxyCodeLine{265     \textcolor{keyword}{operator} \textcolor{keyword}{const} D3D12\_RESOURCE\_ALLOCATION\_INFO\& () \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{266 \};}
+\DoxyCodeLine{267 }
+\DoxyCodeLine{268 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{269 \textcolor{keyword}{struct }CD3DX12\_HEAP\_PROPERTIES : \textcolor{keyword}{public} D3D12\_HEAP\_PROPERTIES}
+\DoxyCodeLine{270 \{}
+\DoxyCodeLine{271     CD3DX12\_HEAP\_PROPERTIES()}
+\DoxyCodeLine{272     \{\}}
+\DoxyCodeLine{273     \textcolor{keyword}{explicit} CD3DX12\_HEAP\_PROPERTIES(\textcolor{keyword}{const} D3D12\_HEAP\_PROPERTIES\& o) :}
+\DoxyCodeLine{274         D3D12\_HEAP\_PROPERTIES(o)}
+\DoxyCodeLine{275     \{\}}
+\DoxyCodeLine{276     CD3DX12\_HEAP\_PROPERTIES(}
+\DoxyCodeLine{277         D3D12\_CPU\_PAGE\_PROPERTY cpuPageProperty,}
+\DoxyCodeLine{278         D3D12\_MEMORY\_POOL memoryPoolPreference,}
+\DoxyCodeLine{279         UINT creationNodeMask = 1,}
+\DoxyCodeLine{280         UINT nodeMask = 1)}
+\DoxyCodeLine{281     \{}
+\DoxyCodeLine{282         Type = D3D12\_HEAP\_TYPE\_CUSTOM;}
+\DoxyCodeLine{283         CPUPageProperty = cpuPageProperty;}
+\DoxyCodeLine{284         MemoryPoolPreference = memoryPoolPreference;}
+\DoxyCodeLine{285         CreationNodeMask = creationNodeMask;}
+\DoxyCodeLine{286         VisibleNodeMask = nodeMask;}
+\DoxyCodeLine{287     \}}
+\DoxyCodeLine{288     \textcolor{keyword}{explicit} CD3DX12\_HEAP\_PROPERTIES(}
+\DoxyCodeLine{289         D3D12\_HEAP\_TYPE type,}
+\DoxyCodeLine{290         UINT creationNodeMask = 1,}
+\DoxyCodeLine{291         UINT nodeMask = 1)}
+\DoxyCodeLine{292     \{}
+\DoxyCodeLine{293         Type = type;}
+\DoxyCodeLine{294         CPUPageProperty = D3D12\_CPU\_PAGE\_PROPERTY\_UNKNOWN;}
+\DoxyCodeLine{295         MemoryPoolPreference = D3D12\_MEMORY\_POOL\_UNKNOWN;}
+\DoxyCodeLine{296         CreationNodeMask = creationNodeMask;}
+\DoxyCodeLine{297         VisibleNodeMask = nodeMask;}
+\DoxyCodeLine{298     \}}
+\DoxyCodeLine{299     \textcolor{keyword}{operator} \textcolor{keyword}{const} D3D12\_HEAP\_PROPERTIES\& () \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{300     \textcolor{keywordtype}{bool} IsCPUAccessible()\textcolor{keyword}{ const}}
+\DoxyCodeLine{301 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{302         \textcolor{keywordflow}{return} Type == D3D12\_HEAP\_TYPE\_UPLOAD || Type == D3D12\_HEAP\_TYPE\_READBACK || (Type == D3D12\_HEAP\_TYPE\_CUSTOM \&\&}
+\DoxyCodeLine{303             (CPUPageProperty == D3D12\_CPU\_PAGE\_PROPERTY\_WRITE\_COMBINE || CPUPageProperty == D3D12\_CPU\_PAGE\_PROPERTY\_WRITE\_BACK));}
+\DoxyCodeLine{304     \}}
+\DoxyCodeLine{305 \};}
+\DoxyCodeLine{306 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} operator==(\textcolor{keyword}{const} D3D12\_HEAP\_PROPERTIES\& l, \textcolor{keyword}{const} D3D12\_HEAP\_PROPERTIES\& r)}
+\DoxyCodeLine{307 \{}
+\DoxyCodeLine{308     \textcolor{keywordflow}{return} l.Type == r.Type \&\& l.CPUPageProperty == r.CPUPageProperty \&\&}
+\DoxyCodeLine{309         l.MemoryPoolPreference == r.MemoryPoolPreference \&\&}
+\DoxyCodeLine{310         l.CreationNodeMask == r.CreationNodeMask \&\&}
+\DoxyCodeLine{311         l.VisibleNodeMask == r.VisibleNodeMask;}
+\DoxyCodeLine{312 \}}
+\DoxyCodeLine{313 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} operator!=(\textcolor{keyword}{const} D3D12\_HEAP\_PROPERTIES\& l, \textcolor{keyword}{const} D3D12\_HEAP\_PROPERTIES\& r)}
+\DoxyCodeLine{314 \{}
+\DoxyCodeLine{315     \textcolor{keywordflow}{return} !(l == r);}
+\DoxyCodeLine{316 \}}
+\DoxyCodeLine{317 }
+\DoxyCodeLine{318 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{319 \textcolor{keyword}{struct }CD3DX12\_HEAP\_DESC : \textcolor{keyword}{public} D3D12\_HEAP\_DESC}
+\DoxyCodeLine{320 \{}
+\DoxyCodeLine{321     CD3DX12\_HEAP\_DESC()}
+\DoxyCodeLine{322     \{\}}
+\DoxyCodeLine{323     \textcolor{keyword}{explicit} CD3DX12\_HEAP\_DESC(\textcolor{keyword}{const} D3D12\_HEAP\_DESC\& o) :}
+\DoxyCodeLine{324         D3D12\_HEAP\_DESC(o)}
+\DoxyCodeLine{325     \{\}}
+\DoxyCodeLine{326     CD3DX12\_HEAP\_DESC(}
+\DoxyCodeLine{327         UINT64 size,}
+\DoxyCodeLine{328         D3D12\_HEAP\_PROPERTIES properties,}
+\DoxyCodeLine{329         UINT64 alignment = 0,}
+\DoxyCodeLine{330         D3D12\_HEAP\_FLAGS flags = D3D12\_HEAP\_FLAG\_NONE)}
+\DoxyCodeLine{331     \{}
+\DoxyCodeLine{332         SizeInBytes = size;}
+\DoxyCodeLine{333         Properties = properties;}
+\DoxyCodeLine{334         Alignment = alignment;}
+\DoxyCodeLine{335         Flags = flags;}
+\DoxyCodeLine{336     \}}
+\DoxyCodeLine{337     CD3DX12\_HEAP\_DESC(}
+\DoxyCodeLine{338         UINT64 size,}
+\DoxyCodeLine{339         D3D12\_HEAP\_TYPE type,}
+\DoxyCodeLine{340         UINT64 alignment = 0,}
+\DoxyCodeLine{341         D3D12\_HEAP\_FLAGS flags = D3D12\_HEAP\_FLAG\_NONE)}
+\DoxyCodeLine{342     \{}
+\DoxyCodeLine{343         SizeInBytes = size;}
+\DoxyCodeLine{344         Properties = CD3DX12\_HEAP\_PROPERTIES(type);}
+\DoxyCodeLine{345         Alignment = alignment;}
+\DoxyCodeLine{346         Flags = flags;}
+\DoxyCodeLine{347     \}}
+\DoxyCodeLine{348     CD3DX12\_HEAP\_DESC(}
+\DoxyCodeLine{349         UINT64 size,}
+\DoxyCodeLine{350         D3D12\_CPU\_PAGE\_PROPERTY cpuPageProperty,}
+\DoxyCodeLine{351         D3D12\_MEMORY\_POOL memoryPoolPreference,}
+\DoxyCodeLine{352         UINT64 alignment = 0,}
+\DoxyCodeLine{353         D3D12\_HEAP\_FLAGS flags = D3D12\_HEAP\_FLAG\_NONE)}
+\DoxyCodeLine{354     \{}
+\DoxyCodeLine{355         SizeInBytes = size;}
+\DoxyCodeLine{356         Properties = CD3DX12\_HEAP\_PROPERTIES(cpuPageProperty, memoryPoolPreference);}
+\DoxyCodeLine{357         Alignment = alignment;}
+\DoxyCodeLine{358         Flags = flags;}
+\DoxyCodeLine{359     \}}
+\DoxyCodeLine{360     CD3DX12\_HEAP\_DESC(}
+\DoxyCodeLine{361         \textcolor{keyword}{const} D3D12\_RESOURCE\_ALLOCATION\_INFO\& resAllocInfo,}
+\DoxyCodeLine{362         D3D12\_HEAP\_PROPERTIES properties,}
+\DoxyCodeLine{363         D3D12\_HEAP\_FLAGS flags = D3D12\_HEAP\_FLAG\_NONE)}
+\DoxyCodeLine{364     \{}
+\DoxyCodeLine{365         SizeInBytes = resAllocInfo.SizeInBytes;}
+\DoxyCodeLine{366         Properties = properties;}
+\DoxyCodeLine{367         Alignment = resAllocInfo.Alignment;}
+\DoxyCodeLine{368         Flags = flags;}
+\DoxyCodeLine{369     \}}
+\DoxyCodeLine{370     CD3DX12\_HEAP\_DESC(}
+\DoxyCodeLine{371         \textcolor{keyword}{const} D3D12\_RESOURCE\_ALLOCATION\_INFO\& resAllocInfo,}
+\DoxyCodeLine{372         D3D12\_HEAP\_TYPE type,}
+\DoxyCodeLine{373         D3D12\_HEAP\_FLAGS flags = D3D12\_HEAP\_FLAG\_NONE)}
+\DoxyCodeLine{374     \{}
+\DoxyCodeLine{375         SizeInBytes = resAllocInfo.SizeInBytes;}
+\DoxyCodeLine{376         Properties = CD3DX12\_HEAP\_PROPERTIES(type);}
+\DoxyCodeLine{377         Alignment = resAllocInfo.Alignment;}
+\DoxyCodeLine{378         Flags = flags;}
+\DoxyCodeLine{379     \}}
+\DoxyCodeLine{380     CD3DX12\_HEAP\_DESC(}
+\DoxyCodeLine{381         \textcolor{keyword}{const} D3D12\_RESOURCE\_ALLOCATION\_INFO\& resAllocInfo,}
+\DoxyCodeLine{382         D3D12\_CPU\_PAGE\_PROPERTY cpuPageProperty,}
+\DoxyCodeLine{383         D3D12\_MEMORY\_POOL memoryPoolPreference,}
+\DoxyCodeLine{384         D3D12\_HEAP\_FLAGS flags = D3D12\_HEAP\_FLAG\_NONE)}
+\DoxyCodeLine{385     \{}
+\DoxyCodeLine{386         SizeInBytes = resAllocInfo.SizeInBytes;}
+\DoxyCodeLine{387         Properties = CD3DX12\_HEAP\_PROPERTIES(cpuPageProperty, memoryPoolPreference);}
+\DoxyCodeLine{388         Alignment = resAllocInfo.Alignment;}
+\DoxyCodeLine{389         Flags = flags;}
+\DoxyCodeLine{390     \}}
+\DoxyCodeLine{391     \textcolor{keyword}{operator} \textcolor{keyword}{const} D3D12\_HEAP\_DESC\& () \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{392     \textcolor{keywordtype}{bool} IsCPUAccessible()\textcolor{keyword}{ const}}
+\DoxyCodeLine{393 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{394         \textcolor{keywordflow}{return} \textcolor{keyword}{static\_cast<}\textcolor{keyword}{const }CD3DX12\_HEAP\_PROPERTIES*\textcolor{keyword}{>}(\&Properties)-\/>IsCPUAccessible();}
+\DoxyCodeLine{395     \}}
+\DoxyCodeLine{396 \};}
+\DoxyCodeLine{397 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} operator==(\textcolor{keyword}{const} D3D12\_HEAP\_DESC\& l, \textcolor{keyword}{const} D3D12\_HEAP\_DESC\& r)}
+\DoxyCodeLine{398 \{}
+\DoxyCodeLine{399     \textcolor{keywordflow}{return} l.SizeInBytes == r.SizeInBytes \&\&}
+\DoxyCodeLine{400         l.Properties == r.Properties \&\&}
+\DoxyCodeLine{401         l.Alignment == r.Alignment \&\&}
+\DoxyCodeLine{402         l.Flags == r.Flags;}
+\DoxyCodeLine{403 \}}
+\DoxyCodeLine{404 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} operator!=(\textcolor{keyword}{const} D3D12\_HEAP\_DESC\& l, \textcolor{keyword}{const} D3D12\_HEAP\_DESC\& r)}
+\DoxyCodeLine{405 \{}
+\DoxyCodeLine{406     \textcolor{keywordflow}{return} !(l == r);}
+\DoxyCodeLine{407 \}}
+\DoxyCodeLine{408 }
+\DoxyCodeLine{409 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{410 \textcolor{keyword}{struct }CD3DX12\_CLEAR\_VALUE : \textcolor{keyword}{public} D3D12\_CLEAR\_VALUE}
+\DoxyCodeLine{411 \{}
+\DoxyCodeLine{412     CD3DX12\_CLEAR\_VALUE()}
+\DoxyCodeLine{413     \{\}}
+\DoxyCodeLine{414     \textcolor{keyword}{explicit} CD3DX12\_CLEAR\_VALUE(\textcolor{keyword}{const} D3D12\_CLEAR\_VALUE\& o) :}
+\DoxyCodeLine{415         D3D12\_CLEAR\_VALUE(o)}
+\DoxyCodeLine{416     \{\}}
+\DoxyCodeLine{417     CD3DX12\_CLEAR\_VALUE(}
+\DoxyCodeLine{418         DXGI\_FORMAT format,}
+\DoxyCodeLine{419         \textcolor{keyword}{const} FLOAT color[4])}
+\DoxyCodeLine{420     \{}
+\DoxyCodeLine{421         Format = format;}
+\DoxyCodeLine{422         memcpy(Color, color, \textcolor{keyword}{sizeof}(Color));}
+\DoxyCodeLine{423     \}}
+\DoxyCodeLine{424     CD3DX12\_CLEAR\_VALUE(}
+\DoxyCodeLine{425         DXGI\_FORMAT format,}
+\DoxyCodeLine{426         FLOAT depth,}
+\DoxyCodeLine{427         UINT8 stencil)}
+\DoxyCodeLine{428     \{}
+\DoxyCodeLine{429         Format = format;}
+\DoxyCodeLine{430         \textcolor{comment}{/* Use memcpy to preserve NAN values */}}
+\DoxyCodeLine{431         memcpy(\&DepthStencil.Depth, \&depth, \textcolor{keyword}{sizeof}(depth));}
+\DoxyCodeLine{432         DepthStencil.Stencil = stencil;}
+\DoxyCodeLine{433     \}}
+\DoxyCodeLine{434     \textcolor{keyword}{operator} \textcolor{keyword}{const} D3D12\_CLEAR\_VALUE\& () \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{435 \};}
+\DoxyCodeLine{436 }
+\DoxyCodeLine{437 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{438 \textcolor{keyword}{struct }CD3DX12\_RANGE : \textcolor{keyword}{public} D3D12\_RANGE}
+\DoxyCodeLine{439 \{}
+\DoxyCodeLine{440     CD3DX12\_RANGE()}
+\DoxyCodeLine{441     \{\}}
+\DoxyCodeLine{442     \textcolor{keyword}{explicit} CD3DX12\_RANGE(\textcolor{keyword}{const} D3D12\_RANGE\& o) :}
+\DoxyCodeLine{443         D3D12\_RANGE(o)}
+\DoxyCodeLine{444     \{\}}
+\DoxyCodeLine{445     CD3DX12\_RANGE(}
+\DoxyCodeLine{446         SIZE\_T begin,}
+\DoxyCodeLine{447         SIZE\_T end)}
+\DoxyCodeLine{448     \{}
+\DoxyCodeLine{449         Begin = begin;}
+\DoxyCodeLine{450         End = end;}
+\DoxyCodeLine{451     \}}
+\DoxyCodeLine{452     \textcolor{keyword}{operator} \textcolor{keyword}{const} D3D12\_RANGE\& () \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{453 \};}
+\DoxyCodeLine{454 }
+\DoxyCodeLine{455 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{456 \textcolor{keyword}{struct }CD3DX12\_TILED\_RESOURCE\_COORDINATE : \textcolor{keyword}{public} D3D12\_TILED\_RESOURCE\_COORDINATE}
+\DoxyCodeLine{457 \{}
+\DoxyCodeLine{458     CD3DX12\_TILED\_RESOURCE\_COORDINATE()}
+\DoxyCodeLine{459     \{\}}
+\DoxyCodeLine{460     \textcolor{keyword}{explicit} CD3DX12\_TILED\_RESOURCE\_COORDINATE(\textcolor{keyword}{const} D3D12\_TILED\_RESOURCE\_COORDINATE\& o) :}
+\DoxyCodeLine{461         D3D12\_TILED\_RESOURCE\_COORDINATE(o)}
+\DoxyCodeLine{462     \{\}}
+\DoxyCodeLine{463     CD3DX12\_TILED\_RESOURCE\_COORDINATE(}
+\DoxyCodeLine{464         UINT x,}
+\DoxyCodeLine{465         UINT y,}
+\DoxyCodeLine{466         UINT z,}
+\DoxyCodeLine{467         UINT subresource)}
+\DoxyCodeLine{468     \{}
+\DoxyCodeLine{469         X = x;}
+\DoxyCodeLine{470         Y = y;}
+\DoxyCodeLine{471         Z = z;}
+\DoxyCodeLine{472         Subresource = subresource;}
+\DoxyCodeLine{473     \}}
+\DoxyCodeLine{474     \textcolor{keyword}{operator} \textcolor{keyword}{const} D3D12\_TILED\_RESOURCE\_COORDINATE\& () \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{475 \};}
+\DoxyCodeLine{476 }
+\DoxyCodeLine{477 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{478 \textcolor{keyword}{struct }CD3DX12\_TILE\_REGION\_SIZE : \textcolor{keyword}{public} D3D12\_TILE\_REGION\_SIZE}
+\DoxyCodeLine{479 \{}
+\DoxyCodeLine{480     CD3DX12\_TILE\_REGION\_SIZE()}
+\DoxyCodeLine{481     \{\}}
+\DoxyCodeLine{482     \textcolor{keyword}{explicit} CD3DX12\_TILE\_REGION\_SIZE(\textcolor{keyword}{const} D3D12\_TILE\_REGION\_SIZE\& o) :}
+\DoxyCodeLine{483         D3D12\_TILE\_REGION\_SIZE(o)}
+\DoxyCodeLine{484     \{\}}
+\DoxyCodeLine{485     CD3DX12\_TILE\_REGION\_SIZE(}
+\DoxyCodeLine{486         UINT numTiles,}
+\DoxyCodeLine{487         BOOL useBox,}
+\DoxyCodeLine{488         UINT width,}
+\DoxyCodeLine{489         UINT16 height,}
+\DoxyCodeLine{490         UINT16 depth)}
+\DoxyCodeLine{491     \{}
+\DoxyCodeLine{492         NumTiles = numTiles;}
+\DoxyCodeLine{493         UseBox = useBox;}
+\DoxyCodeLine{494         Width = width;}
+\DoxyCodeLine{495         Height = height;}
+\DoxyCodeLine{496         Depth = depth;}
+\DoxyCodeLine{497     \}}
+\DoxyCodeLine{498     \textcolor{keyword}{operator} \textcolor{keyword}{const} D3D12\_TILE\_REGION\_SIZE\& () \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{499 \};}
+\DoxyCodeLine{500 }
+\DoxyCodeLine{501 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{502 \textcolor{keyword}{struct }CD3DX12\_SUBRESOURCE\_TILING : \textcolor{keyword}{public} D3D12\_SUBRESOURCE\_TILING}
+\DoxyCodeLine{503 \{}
+\DoxyCodeLine{504     CD3DX12\_SUBRESOURCE\_TILING()}
+\DoxyCodeLine{505     \{\}}
+\DoxyCodeLine{506     \textcolor{keyword}{explicit} CD3DX12\_SUBRESOURCE\_TILING(\textcolor{keyword}{const} D3D12\_SUBRESOURCE\_TILING\& o) :}
+\DoxyCodeLine{507         D3D12\_SUBRESOURCE\_TILING(o)}
+\DoxyCodeLine{508     \{\}}
+\DoxyCodeLine{509     CD3DX12\_SUBRESOURCE\_TILING(}
+\DoxyCodeLine{510         UINT widthInTiles,}
+\DoxyCodeLine{511         UINT16 heightInTiles,}
+\DoxyCodeLine{512         UINT16 depthInTiles,}
+\DoxyCodeLine{513         UINT startTileIndexInOverallResource)}
+\DoxyCodeLine{514     \{}
+\DoxyCodeLine{515         WidthInTiles = widthInTiles;}
+\DoxyCodeLine{516         HeightInTiles = heightInTiles;}
+\DoxyCodeLine{517         DepthInTiles = depthInTiles;}
+\DoxyCodeLine{518         StartTileIndexInOverallResource = startTileIndexInOverallResource;}
+\DoxyCodeLine{519     \}}
+\DoxyCodeLine{520     \textcolor{keyword}{operator} \textcolor{keyword}{const} D3D12\_SUBRESOURCE\_TILING\& () \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{521 \};}
+\DoxyCodeLine{522 }
+\DoxyCodeLine{523 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{524 \textcolor{keyword}{struct }CD3DX12\_TILE\_SHAPE : \textcolor{keyword}{public} D3D12\_TILE\_SHAPE}
+\DoxyCodeLine{525 \{}
+\DoxyCodeLine{526     CD3DX12\_TILE\_SHAPE()}
+\DoxyCodeLine{527     \{\}}
+\DoxyCodeLine{528     \textcolor{keyword}{explicit} CD3DX12\_TILE\_SHAPE(\textcolor{keyword}{const} D3D12\_TILE\_SHAPE\& o) :}
+\DoxyCodeLine{529         D3D12\_TILE\_SHAPE(o)}
+\DoxyCodeLine{530     \{\}}
+\DoxyCodeLine{531     CD3DX12\_TILE\_SHAPE(}
+\DoxyCodeLine{532         UINT widthInTexels,}
+\DoxyCodeLine{533         UINT heightInTexels,}
+\DoxyCodeLine{534         UINT depthInTexels)}
+\DoxyCodeLine{535     \{}
+\DoxyCodeLine{536         WidthInTexels = widthInTexels;}
+\DoxyCodeLine{537         HeightInTexels = heightInTexels;}
+\DoxyCodeLine{538         DepthInTexels = depthInTexels;}
+\DoxyCodeLine{539     \}}
+\DoxyCodeLine{540     \textcolor{keyword}{operator} \textcolor{keyword}{const} D3D12\_TILE\_SHAPE\& () \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{541 \};}
+\DoxyCodeLine{542 }
+\DoxyCodeLine{543 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{544 \textcolor{keyword}{struct }CD3DX12\_RESOURCE\_BARRIER : \textcolor{keyword}{public} D3D12\_RESOURCE\_BARRIER}
+\DoxyCodeLine{545 \{}
+\DoxyCodeLine{546     CD3DX12\_RESOURCE\_BARRIER()}
+\DoxyCodeLine{547     \{\}}
+\DoxyCodeLine{548     \textcolor{keyword}{explicit} CD3DX12\_RESOURCE\_BARRIER(\textcolor{keyword}{const} D3D12\_RESOURCE\_BARRIER\& o) :}
+\DoxyCodeLine{549         D3D12\_RESOURCE\_BARRIER(o)}
+\DoxyCodeLine{550     \{\}}
+\DoxyCodeLine{551     \textcolor{keyword}{static} \textcolor{keyword}{inline} CD3DX12\_RESOURCE\_BARRIER Transition(}
+\DoxyCodeLine{552         \_In\_ ID3D12Resource* pResource,}
+\DoxyCodeLine{553         D3D12\_RESOURCE\_STATES stateBefore,}
+\DoxyCodeLine{554         D3D12\_RESOURCE\_STATES stateAfter,}
+\DoxyCodeLine{555         UINT subresource = D3D12\_RESOURCE\_BARRIER\_ALL\_SUBRESOURCES,}
+\DoxyCodeLine{556         D3D12\_RESOURCE\_BARRIER\_FLAGS flags = D3D12\_RESOURCE\_BARRIER\_FLAG\_NONE)}
+\DoxyCodeLine{557     \{}
+\DoxyCodeLine{558         CD3DX12\_RESOURCE\_BARRIER result;}
+\DoxyCodeLine{559         ZeroMemory(\&result, \textcolor{keyword}{sizeof}(result));}
+\DoxyCodeLine{560         D3D12\_RESOURCE\_BARRIER\& barrier = result;}
+\DoxyCodeLine{561         result.Type = D3D12\_RESOURCE\_BARRIER\_TYPE\_TRANSITION;}
+\DoxyCodeLine{562         result.Flags = flags;}
+\DoxyCodeLine{563         barrier.Transition.pResource = pResource;}
+\DoxyCodeLine{564         barrier.Transition.StateBefore = stateBefore;}
+\DoxyCodeLine{565         barrier.Transition.StateAfter = stateAfter;}
+\DoxyCodeLine{566         barrier.Transition.Subresource = subresource;}
+\DoxyCodeLine{567         \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{568     \}}
+\DoxyCodeLine{569     \textcolor{keyword}{static} \textcolor{keyword}{inline} CD3DX12\_RESOURCE\_BARRIER Aliasing(}
+\DoxyCodeLine{570         \_In\_ ID3D12Resource* pResourceBefore,}
+\DoxyCodeLine{571         \_In\_ ID3D12Resource* pResourceAfter)}
+\DoxyCodeLine{572     \{}
+\DoxyCodeLine{573         CD3DX12\_RESOURCE\_BARRIER result;}
+\DoxyCodeLine{574         ZeroMemory(\&result, \textcolor{keyword}{sizeof}(result));}
+\DoxyCodeLine{575         D3D12\_RESOURCE\_BARRIER\& barrier = result;}
+\DoxyCodeLine{576         result.Type = D3D12\_RESOURCE\_BARRIER\_TYPE\_ALIASING;}
+\DoxyCodeLine{577         barrier.Aliasing.pResourceBefore = pResourceBefore;}
+\DoxyCodeLine{578         barrier.Aliasing.pResourceAfter = pResourceAfter;}
+\DoxyCodeLine{579         \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{580     \}}
+\DoxyCodeLine{581     \textcolor{keyword}{static} \textcolor{keyword}{inline} CD3DX12\_RESOURCE\_BARRIER UAV(}
+\DoxyCodeLine{582         \_In\_ ID3D12Resource* pResource)}
+\DoxyCodeLine{583     \{}
+\DoxyCodeLine{584         CD3DX12\_RESOURCE\_BARRIER result;}
+\DoxyCodeLine{585         ZeroMemory(\&result, \textcolor{keyword}{sizeof}(result));}
+\DoxyCodeLine{586         D3D12\_RESOURCE\_BARRIER\& barrier = result;}
+\DoxyCodeLine{587         result.Type = D3D12\_RESOURCE\_BARRIER\_TYPE\_UAV;}
+\DoxyCodeLine{588         barrier.UAV.pResource = pResource;}
+\DoxyCodeLine{589         \textcolor{keywordflow}{return} result;}
+\DoxyCodeLine{590     \}}
+\DoxyCodeLine{591     \textcolor{keyword}{operator} \textcolor{keyword}{const} D3D12\_RESOURCE\_BARRIER\& () \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{592 \};}
+\DoxyCodeLine{593 }
+\DoxyCodeLine{594 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{595 \textcolor{keyword}{struct }CD3DX12\_PACKED\_MIP\_INFO : \textcolor{keyword}{public} D3D12\_PACKED\_MIP\_INFO}
+\DoxyCodeLine{596 \{}
+\DoxyCodeLine{597     CD3DX12\_PACKED\_MIP\_INFO()}
+\DoxyCodeLine{598     \{\}}
+\DoxyCodeLine{599     \textcolor{keyword}{explicit} CD3DX12\_PACKED\_MIP\_INFO(\textcolor{keyword}{const} D3D12\_PACKED\_MIP\_INFO\& o) :}
+\DoxyCodeLine{600         D3D12\_PACKED\_MIP\_INFO(o)}
+\DoxyCodeLine{601     \{\}}
+\DoxyCodeLine{602     CD3DX12\_PACKED\_MIP\_INFO(}
+\DoxyCodeLine{603         UINT8 numStandardMips,}
+\DoxyCodeLine{604         UINT8 numPackedMips,}
+\DoxyCodeLine{605         UINT numTilesForPackedMips,}
+\DoxyCodeLine{606         UINT startTileIndexInOverallResource)}
+\DoxyCodeLine{607     \{}
+\DoxyCodeLine{608         NumStandardMips = numStandardMips;}
+\DoxyCodeLine{609         NumPackedMips = numPackedMips;}
+\DoxyCodeLine{610         NumTilesForPackedMips = numTilesForPackedMips;}
+\DoxyCodeLine{611         StartTileIndexInOverallResource = startTileIndexInOverallResource;}
+\DoxyCodeLine{612     \}}
+\DoxyCodeLine{613     \textcolor{keyword}{operator} \textcolor{keyword}{const} D3D12\_PACKED\_MIP\_INFO\& () \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{614 \};}
+\DoxyCodeLine{615 }
+\DoxyCodeLine{616 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{617 \textcolor{keyword}{struct }CD3DX12\_SUBRESOURCE\_FOOTPRINT : \textcolor{keyword}{public} D3D12\_SUBRESOURCE\_FOOTPRINT}
+\DoxyCodeLine{618 \{}
+\DoxyCodeLine{619     CD3DX12\_SUBRESOURCE\_FOOTPRINT()}
+\DoxyCodeLine{620     \{\}}
+\DoxyCodeLine{621     \textcolor{keyword}{explicit} CD3DX12\_SUBRESOURCE\_FOOTPRINT(\textcolor{keyword}{const} D3D12\_SUBRESOURCE\_FOOTPRINT\& o) :}
+\DoxyCodeLine{622         D3D12\_SUBRESOURCE\_FOOTPRINT(o)}
+\DoxyCodeLine{623     \{\}}
+\DoxyCodeLine{624     CD3DX12\_SUBRESOURCE\_FOOTPRINT(}
+\DoxyCodeLine{625         DXGI\_FORMAT format,}
+\DoxyCodeLine{626         UINT width,}
+\DoxyCodeLine{627         UINT height,}
+\DoxyCodeLine{628         UINT depth,}
+\DoxyCodeLine{629         UINT rowPitch)}
+\DoxyCodeLine{630     \{}
+\DoxyCodeLine{631         Format = format;}
+\DoxyCodeLine{632         Width = width;}
+\DoxyCodeLine{633         Height = height;}
+\DoxyCodeLine{634         Depth = depth;}
+\DoxyCodeLine{635         RowPitch = rowPitch;}
+\DoxyCodeLine{636     \}}
+\DoxyCodeLine{637     \textcolor{keyword}{explicit} CD3DX12\_SUBRESOURCE\_FOOTPRINT(}
+\DoxyCodeLine{638         \textcolor{keyword}{const} D3D12\_RESOURCE\_DESC\& resDesc,}
+\DoxyCodeLine{639         UINT rowPitch)}
+\DoxyCodeLine{640     \{}
+\DoxyCodeLine{641         Format = resDesc.Format;}
+\DoxyCodeLine{642         Width = UINT(resDesc.Width);}
+\DoxyCodeLine{643         Height = resDesc.Height;}
+\DoxyCodeLine{644         Depth = (resDesc.Dimension == D3D12\_RESOURCE\_DIMENSION\_TEXTURE3D ? resDesc.DepthOrArraySize : 1);}
+\DoxyCodeLine{645         RowPitch = rowPitch;}
+\DoxyCodeLine{646     \}}
+\DoxyCodeLine{647     \textcolor{keyword}{operator} \textcolor{keyword}{const} D3D12\_SUBRESOURCE\_FOOTPRINT\& () \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{648 \};}
+\DoxyCodeLine{649 }
+\DoxyCodeLine{650 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{651 \textcolor{keyword}{struct }CD3DX12\_TEXTURE\_COPY\_LOCATION : \textcolor{keyword}{public} D3D12\_TEXTURE\_COPY\_LOCATION}
+\DoxyCodeLine{652 \{}
+\DoxyCodeLine{653     CD3DX12\_TEXTURE\_COPY\_LOCATION()}
+\DoxyCodeLine{654     \{\}}
+\DoxyCodeLine{655     \textcolor{keyword}{explicit} CD3DX12\_TEXTURE\_COPY\_LOCATION(\textcolor{keyword}{const} D3D12\_TEXTURE\_COPY\_LOCATION\& o) :}
+\DoxyCodeLine{656         D3D12\_TEXTURE\_COPY\_LOCATION(o)}
+\DoxyCodeLine{657     \{\}}
+\DoxyCodeLine{658     CD3DX12\_TEXTURE\_COPY\_LOCATION(ID3D12Resource* pRes) \{ pResource = pRes; \}}
+\DoxyCodeLine{659     CD3DX12\_TEXTURE\_COPY\_LOCATION(ID3D12Resource* pRes, D3D12\_PLACED\_SUBRESOURCE\_FOOTPRINT \textcolor{keyword}{const}\& Footprint)}
+\DoxyCodeLine{660     \{}
+\DoxyCodeLine{661         pResource = pRes;}
+\DoxyCodeLine{662         Type = D3D12\_TEXTURE\_COPY\_TYPE\_PLACED\_FOOTPRINT;}
+\DoxyCodeLine{663         PlacedFootprint = Footprint;}
+\DoxyCodeLine{664     \}}
+\DoxyCodeLine{665     CD3DX12\_TEXTURE\_COPY\_LOCATION(ID3D12Resource* pRes, UINT Sub)}
+\DoxyCodeLine{666     \{}
+\DoxyCodeLine{667         pResource = pRes;}
+\DoxyCodeLine{668         Type = D3D12\_TEXTURE\_COPY\_TYPE\_SUBRESOURCE\_INDEX;}
+\DoxyCodeLine{669         SubresourceIndex = Sub;}
+\DoxyCodeLine{670     \}}
+\DoxyCodeLine{671 \};}
+\DoxyCodeLine{672 }
+\DoxyCodeLine{673 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{674 \textcolor{keyword}{struct }CD3DX12\_DESCRIPTOR\_RANGE : \textcolor{keyword}{public} D3D12\_DESCRIPTOR\_RANGE}
+\DoxyCodeLine{675 \{}
+\DoxyCodeLine{676     CD3DX12\_DESCRIPTOR\_RANGE() \{ \}}
+\DoxyCodeLine{677     \textcolor{keyword}{explicit} CD3DX12\_DESCRIPTOR\_RANGE(\textcolor{keyword}{const} D3D12\_DESCRIPTOR\_RANGE\& o) :}
+\DoxyCodeLine{678         D3D12\_DESCRIPTOR\_RANGE(o)}
+\DoxyCodeLine{679     \{\}}
+\DoxyCodeLine{680     CD3DX12\_DESCRIPTOR\_RANGE(}
+\DoxyCodeLine{681         D3D12\_DESCRIPTOR\_RANGE\_TYPE rangeType,}
+\DoxyCodeLine{682         UINT numDescriptors,}
+\DoxyCodeLine{683         UINT baseShaderRegister,}
+\DoxyCodeLine{684         UINT registerSpace = 0,}
+\DoxyCodeLine{685         UINT offsetInDescriptorsFromTableStart =}
+\DoxyCodeLine{686         D3D12\_DESCRIPTOR\_RANGE\_OFFSET\_APPEND)}
+\DoxyCodeLine{687     \{}
+\DoxyCodeLine{688         Init(rangeType, numDescriptors, baseShaderRegister, registerSpace, offsetInDescriptorsFromTableStart);}
+\DoxyCodeLine{689     \}}
+\DoxyCodeLine{690 }
+\DoxyCodeLine{691     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} Init(}
+\DoxyCodeLine{692         D3D12\_DESCRIPTOR\_RANGE\_TYPE rangeType,}
+\DoxyCodeLine{693         UINT numDescriptors,}
+\DoxyCodeLine{694         UINT baseShaderRegister,}
+\DoxyCodeLine{695         UINT registerSpace = 0,}
+\DoxyCodeLine{696         UINT offsetInDescriptorsFromTableStart =}
+\DoxyCodeLine{697         D3D12\_DESCRIPTOR\_RANGE\_OFFSET\_APPEND)}
+\DoxyCodeLine{698     \{}
+\DoxyCodeLine{699         Init(*\textcolor{keyword}{this}, rangeType, numDescriptors, baseShaderRegister, registerSpace, offsetInDescriptorsFromTableStart);}
+\DoxyCodeLine{700     \}}
+\DoxyCodeLine{701 }
+\DoxyCodeLine{702     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} Init(}
+\DoxyCodeLine{703         \_Out\_ D3D12\_DESCRIPTOR\_RANGE\& range,}
+\DoxyCodeLine{704         D3D12\_DESCRIPTOR\_RANGE\_TYPE rangeType,}
+\DoxyCodeLine{705         UINT numDescriptors,}
+\DoxyCodeLine{706         UINT baseShaderRegister,}
+\DoxyCodeLine{707         UINT registerSpace = 0,}
+\DoxyCodeLine{708         UINT offsetInDescriptorsFromTableStart =}
+\DoxyCodeLine{709         D3D12\_DESCRIPTOR\_RANGE\_OFFSET\_APPEND)}
+\DoxyCodeLine{710     \{}
+\DoxyCodeLine{711         range.RangeType = rangeType;}
+\DoxyCodeLine{712         range.NumDescriptors = numDescriptors;}
+\DoxyCodeLine{713         range.BaseShaderRegister = baseShaderRegister;}
+\DoxyCodeLine{714         range.RegisterSpace = registerSpace;}
+\DoxyCodeLine{715         range.OffsetInDescriptorsFromTableStart = offsetInDescriptorsFromTableStart;}
+\DoxyCodeLine{716     \}}
+\DoxyCodeLine{717 \};}
+\DoxyCodeLine{718 }
+\DoxyCodeLine{719 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{720 \textcolor{keyword}{struct }CD3DX12\_ROOT\_DESCRIPTOR\_TABLE : \textcolor{keyword}{public} D3D12\_ROOT\_DESCRIPTOR\_TABLE}
+\DoxyCodeLine{721 \{}
+\DoxyCodeLine{722     CD3DX12\_ROOT\_DESCRIPTOR\_TABLE() \{\}}
+\DoxyCodeLine{723     \textcolor{keyword}{explicit} CD3DX12\_ROOT\_DESCRIPTOR\_TABLE(\textcolor{keyword}{const} D3D12\_ROOT\_DESCRIPTOR\_TABLE\& o) :}
+\DoxyCodeLine{724         D3D12\_ROOT\_DESCRIPTOR\_TABLE(o)}
+\DoxyCodeLine{725     \{\}}
+\DoxyCodeLine{726     CD3DX12\_ROOT\_DESCRIPTOR\_TABLE(}
+\DoxyCodeLine{727         UINT numDescriptorRanges,}
+\DoxyCodeLine{728         \_In\_reads\_opt\_(numDescriptorRanges) \textcolor{keyword}{const} D3D12\_DESCRIPTOR\_RANGE* \_pDescriptorRanges)}
+\DoxyCodeLine{729     \{}
+\DoxyCodeLine{730         Init(numDescriptorRanges, \_pDescriptorRanges);}
+\DoxyCodeLine{731     \}}
+\DoxyCodeLine{732 }
+\DoxyCodeLine{733     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} Init(}
+\DoxyCodeLine{734         UINT numDescriptorRanges,}
+\DoxyCodeLine{735         \_In\_reads\_(numDescriptorRanges) \textcolor{keyword}{const} D3D12\_DESCRIPTOR\_RANGE* \_pDescriptorRanges)}
+\DoxyCodeLine{736     \{}
+\DoxyCodeLine{737         Init(*\textcolor{keyword}{this}, numDescriptorRanges, \_pDescriptorRanges);}
+\DoxyCodeLine{738     \}}
+\DoxyCodeLine{739 }
+\DoxyCodeLine{740     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} Init(}
+\DoxyCodeLine{741         \_Out\_ D3D12\_ROOT\_DESCRIPTOR\_TABLE\& rootDescriptorTable,}
+\DoxyCodeLine{742         UINT numDescriptorRanges,}
+\DoxyCodeLine{743         \_In\_reads\_opt\_(numDescriptorRanges) \textcolor{keyword}{const} D3D12\_DESCRIPTOR\_RANGE* \_pDescriptorRanges)}
+\DoxyCodeLine{744     \{}
+\DoxyCodeLine{745         rootDescriptorTable.NumDescriptorRanges = numDescriptorRanges;}
+\DoxyCodeLine{746         rootDescriptorTable.pDescriptorRanges = \_pDescriptorRanges;}
+\DoxyCodeLine{747     \}}
+\DoxyCodeLine{748 \};}
+\DoxyCodeLine{749 }
+\DoxyCodeLine{750 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{751 \textcolor{keyword}{struct }CD3DX12\_ROOT\_CONSTANTS : \textcolor{keyword}{public} D3D12\_ROOT\_CONSTANTS}
+\DoxyCodeLine{752 \{}
+\DoxyCodeLine{753     CD3DX12\_ROOT\_CONSTANTS() \{\}}
+\DoxyCodeLine{754     \textcolor{keyword}{explicit} CD3DX12\_ROOT\_CONSTANTS(\textcolor{keyword}{const} D3D12\_ROOT\_CONSTANTS\& o) :}
+\DoxyCodeLine{755         D3D12\_ROOT\_CONSTANTS(o)}
+\DoxyCodeLine{756     \{\}}
+\DoxyCodeLine{757     CD3DX12\_ROOT\_CONSTANTS(}
+\DoxyCodeLine{758         UINT num32BitValues,}
+\DoxyCodeLine{759         UINT shaderRegister,}
+\DoxyCodeLine{760         UINT registerSpace = 0)}
+\DoxyCodeLine{761     \{}
+\DoxyCodeLine{762         Init(num32BitValues, shaderRegister, registerSpace);}
+\DoxyCodeLine{763     \}}
+\DoxyCodeLine{764 }
+\DoxyCodeLine{765     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} Init(}
+\DoxyCodeLine{766         UINT num32BitValues,}
+\DoxyCodeLine{767         UINT shaderRegister,}
+\DoxyCodeLine{768         UINT registerSpace = 0)}
+\DoxyCodeLine{769     \{}
+\DoxyCodeLine{770         Init(*\textcolor{keyword}{this}, num32BitValues, shaderRegister, registerSpace);}
+\DoxyCodeLine{771     \}}
+\DoxyCodeLine{772 }
+\DoxyCodeLine{773     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} Init(}
+\DoxyCodeLine{774         \_Out\_ D3D12\_ROOT\_CONSTANTS\& rootConstants,}
+\DoxyCodeLine{775         UINT num32BitValues,}
+\DoxyCodeLine{776         UINT shaderRegister,}
+\DoxyCodeLine{777         UINT registerSpace = 0)}
+\DoxyCodeLine{778     \{}
+\DoxyCodeLine{779         rootConstants.Num32BitValues = num32BitValues;}
+\DoxyCodeLine{780         rootConstants.ShaderRegister = shaderRegister;}
+\DoxyCodeLine{781         rootConstants.RegisterSpace = registerSpace;}
+\DoxyCodeLine{782     \}}
+\DoxyCodeLine{783 \};}
+\DoxyCodeLine{784 }
+\DoxyCodeLine{785 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{786 \textcolor{keyword}{struct }CD3DX12\_ROOT\_DESCRIPTOR : \textcolor{keyword}{public} D3D12\_ROOT\_DESCRIPTOR}
+\DoxyCodeLine{787 \{}
+\DoxyCodeLine{788     CD3DX12\_ROOT\_DESCRIPTOR() \{\}}
+\DoxyCodeLine{789     \textcolor{keyword}{explicit} CD3DX12\_ROOT\_DESCRIPTOR(\textcolor{keyword}{const} D3D12\_ROOT\_DESCRIPTOR\& o) :}
+\DoxyCodeLine{790         D3D12\_ROOT\_DESCRIPTOR(o)}
+\DoxyCodeLine{791     \{\}}
+\DoxyCodeLine{792     CD3DX12\_ROOT\_DESCRIPTOR(}
+\DoxyCodeLine{793         UINT shaderRegister,}
+\DoxyCodeLine{794         UINT registerSpace = 0)}
+\DoxyCodeLine{795     \{}
+\DoxyCodeLine{796         Init(shaderRegister, registerSpace);}
+\DoxyCodeLine{797     \}}
+\DoxyCodeLine{798 }
+\DoxyCodeLine{799     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} Init(}
+\DoxyCodeLine{800         UINT shaderRegister,}
+\DoxyCodeLine{801         UINT registerSpace = 0)}
+\DoxyCodeLine{802     \{}
+\DoxyCodeLine{803         Init(*\textcolor{keyword}{this}, shaderRegister, registerSpace);}
+\DoxyCodeLine{804     \}}
+\DoxyCodeLine{805 }
+\DoxyCodeLine{806     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} Init(\_Out\_ D3D12\_ROOT\_DESCRIPTOR\& table, UINT shaderRegister, UINT registerSpace = 0)}
+\DoxyCodeLine{807     \{}
+\DoxyCodeLine{808         table.ShaderRegister = shaderRegister;}
+\DoxyCodeLine{809         table.RegisterSpace = registerSpace;}
+\DoxyCodeLine{810     \}}
+\DoxyCodeLine{811 \};}
+\DoxyCodeLine{812 }
+\DoxyCodeLine{813 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{814 \textcolor{keyword}{struct }CD3DX12\_ROOT\_PARAMETER : \textcolor{keyword}{public} D3D12\_ROOT\_PARAMETER}
+\DoxyCodeLine{815 \{}
+\DoxyCodeLine{816     CD3DX12\_ROOT\_PARAMETER() \{\}}
+\DoxyCodeLine{817     \textcolor{keyword}{explicit} CD3DX12\_ROOT\_PARAMETER(\textcolor{keyword}{const} D3D12\_ROOT\_PARAMETER\& o) :}
+\DoxyCodeLine{818         D3D12\_ROOT\_PARAMETER(o)}
+\DoxyCodeLine{819     \{\}}
+\DoxyCodeLine{820 }
+\DoxyCodeLine{821     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitAsDescriptorTable(}
+\DoxyCodeLine{822         \_Out\_ D3D12\_ROOT\_PARAMETER\& rootParam,}
+\DoxyCodeLine{823         UINT numDescriptorRanges,}
+\DoxyCodeLine{824         \_In\_reads\_(numDescriptorRanges) \textcolor{keyword}{const} D3D12\_DESCRIPTOR\_RANGE* pDescriptorRanges,}
+\DoxyCodeLine{825         D3D12\_SHADER\_VISIBILITY visibility = D3D12\_SHADER\_VISIBILITY\_ALL)}
+\DoxyCodeLine{826     \{}
+\DoxyCodeLine{827         rootParam.ParameterType = D3D12\_ROOT\_PARAMETER\_TYPE\_DESCRIPTOR\_TABLE;}
+\DoxyCodeLine{828         rootParam.ShaderVisibility = visibility;}
+\DoxyCodeLine{829         CD3DX12\_ROOT\_DESCRIPTOR\_TABLE::Init(rootParam.DescriptorTable, numDescriptorRanges, pDescriptorRanges);}
+\DoxyCodeLine{830     \}}
+\DoxyCodeLine{831 }
+\DoxyCodeLine{832     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitAsConstants(}
+\DoxyCodeLine{833         \_Out\_ D3D12\_ROOT\_PARAMETER\& rootParam,}
+\DoxyCodeLine{834         UINT num32BitValues,}
+\DoxyCodeLine{835         UINT shaderRegister,}
+\DoxyCodeLine{836         UINT registerSpace = 0,}
+\DoxyCodeLine{837         D3D12\_SHADER\_VISIBILITY visibility = D3D12\_SHADER\_VISIBILITY\_ALL)}
+\DoxyCodeLine{838     \{}
+\DoxyCodeLine{839         rootParam.ParameterType = D3D12\_ROOT\_PARAMETER\_TYPE\_32BIT\_CONSTANTS;}
+\DoxyCodeLine{840         rootParam.ShaderVisibility = visibility;}
+\DoxyCodeLine{841         CD3DX12\_ROOT\_CONSTANTS::Init(rootParam.Constants, num32BitValues, shaderRegister, registerSpace);}
+\DoxyCodeLine{842     \}}
+\DoxyCodeLine{843 }
+\DoxyCodeLine{844     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitAsConstantBufferView(}
+\DoxyCodeLine{845         \_Out\_ D3D12\_ROOT\_PARAMETER\& rootParam,}
+\DoxyCodeLine{846         UINT shaderRegister,}
+\DoxyCodeLine{847         UINT registerSpace = 0,}
+\DoxyCodeLine{848         D3D12\_SHADER\_VISIBILITY visibility = D3D12\_SHADER\_VISIBILITY\_ALL)}
+\DoxyCodeLine{849     \{}
+\DoxyCodeLine{850         rootParam.ParameterType = D3D12\_ROOT\_PARAMETER\_TYPE\_CBV;}
+\DoxyCodeLine{851         rootParam.ShaderVisibility = visibility;}
+\DoxyCodeLine{852         CD3DX12\_ROOT\_DESCRIPTOR::Init(rootParam.Descriptor, shaderRegister, registerSpace);}
+\DoxyCodeLine{853     \}}
+\DoxyCodeLine{854 }
+\DoxyCodeLine{855     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitAsShaderResourceView(}
+\DoxyCodeLine{856         \_Out\_ D3D12\_ROOT\_PARAMETER\& rootParam,}
+\DoxyCodeLine{857         UINT shaderRegister,}
+\DoxyCodeLine{858         UINT registerSpace = 0,}
+\DoxyCodeLine{859         D3D12\_SHADER\_VISIBILITY visibility = D3D12\_SHADER\_VISIBILITY\_ALL)}
+\DoxyCodeLine{860     \{}
+\DoxyCodeLine{861         rootParam.ParameterType = D3D12\_ROOT\_PARAMETER\_TYPE\_SRV;}
+\DoxyCodeLine{862         rootParam.ShaderVisibility = visibility;}
+\DoxyCodeLine{863         CD3DX12\_ROOT\_DESCRIPTOR::Init(rootParam.Descriptor, shaderRegister, registerSpace);}
+\DoxyCodeLine{864     \}}
+\DoxyCodeLine{865 }
+\DoxyCodeLine{866     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitAsUnorderedAccessView(}
+\DoxyCodeLine{867         \_Out\_ D3D12\_ROOT\_PARAMETER\& rootParam,}
+\DoxyCodeLine{868         UINT shaderRegister,}
+\DoxyCodeLine{869         UINT registerSpace = 0,}
+\DoxyCodeLine{870         D3D12\_SHADER\_VISIBILITY visibility = D3D12\_SHADER\_VISIBILITY\_ALL)}
+\DoxyCodeLine{871     \{}
+\DoxyCodeLine{872         rootParam.ParameterType = D3D12\_ROOT\_PARAMETER\_TYPE\_UAV;}
+\DoxyCodeLine{873         rootParam.ShaderVisibility = visibility;}
+\DoxyCodeLine{874         CD3DX12\_ROOT\_DESCRIPTOR::Init(rootParam.Descriptor, shaderRegister, registerSpace);}
+\DoxyCodeLine{875     \}}
+\DoxyCodeLine{876 }
+\DoxyCodeLine{877     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitAsDescriptorTable(}
+\DoxyCodeLine{878         UINT numDescriptorRanges,}
+\DoxyCodeLine{879         \_In\_reads\_(numDescriptorRanges) \textcolor{keyword}{const} D3D12\_DESCRIPTOR\_RANGE* pDescriptorRanges,}
+\DoxyCodeLine{880         D3D12\_SHADER\_VISIBILITY visibility = D3D12\_SHADER\_VISIBILITY\_ALL)}
+\DoxyCodeLine{881     \{}
+\DoxyCodeLine{882         InitAsDescriptorTable(*\textcolor{keyword}{this}, numDescriptorRanges, pDescriptorRanges, visibility);}
+\DoxyCodeLine{883     \}}
+\DoxyCodeLine{884 }
+\DoxyCodeLine{885     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitAsConstants(}
+\DoxyCodeLine{886         UINT num32BitValues,}
+\DoxyCodeLine{887         UINT shaderRegister,}
+\DoxyCodeLine{888         UINT registerSpace = 0,}
+\DoxyCodeLine{889         D3D12\_SHADER\_VISIBILITY visibility = D3D12\_SHADER\_VISIBILITY\_ALL)}
+\DoxyCodeLine{890     \{}
+\DoxyCodeLine{891         InitAsConstants(*\textcolor{keyword}{this}, num32BitValues, shaderRegister, registerSpace, visibility);}
+\DoxyCodeLine{892     \}}
+\DoxyCodeLine{893 }
+\DoxyCodeLine{894     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitAsConstantBufferView(}
+\DoxyCodeLine{895         UINT shaderRegister,}
+\DoxyCodeLine{896         UINT registerSpace = 0,}
+\DoxyCodeLine{897         D3D12\_SHADER\_VISIBILITY visibility = D3D12\_SHADER\_VISIBILITY\_ALL)}
+\DoxyCodeLine{898     \{}
+\DoxyCodeLine{899         InitAsConstantBufferView(*\textcolor{keyword}{this}, shaderRegister, registerSpace, visibility);}
+\DoxyCodeLine{900     \}}
+\DoxyCodeLine{901 }
+\DoxyCodeLine{902     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitAsShaderResourceView(}
+\DoxyCodeLine{903         UINT shaderRegister,}
+\DoxyCodeLine{904         UINT registerSpace = 0,}
+\DoxyCodeLine{905         D3D12\_SHADER\_VISIBILITY visibility = D3D12\_SHADER\_VISIBILITY\_ALL)}
+\DoxyCodeLine{906     \{}
+\DoxyCodeLine{907         InitAsShaderResourceView(*\textcolor{keyword}{this}, shaderRegister, registerSpace, visibility);}
+\DoxyCodeLine{908     \}}
+\DoxyCodeLine{909 }
+\DoxyCodeLine{910     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitAsUnorderedAccessView(}
+\DoxyCodeLine{911         UINT shaderRegister,}
+\DoxyCodeLine{912         UINT registerSpace = 0,}
+\DoxyCodeLine{913         D3D12\_SHADER\_VISIBILITY visibility = D3D12\_SHADER\_VISIBILITY\_ALL)}
+\DoxyCodeLine{914     \{}
+\DoxyCodeLine{915         InitAsUnorderedAccessView(*\textcolor{keyword}{this}, shaderRegister, registerSpace, visibility);}
+\DoxyCodeLine{916     \}}
+\DoxyCodeLine{917 \};}
+\DoxyCodeLine{918 }
+\DoxyCodeLine{919 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{920 \textcolor{keyword}{struct }CD3DX12\_STATIC\_SAMPLER\_DESC : \textcolor{keyword}{public} D3D12\_STATIC\_SAMPLER\_DESC}
+\DoxyCodeLine{921 \{}
+\DoxyCodeLine{922     CD3DX12\_STATIC\_SAMPLER\_DESC() \{\}}
+\DoxyCodeLine{923     \textcolor{keyword}{explicit} CD3DX12\_STATIC\_SAMPLER\_DESC(\textcolor{keyword}{const} D3D12\_STATIC\_SAMPLER\_DESC\& o) :}
+\DoxyCodeLine{924         D3D12\_STATIC\_SAMPLER\_DESC(o)}
+\DoxyCodeLine{925     \{\}}
+\DoxyCodeLine{926     CD3DX12\_STATIC\_SAMPLER\_DESC(}
+\DoxyCodeLine{927         UINT shaderRegister,}
+\DoxyCodeLine{928         D3D12\_FILTER filter = D3D12\_FILTER\_ANISOTROPIC,}
+\DoxyCodeLine{929         D3D12\_TEXTURE\_ADDRESS\_MODE addressU = D3D12\_TEXTURE\_ADDRESS\_MODE\_WRAP,}
+\DoxyCodeLine{930         D3D12\_TEXTURE\_ADDRESS\_MODE addressV = D3D12\_TEXTURE\_ADDRESS\_MODE\_WRAP,}
+\DoxyCodeLine{931         D3D12\_TEXTURE\_ADDRESS\_MODE addressW = D3D12\_TEXTURE\_ADDRESS\_MODE\_WRAP,}
+\DoxyCodeLine{932         FLOAT mipLODBias = 0,}
+\DoxyCodeLine{933         UINT maxAnisotropy = 16,}
+\DoxyCodeLine{934         D3D12\_COMPARISON\_FUNC comparisonFunc = D3D12\_COMPARISON\_FUNC\_LESS\_EQUAL,}
+\DoxyCodeLine{935         D3D12\_STATIC\_BORDER\_COLOR borderColor = D3D12\_STATIC\_BORDER\_COLOR\_OPAQUE\_WHITE,}
+\DoxyCodeLine{936         FLOAT minLOD = 0.f,}
+\DoxyCodeLine{937         FLOAT maxLOD = D3D12\_FLOAT32\_MAX,}
+\DoxyCodeLine{938         D3D12\_SHADER\_VISIBILITY shaderVisibility = D3D12\_SHADER\_VISIBILITY\_ALL,}
+\DoxyCodeLine{939         UINT registerSpace = 0)}
+\DoxyCodeLine{940     \{}
+\DoxyCodeLine{941         Init(}
+\DoxyCodeLine{942             shaderRegister,}
+\DoxyCodeLine{943             filter,}
+\DoxyCodeLine{944             addressU,}
+\DoxyCodeLine{945             addressV,}
+\DoxyCodeLine{946             addressW,}
+\DoxyCodeLine{947             mipLODBias,}
+\DoxyCodeLine{948             maxAnisotropy,}
+\DoxyCodeLine{949             comparisonFunc,}
+\DoxyCodeLine{950             borderColor,}
+\DoxyCodeLine{951             minLOD,}
+\DoxyCodeLine{952             maxLOD,}
+\DoxyCodeLine{953             shaderVisibility,}
+\DoxyCodeLine{954             registerSpace);}
+\DoxyCodeLine{955     \}}
+\DoxyCodeLine{956 }
+\DoxyCodeLine{957     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} Init(}
+\DoxyCodeLine{958         \_Out\_ D3D12\_STATIC\_SAMPLER\_DESC\& samplerDesc,}
+\DoxyCodeLine{959         UINT shaderRegister,}
+\DoxyCodeLine{960         D3D12\_FILTER filter = D3D12\_FILTER\_ANISOTROPIC,}
+\DoxyCodeLine{961         D3D12\_TEXTURE\_ADDRESS\_MODE addressU = D3D12\_TEXTURE\_ADDRESS\_MODE\_WRAP,}
+\DoxyCodeLine{962         D3D12\_TEXTURE\_ADDRESS\_MODE addressV = D3D12\_TEXTURE\_ADDRESS\_MODE\_WRAP,}
+\DoxyCodeLine{963         D3D12\_TEXTURE\_ADDRESS\_MODE addressW = D3D12\_TEXTURE\_ADDRESS\_MODE\_WRAP,}
+\DoxyCodeLine{964         FLOAT mipLODBias = 0,}
+\DoxyCodeLine{965         UINT maxAnisotropy = 16,}
+\DoxyCodeLine{966         D3D12\_COMPARISON\_FUNC comparisonFunc = D3D12\_COMPARISON\_FUNC\_LESS\_EQUAL,}
+\DoxyCodeLine{967         D3D12\_STATIC\_BORDER\_COLOR borderColor = D3D12\_STATIC\_BORDER\_COLOR\_OPAQUE\_WHITE,}
+\DoxyCodeLine{968         FLOAT minLOD = 0.f,}
+\DoxyCodeLine{969         FLOAT maxLOD = D3D12\_FLOAT32\_MAX,}
+\DoxyCodeLine{970         D3D12\_SHADER\_VISIBILITY shaderVisibility = D3D12\_SHADER\_VISIBILITY\_ALL,}
+\DoxyCodeLine{971         UINT registerSpace = 0)}
+\DoxyCodeLine{972     \{}
+\DoxyCodeLine{973         samplerDesc.ShaderRegister = shaderRegister;}
+\DoxyCodeLine{974         samplerDesc.Filter = filter;}
+\DoxyCodeLine{975         samplerDesc.AddressU = addressU;}
+\DoxyCodeLine{976         samplerDesc.AddressV = addressV;}
+\DoxyCodeLine{977         samplerDesc.AddressW = addressW;}
+\DoxyCodeLine{978         samplerDesc.MipLODBias = mipLODBias;}
+\DoxyCodeLine{979         samplerDesc.MaxAnisotropy = maxAnisotropy;}
+\DoxyCodeLine{980         samplerDesc.ComparisonFunc = comparisonFunc;}
+\DoxyCodeLine{981         samplerDesc.BorderColor = borderColor;}
+\DoxyCodeLine{982         samplerDesc.MinLOD = minLOD;}
+\DoxyCodeLine{983         samplerDesc.MaxLOD = maxLOD;}
+\DoxyCodeLine{984         samplerDesc.ShaderVisibility = shaderVisibility;}
+\DoxyCodeLine{985         samplerDesc.RegisterSpace = registerSpace;}
+\DoxyCodeLine{986     \}}
+\DoxyCodeLine{987     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} Init(}
+\DoxyCodeLine{988         UINT shaderRegister,}
+\DoxyCodeLine{989         D3D12\_FILTER filter = D3D12\_FILTER\_ANISOTROPIC,}
+\DoxyCodeLine{990         D3D12\_TEXTURE\_ADDRESS\_MODE addressU = D3D12\_TEXTURE\_ADDRESS\_MODE\_WRAP,}
+\DoxyCodeLine{991         D3D12\_TEXTURE\_ADDRESS\_MODE addressV = D3D12\_TEXTURE\_ADDRESS\_MODE\_WRAP,}
+\DoxyCodeLine{992         D3D12\_TEXTURE\_ADDRESS\_MODE addressW = D3D12\_TEXTURE\_ADDRESS\_MODE\_WRAP,}
+\DoxyCodeLine{993         FLOAT mipLODBias = 0,}
+\DoxyCodeLine{994         UINT maxAnisotropy = 16,}
+\DoxyCodeLine{995         D3D12\_COMPARISON\_FUNC comparisonFunc = D3D12\_COMPARISON\_FUNC\_LESS\_EQUAL,}
+\DoxyCodeLine{996         D3D12\_STATIC\_BORDER\_COLOR borderColor = D3D12\_STATIC\_BORDER\_COLOR\_OPAQUE\_WHITE,}
+\DoxyCodeLine{997         FLOAT minLOD = 0.f,}
+\DoxyCodeLine{998         FLOAT maxLOD = D3D12\_FLOAT32\_MAX,}
+\DoxyCodeLine{999         D3D12\_SHADER\_VISIBILITY shaderVisibility = D3D12\_SHADER\_VISIBILITY\_ALL,}
+\DoxyCodeLine{1000         UINT registerSpace = 0)}
+\DoxyCodeLine{1001     \{}
+\DoxyCodeLine{1002         Init(}
+\DoxyCodeLine{1003             *\textcolor{keyword}{this},}
+\DoxyCodeLine{1004             shaderRegister,}
+\DoxyCodeLine{1005             filter,}
+\DoxyCodeLine{1006             addressU,}
+\DoxyCodeLine{1007             addressV,}
+\DoxyCodeLine{1008             addressW,}
+\DoxyCodeLine{1009             mipLODBias,}
+\DoxyCodeLine{1010             maxAnisotropy,}
+\DoxyCodeLine{1011             comparisonFunc,}
+\DoxyCodeLine{1012             borderColor,}
+\DoxyCodeLine{1013             minLOD,}
+\DoxyCodeLine{1014             maxLOD,}
+\DoxyCodeLine{1015             shaderVisibility,}
+\DoxyCodeLine{1016             registerSpace);}
+\DoxyCodeLine{1017     \}}
+\DoxyCodeLine{1018 }
+\DoxyCodeLine{1019 \};}
+\DoxyCodeLine{1020 }
+\DoxyCodeLine{1021 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{1022 \textcolor{keyword}{struct }CD3DX12\_ROOT\_SIGNATURE\_DESC : \textcolor{keyword}{public} D3D12\_ROOT\_SIGNATURE\_DESC}
+\DoxyCodeLine{1023 \{}
+\DoxyCodeLine{1024     CD3DX12\_ROOT\_SIGNATURE\_DESC() \{\}}
+\DoxyCodeLine{1025     \textcolor{keyword}{explicit} CD3DX12\_ROOT\_SIGNATURE\_DESC(\textcolor{keyword}{const} D3D12\_ROOT\_SIGNATURE\_DESC\& o) :}
+\DoxyCodeLine{1026         D3D12\_ROOT\_SIGNATURE\_DESC(o)}
+\DoxyCodeLine{1027     \{\}}
+\DoxyCodeLine{1028     CD3DX12\_ROOT\_SIGNATURE\_DESC(}
+\DoxyCodeLine{1029         UINT numParameters,}
+\DoxyCodeLine{1030         \_In\_reads\_opt\_(numParameters) \textcolor{keyword}{const} D3D12\_ROOT\_PARAMETER* \_pParameters,}
+\DoxyCodeLine{1031         UINT numStaticSamplers = 0,}
+\DoxyCodeLine{1032         \_In\_reads\_opt\_(numStaticSamplers) \textcolor{keyword}{const} D3D12\_STATIC\_SAMPLER\_DESC* \_pStaticSamplers = NULL,}
+\DoxyCodeLine{1033         D3D12\_ROOT\_SIGNATURE\_FLAGS flags = D3D12\_ROOT\_SIGNATURE\_FLAG\_NONE)}
+\DoxyCodeLine{1034     \{}
+\DoxyCodeLine{1035         Init(numParameters, \_pParameters, numStaticSamplers, \_pStaticSamplers, flags);}
+\DoxyCodeLine{1036     \}}
+\DoxyCodeLine{1037     CD3DX12\_ROOT\_SIGNATURE\_DESC(CD3DX12\_DEFAULT)}
+\DoxyCodeLine{1038     \{}
+\DoxyCodeLine{1039         Init(0, NULL, 0, NULL, D3D12\_ROOT\_SIGNATURE\_FLAG\_NONE);}
+\DoxyCodeLine{1040     \}}
+\DoxyCodeLine{1041 }
+\DoxyCodeLine{1042     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} Init(}
+\DoxyCodeLine{1043         UINT numParameters,}
+\DoxyCodeLine{1044         \_In\_reads\_opt\_(numParameters) \textcolor{keyword}{const} D3D12\_ROOT\_PARAMETER* \_pParameters,}
+\DoxyCodeLine{1045         UINT numStaticSamplers = 0,}
+\DoxyCodeLine{1046         \_In\_reads\_opt\_(numStaticSamplers) \textcolor{keyword}{const} D3D12\_STATIC\_SAMPLER\_DESC* \_pStaticSamplers = NULL,}
+\DoxyCodeLine{1047         D3D12\_ROOT\_SIGNATURE\_FLAGS flags = D3D12\_ROOT\_SIGNATURE\_FLAG\_NONE)}
+\DoxyCodeLine{1048     \{}
+\DoxyCodeLine{1049         Init(*\textcolor{keyword}{this}, numParameters, \_pParameters, numStaticSamplers, \_pStaticSamplers, flags);}
+\DoxyCodeLine{1050     \}}
+\DoxyCodeLine{1051 }
+\DoxyCodeLine{1052     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} Init(}
+\DoxyCodeLine{1053         \_Out\_ D3D12\_ROOT\_SIGNATURE\_DESC\& desc,}
+\DoxyCodeLine{1054         UINT numParameters,}
+\DoxyCodeLine{1055         \_In\_reads\_opt\_(numParameters) \textcolor{keyword}{const} D3D12\_ROOT\_PARAMETER* \_pParameters,}
+\DoxyCodeLine{1056         UINT numStaticSamplers = 0,}
+\DoxyCodeLine{1057         \_In\_reads\_opt\_(numStaticSamplers) \textcolor{keyword}{const} D3D12\_STATIC\_SAMPLER\_DESC* \_pStaticSamplers = NULL,}
+\DoxyCodeLine{1058         D3D12\_ROOT\_SIGNATURE\_FLAGS flags = D3D12\_ROOT\_SIGNATURE\_FLAG\_NONE)}
+\DoxyCodeLine{1059     \{}
+\DoxyCodeLine{1060         desc.NumParameters = numParameters;}
+\DoxyCodeLine{1061         desc.pParameters = \_pParameters;}
+\DoxyCodeLine{1062         desc.NumStaticSamplers = numStaticSamplers;}
+\DoxyCodeLine{1063         desc.pStaticSamplers = \_pStaticSamplers;}
+\DoxyCodeLine{1064         desc.Flags = flags;}
+\DoxyCodeLine{1065     \}}
+\DoxyCodeLine{1066 \};}
+\DoxyCodeLine{1067 }
+\DoxyCodeLine{1068 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{1069 \textcolor{keyword}{struct }CD3DX12\_CPU\_DESCRIPTOR\_HANDLE : \textcolor{keyword}{public} D3D12\_CPU\_DESCRIPTOR\_HANDLE}
+\DoxyCodeLine{1070 \{}
+\DoxyCodeLine{1071     CD3DX12\_CPU\_DESCRIPTOR\_HANDLE() \{\}}
+\DoxyCodeLine{1072     \textcolor{keyword}{explicit} CD3DX12\_CPU\_DESCRIPTOR\_HANDLE(\textcolor{keyword}{const} D3D12\_CPU\_DESCRIPTOR\_HANDLE\& o) :}
+\DoxyCodeLine{1073         D3D12\_CPU\_DESCRIPTOR\_HANDLE(o)}
+\DoxyCodeLine{1074     \{\}}
+\DoxyCodeLine{1075     CD3DX12\_CPU\_DESCRIPTOR\_HANDLE(CD3DX12\_DEFAULT) \{ ptr = 0; \}}
+\DoxyCodeLine{1076     CD3DX12\_CPU\_DESCRIPTOR\_HANDLE(\_In\_ \textcolor{keyword}{const} D3D12\_CPU\_DESCRIPTOR\_HANDLE\& other, INT offsetScaledByIncrementSize)}
+\DoxyCodeLine{1077     \{}
+\DoxyCodeLine{1078         InitOffsetted(other, offsetScaledByIncrementSize);}
+\DoxyCodeLine{1079     \}}
+\DoxyCodeLine{1080     CD3DX12\_CPU\_DESCRIPTOR\_HANDLE(\_In\_ \textcolor{keyword}{const} D3D12\_CPU\_DESCRIPTOR\_HANDLE\& other, INT offsetInDescriptors, UINT descriptorIncrementSize)}
+\DoxyCodeLine{1081     \{}
+\DoxyCodeLine{1082         InitOffsetted(other, offsetInDescriptors, descriptorIncrementSize);}
+\DoxyCodeLine{1083     \}}
+\DoxyCodeLine{1084     CD3DX12\_CPU\_DESCRIPTOR\_HANDLE\& Offset(INT offsetInDescriptors, UINT descriptorIncrementSize)}
+\DoxyCodeLine{1085     \{}
+\DoxyCodeLine{1086         ptr += offsetInDescriptors * descriptorIncrementSize;}
+\DoxyCodeLine{1087         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{1088     \}}
+\DoxyCodeLine{1089     CD3DX12\_CPU\_DESCRIPTOR\_HANDLE\& Offset(INT offsetScaledByIncrementSize)}
+\DoxyCodeLine{1090     \{}
+\DoxyCodeLine{1091         ptr += offsetScaledByIncrementSize;}
+\DoxyCodeLine{1092         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{1093     \}}
+\DoxyCodeLine{1094     \textcolor{keywordtype}{bool} operator==(\_In\_ \textcolor{keyword}{const} D3D12\_CPU\_DESCRIPTOR\_HANDLE\& other)}
+\DoxyCodeLine{1095     \{}
+\DoxyCodeLine{1096         \textcolor{keywordflow}{return} (ptr == other.ptr);}
+\DoxyCodeLine{1097     \}}
+\DoxyCodeLine{1098     \textcolor{keywordtype}{bool} operator!=(\_In\_ \textcolor{keyword}{const} D3D12\_CPU\_DESCRIPTOR\_HANDLE\& other)}
+\DoxyCodeLine{1099     \{}
+\DoxyCodeLine{1100         \textcolor{keywordflow}{return} (ptr != other.ptr);}
+\DoxyCodeLine{1101     \}}
+\DoxyCodeLine{1102     CD3DX12\_CPU\_DESCRIPTOR\_HANDLE\& operator=(\textcolor{keyword}{const} D3D12\_CPU\_DESCRIPTOR\_HANDLE\& other)}
+\DoxyCodeLine{1103     \{}
+\DoxyCodeLine{1104         ptr = other.ptr;}
+\DoxyCodeLine{1105         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{1106     \}}
+\DoxyCodeLine{1107 }
+\DoxyCodeLine{1108     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitOffsetted(\_In\_ \textcolor{keyword}{const} D3D12\_CPU\_DESCRIPTOR\_HANDLE\& base, INT offsetScaledByIncrementSize)}
+\DoxyCodeLine{1109     \{}
+\DoxyCodeLine{1110         InitOffsetted(*\textcolor{keyword}{this}, base, offsetScaledByIncrementSize);}
+\DoxyCodeLine{1111     \}}
+\DoxyCodeLine{1112 }
+\DoxyCodeLine{1113     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitOffsetted(\_In\_ \textcolor{keyword}{const} D3D12\_CPU\_DESCRIPTOR\_HANDLE\& base, INT offsetInDescriptors, UINT descriptorIncrementSize)}
+\DoxyCodeLine{1114     \{}
+\DoxyCodeLine{1115         InitOffsetted(*\textcolor{keyword}{this}, base, offsetInDescriptors, descriptorIncrementSize);}
+\DoxyCodeLine{1116     \}}
+\DoxyCodeLine{1117 }
+\DoxyCodeLine{1118     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitOffsetted(\_Out\_ D3D12\_CPU\_DESCRIPTOR\_HANDLE\& handle, \_In\_ \textcolor{keyword}{const} D3D12\_CPU\_DESCRIPTOR\_HANDLE\& base, INT offsetScaledByIncrementSize)}
+\DoxyCodeLine{1119     \{}
+\DoxyCodeLine{1120         handle.ptr = base.ptr + offsetScaledByIncrementSize;}
+\DoxyCodeLine{1121     \}}
+\DoxyCodeLine{1122 }
+\DoxyCodeLine{1123     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitOffsetted(\_Out\_ D3D12\_CPU\_DESCRIPTOR\_HANDLE\& handle, \_In\_ \textcolor{keyword}{const} D3D12\_CPU\_DESCRIPTOR\_HANDLE\& base, INT offsetInDescriptors, UINT descriptorIncrementSize)}
+\DoxyCodeLine{1124     \{}
+\DoxyCodeLine{1125         handle.ptr = base.ptr + offsetInDescriptors * descriptorIncrementSize;}
+\DoxyCodeLine{1126     \}}
+\DoxyCodeLine{1127 \};}
+\DoxyCodeLine{1128 }
+\DoxyCodeLine{1129 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{1130 \textcolor{keyword}{struct }CD3DX12\_GPU\_DESCRIPTOR\_HANDLE : \textcolor{keyword}{public} D3D12\_GPU\_DESCRIPTOR\_HANDLE}
+\DoxyCodeLine{1131 \{}
+\DoxyCodeLine{1132     CD3DX12\_GPU\_DESCRIPTOR\_HANDLE() \{\}}
+\DoxyCodeLine{1133     \textcolor{keyword}{explicit} CD3DX12\_GPU\_DESCRIPTOR\_HANDLE(\textcolor{keyword}{const} D3D12\_GPU\_DESCRIPTOR\_HANDLE\& o) :}
+\DoxyCodeLine{1134         D3D12\_GPU\_DESCRIPTOR\_HANDLE(o)}
+\DoxyCodeLine{1135     \{\}}
+\DoxyCodeLine{1136     CD3DX12\_GPU\_DESCRIPTOR\_HANDLE(CD3DX12\_DEFAULT) \{ ptr = 0; \}}
+\DoxyCodeLine{1137     CD3DX12\_GPU\_DESCRIPTOR\_HANDLE(\_In\_ \textcolor{keyword}{const} D3D12\_GPU\_DESCRIPTOR\_HANDLE\& other, INT offsetScaledByIncrementSize)}
+\DoxyCodeLine{1138     \{}
+\DoxyCodeLine{1139         InitOffsetted(other, offsetScaledByIncrementSize);}
+\DoxyCodeLine{1140     \}}
+\DoxyCodeLine{1141     CD3DX12\_GPU\_DESCRIPTOR\_HANDLE(\_In\_ \textcolor{keyword}{const} D3D12\_GPU\_DESCRIPTOR\_HANDLE\& other, INT offsetInDescriptors, UINT descriptorIncrementSize)}
+\DoxyCodeLine{1142     \{}
+\DoxyCodeLine{1143         InitOffsetted(other, offsetInDescriptors, descriptorIncrementSize);}
+\DoxyCodeLine{1144     \}}
+\DoxyCodeLine{1145     CD3DX12\_GPU\_DESCRIPTOR\_HANDLE\& Offset(INT offsetInDescriptors, UINT descriptorIncrementSize)}
+\DoxyCodeLine{1146     \{}
+\DoxyCodeLine{1147         ptr += offsetInDescriptors * descriptorIncrementSize;}
+\DoxyCodeLine{1148         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{1149     \}}
+\DoxyCodeLine{1150     CD3DX12\_GPU\_DESCRIPTOR\_HANDLE\& Offset(INT offsetScaledByIncrementSize)}
+\DoxyCodeLine{1151     \{}
+\DoxyCodeLine{1152         ptr += offsetScaledByIncrementSize;}
+\DoxyCodeLine{1153         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{1154     \}}
+\DoxyCodeLine{1155     \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} operator==(\_In\_ \textcolor{keyword}{const} D3D12\_GPU\_DESCRIPTOR\_HANDLE\& other)}
+\DoxyCodeLine{1156     \{}
+\DoxyCodeLine{1157         \textcolor{keywordflow}{return} (ptr == other.ptr);}
+\DoxyCodeLine{1158     \}}
+\DoxyCodeLine{1159     \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} operator!=(\_In\_ \textcolor{keyword}{const} D3D12\_GPU\_DESCRIPTOR\_HANDLE\& other)}
+\DoxyCodeLine{1160     \{}
+\DoxyCodeLine{1161         \textcolor{keywordflow}{return} (ptr != other.ptr);}
+\DoxyCodeLine{1162     \}}
+\DoxyCodeLine{1163     CD3DX12\_GPU\_DESCRIPTOR\_HANDLE\& operator=(\textcolor{keyword}{const} D3D12\_GPU\_DESCRIPTOR\_HANDLE\& other)}
+\DoxyCodeLine{1164     \{}
+\DoxyCodeLine{1165         ptr = other.ptr;}
+\DoxyCodeLine{1166         \textcolor{keywordflow}{return} *\textcolor{keyword}{this};}
+\DoxyCodeLine{1167     \}}
+\DoxyCodeLine{1168 }
+\DoxyCodeLine{1169     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitOffsetted(\_In\_ \textcolor{keyword}{const} D3D12\_GPU\_DESCRIPTOR\_HANDLE\& base, INT offsetScaledByIncrementSize)}
+\DoxyCodeLine{1170     \{}
+\DoxyCodeLine{1171         InitOffsetted(*\textcolor{keyword}{this}, base, offsetScaledByIncrementSize);}
+\DoxyCodeLine{1172     \}}
+\DoxyCodeLine{1173 }
+\DoxyCodeLine{1174     \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitOffsetted(\_In\_ \textcolor{keyword}{const} D3D12\_GPU\_DESCRIPTOR\_HANDLE\& base, INT offsetInDescriptors, UINT descriptorIncrementSize)}
+\DoxyCodeLine{1175     \{}
+\DoxyCodeLine{1176         InitOffsetted(*\textcolor{keyword}{this}, base, offsetInDescriptors, descriptorIncrementSize);}
+\DoxyCodeLine{1177     \}}
+\DoxyCodeLine{1178 }
+\DoxyCodeLine{1179     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitOffsetted(\_Out\_ D3D12\_GPU\_DESCRIPTOR\_HANDLE\& handle, \_In\_ \textcolor{keyword}{const} D3D12\_GPU\_DESCRIPTOR\_HANDLE\& base, INT offsetScaledByIncrementSize)}
+\DoxyCodeLine{1180     \{}
+\DoxyCodeLine{1181         handle.ptr = base.ptr + offsetScaledByIncrementSize;}
+\DoxyCodeLine{1182     \}}
+\DoxyCodeLine{1183 }
+\DoxyCodeLine{1184     \textcolor{keyword}{static} \textcolor{keyword}{inline} \textcolor{keywordtype}{void} InitOffsetted(\_Out\_ D3D12\_GPU\_DESCRIPTOR\_HANDLE\& handle, \_In\_ \textcolor{keyword}{const} D3D12\_GPU\_DESCRIPTOR\_HANDLE\& base, INT offsetInDescriptors, UINT descriptorIncrementSize)}
+\DoxyCodeLine{1185     \{}
+\DoxyCodeLine{1186         handle.ptr = base.ptr + offsetInDescriptors * descriptorIncrementSize;}
+\DoxyCodeLine{1187     \}}
+\DoxyCodeLine{1188 \};}
+\DoxyCodeLine{1189 }
+\DoxyCodeLine{1190 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{1191 \textcolor{keyword}{inline} UINT D3D12CalcSubresource(UINT MipSlice, UINT ArraySlice, UINT PlaneSlice, UINT MipLevels, UINT ArraySize)}
+\DoxyCodeLine{1192 \{}
+\DoxyCodeLine{1193     \textcolor{keywordflow}{return} MipSlice + ArraySlice * MipLevels + PlaneSlice * MipLevels * ArraySize;}
+\DoxyCodeLine{1194 \}}
+\DoxyCodeLine{1195 }
+\DoxyCodeLine{1196 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{1197 \textcolor{keyword}{template} <\textcolor{keyword}{typename} T, \textcolor{keyword}{typename} U, \textcolor{keyword}{typename} V>}
+\DoxyCodeLine{1198 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} D3D12DecomposeSubresource(UINT Subresource, UINT MipLevels, UINT ArraySize, \_Out\_ T\& MipSlice, \_Out\_ U\& ArraySlice, \_Out\_ V\& PlaneSlice)}
+\DoxyCodeLine{1199 \{}
+\DoxyCodeLine{1200     MipSlice = \textcolor{keyword}{static\_cast<}T\textcolor{keyword}{>}(Subresource \% MipLevels);}
+\DoxyCodeLine{1201     ArraySlice = \textcolor{keyword}{static\_cast<}U\textcolor{keyword}{>}((Subresource / MipLevels) \% ArraySize);}
+\DoxyCodeLine{1202     PlaneSlice = \textcolor{keyword}{static\_cast<}V\textcolor{keyword}{>}(Subresource / (MipLevels * ArraySize));}
+\DoxyCodeLine{1203 \}}
+\DoxyCodeLine{1204 }
+\DoxyCodeLine{1205 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{1206 \textcolor{keyword}{inline} UINT8 D3D12GetFormatPlaneCount(}
+\DoxyCodeLine{1207     \_In\_ ID3D12Device* pDevice,}
+\DoxyCodeLine{1208     DXGI\_FORMAT Format}
+\DoxyCodeLine{1209 )}
+\DoxyCodeLine{1210 \{}
+\DoxyCodeLine{1211     D3D12\_FEATURE\_DATA\_FORMAT\_INFO formatInfo = \{ Format \};}
+\DoxyCodeLine{1212     \textcolor{keywordflow}{if} (FAILED(pDevice-\/>CheckFeatureSupport(D3D12\_FEATURE\_FORMAT\_INFO, \&formatInfo, \textcolor{keyword}{sizeof}(formatInfo))))}
+\DoxyCodeLine{1213     \{}
+\DoxyCodeLine{1214         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{1215     \}}
+\DoxyCodeLine{1216     \textcolor{keywordflow}{return} formatInfo.PlaneCount;}
+\DoxyCodeLine{1217 \}}
+\DoxyCodeLine{1218 }
+\DoxyCodeLine{1219 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{1220 \textcolor{keyword}{struct }CD3DX12\_RESOURCE\_DESC : \textcolor{keyword}{public} D3D12\_RESOURCE\_DESC}
+\DoxyCodeLine{1221 \{}
+\DoxyCodeLine{1222     CD3DX12\_RESOURCE\_DESC()}
+\DoxyCodeLine{1223     \{\}}
+\DoxyCodeLine{1224     \textcolor{keyword}{explicit} CD3DX12\_RESOURCE\_DESC(\textcolor{keyword}{const} D3D12\_RESOURCE\_DESC\& o) :}
+\DoxyCodeLine{1225         D3D12\_RESOURCE\_DESC(o)}
+\DoxyCodeLine{1226     \{\}}
+\DoxyCodeLine{1227     CD3DX12\_RESOURCE\_DESC(}
+\DoxyCodeLine{1228         D3D12\_RESOURCE\_DIMENSION dimension,}
+\DoxyCodeLine{1229         UINT64 alignment,}
+\DoxyCodeLine{1230         UINT64 width,}
+\DoxyCodeLine{1231         UINT height,}
+\DoxyCodeLine{1232         UINT16 depthOrArraySize,}
+\DoxyCodeLine{1233         UINT16 mipLevels,}
+\DoxyCodeLine{1234         DXGI\_FORMAT format,}
+\DoxyCodeLine{1235         UINT sampleCount,}
+\DoxyCodeLine{1236         UINT sampleQuality,}
+\DoxyCodeLine{1237         D3D12\_TEXTURE\_LAYOUT layout,}
+\DoxyCodeLine{1238         D3D12\_RESOURCE\_FLAGS flags)}
+\DoxyCodeLine{1239     \{}
+\DoxyCodeLine{1240         Dimension = dimension;}
+\DoxyCodeLine{1241         Alignment = alignment;}
+\DoxyCodeLine{1242         Width = width;}
+\DoxyCodeLine{1243         Height = height;}
+\DoxyCodeLine{1244         DepthOrArraySize = depthOrArraySize;}
+\DoxyCodeLine{1245         MipLevels = mipLevels;}
+\DoxyCodeLine{1246         Format = format;}
+\DoxyCodeLine{1247         SampleDesc.Count = sampleCount;}
+\DoxyCodeLine{1248         SampleDesc.Quality = sampleQuality;}
+\DoxyCodeLine{1249         Layout = layout;}
+\DoxyCodeLine{1250         Flags = flags;}
+\DoxyCodeLine{1251     \}}
+\DoxyCodeLine{1252     \textcolor{keyword}{static} \textcolor{keyword}{inline} CD3DX12\_RESOURCE\_DESC Buffer(}
+\DoxyCodeLine{1253         \textcolor{keyword}{const} D3D12\_RESOURCE\_ALLOCATION\_INFO\& resAllocInfo,}
+\DoxyCodeLine{1254         D3D12\_RESOURCE\_FLAGS flags = D3D12\_RESOURCE\_FLAG\_NONE)}
+\DoxyCodeLine{1255     \{}
+\DoxyCodeLine{1256         \textcolor{keywordflow}{return} CD3DX12\_RESOURCE\_DESC(D3D12\_RESOURCE\_DIMENSION\_BUFFER, resAllocInfo.Alignment, resAllocInfo.SizeInBytes,}
+\DoxyCodeLine{1257             1, 1, 1, DXGI\_FORMAT\_UNKNOWN, 1, 0, D3D12\_TEXTURE\_LAYOUT\_ROW\_MAJOR, flags);}
+\DoxyCodeLine{1258     \}}
+\DoxyCodeLine{1259     \textcolor{keyword}{static} \textcolor{keyword}{inline} CD3DX12\_RESOURCE\_DESC Buffer(}
+\DoxyCodeLine{1260         UINT64 width,}
+\DoxyCodeLine{1261         D3D12\_RESOURCE\_FLAGS flags = D3D12\_RESOURCE\_FLAG\_NONE,}
+\DoxyCodeLine{1262         UINT64 alignment = 0)}
+\DoxyCodeLine{1263     \{}
+\DoxyCodeLine{1264         \textcolor{keywordflow}{return} CD3DX12\_RESOURCE\_DESC(D3D12\_RESOURCE\_DIMENSION\_BUFFER, alignment, width, 1, 1, 1,}
+\DoxyCodeLine{1265             DXGI\_FORMAT\_UNKNOWN, 1, 0, D3D12\_TEXTURE\_LAYOUT\_ROW\_MAJOR, flags);}
+\DoxyCodeLine{1266     \}}
+\DoxyCodeLine{1267     \textcolor{keyword}{static} \textcolor{keyword}{inline} CD3DX12\_RESOURCE\_DESC Tex1D(}
+\DoxyCodeLine{1268         DXGI\_FORMAT format,}
+\DoxyCodeLine{1269         UINT64 width,}
+\DoxyCodeLine{1270         UINT16 arraySize = 1,}
+\DoxyCodeLine{1271         UINT16 mipLevels = 0,}
+\DoxyCodeLine{1272         D3D12\_RESOURCE\_FLAGS flags = D3D12\_RESOURCE\_FLAG\_NONE,}
+\DoxyCodeLine{1273         D3D12\_TEXTURE\_LAYOUT layout = D3D12\_TEXTURE\_LAYOUT\_UNKNOWN,}
+\DoxyCodeLine{1274         UINT64 alignment = 0)}
+\DoxyCodeLine{1275     \{}
+\DoxyCodeLine{1276         \textcolor{keywordflow}{return} CD3DX12\_RESOURCE\_DESC(D3D12\_RESOURCE\_DIMENSION\_TEXTURE1D, alignment, width, 1, arraySize,}
+\DoxyCodeLine{1277             mipLevels, format, 1, 0, layout, flags);}
+\DoxyCodeLine{1278     \}}
+\DoxyCodeLine{1279     \textcolor{keyword}{static} \textcolor{keyword}{inline} CD3DX12\_RESOURCE\_DESC Tex2D(}
+\DoxyCodeLine{1280         DXGI\_FORMAT format,}
+\DoxyCodeLine{1281         UINT64 width,}
+\DoxyCodeLine{1282         UINT height,}
+\DoxyCodeLine{1283         UINT16 arraySize = 1,}
+\DoxyCodeLine{1284         UINT16 mipLevels = 0,}
+\DoxyCodeLine{1285         UINT sampleCount = 1,}
+\DoxyCodeLine{1286         UINT sampleQuality = 0,}
+\DoxyCodeLine{1287         D3D12\_RESOURCE\_FLAGS flags = D3D12\_RESOURCE\_FLAG\_NONE,}
+\DoxyCodeLine{1288         D3D12\_TEXTURE\_LAYOUT layout = D3D12\_TEXTURE\_LAYOUT\_UNKNOWN,}
+\DoxyCodeLine{1289         UINT64 alignment = 0)}
+\DoxyCodeLine{1290     \{}
+\DoxyCodeLine{1291         \textcolor{keywordflow}{return} CD3DX12\_RESOURCE\_DESC(D3D12\_RESOURCE\_DIMENSION\_TEXTURE2D, alignment, width, height, arraySize,}
+\DoxyCodeLine{1292             mipLevels, format, sampleCount, sampleQuality, layout, flags);}
+\DoxyCodeLine{1293     \}}
+\DoxyCodeLine{1294     \textcolor{keyword}{static} \textcolor{keyword}{inline} CD3DX12\_RESOURCE\_DESC Tex3D(}
+\DoxyCodeLine{1295         DXGI\_FORMAT format,}
+\DoxyCodeLine{1296         UINT64 width,}
+\DoxyCodeLine{1297         UINT height,}
+\DoxyCodeLine{1298         UINT16 depth,}
+\DoxyCodeLine{1299         UINT16 mipLevels = 0,}
+\DoxyCodeLine{1300         D3D12\_RESOURCE\_FLAGS flags = D3D12\_RESOURCE\_FLAG\_NONE,}
+\DoxyCodeLine{1301         D3D12\_TEXTURE\_LAYOUT layout = D3D12\_TEXTURE\_LAYOUT\_UNKNOWN,}
+\DoxyCodeLine{1302         UINT64 alignment = 0)}
+\DoxyCodeLine{1303     \{}
+\DoxyCodeLine{1304         \textcolor{keywordflow}{return} CD3DX12\_RESOURCE\_DESC(D3D12\_RESOURCE\_DIMENSION\_TEXTURE3D, alignment, width, height, depth,}
+\DoxyCodeLine{1305             mipLevels, format, 1, 0, layout, flags);}
+\DoxyCodeLine{1306     \}}
+\DoxyCodeLine{1307     \textcolor{keyword}{inline} UINT16 Depth()\textcolor{keyword}{ const}}
+\DoxyCodeLine{1308 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{1309         \textcolor{keywordflow}{return} (Dimension == D3D12\_RESOURCE\_DIMENSION\_TEXTURE3D ? DepthOrArraySize : 1);}
+\DoxyCodeLine{1310     \}}
+\DoxyCodeLine{1311     \textcolor{keyword}{inline} UINT16 ArraySize()\textcolor{keyword}{ const}}
+\DoxyCodeLine{1312 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{1313         \textcolor{keywordflow}{return} (Dimension != D3D12\_RESOURCE\_DIMENSION\_TEXTURE3D ? DepthOrArraySize : 1);}
+\DoxyCodeLine{1314     \}}
+\DoxyCodeLine{1315     \textcolor{keyword}{inline} UINT8 PlaneCount(\_In\_ ID3D12Device* pDevice)\textcolor{keyword}{ const}}
+\DoxyCodeLine{1316 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{1317         \textcolor{keywordflow}{return} D3D12GetFormatPlaneCount(pDevice, Format);}
+\DoxyCodeLine{1318     \}}
+\DoxyCodeLine{1319     \textcolor{keyword}{inline} UINT Subresources(\_In\_ ID3D12Device* pDevice)\textcolor{keyword}{ const}}
+\DoxyCodeLine{1320 \textcolor{keyword}{    }\{}
+\DoxyCodeLine{1321         \textcolor{keywordflow}{return} MipLevels * ArraySize() * PlaneCount(pDevice);}
+\DoxyCodeLine{1322     \}}
+\DoxyCodeLine{1323     \textcolor{keyword}{inline} UINT CalcSubresource(UINT MipSlice, UINT ArraySlice, UINT PlaneSlice)}
+\DoxyCodeLine{1324     \{}
+\DoxyCodeLine{1325         \textcolor{keywordflow}{return} D3D12CalcSubresource(MipSlice, ArraySlice, PlaneSlice, MipLevels, ArraySize());}
+\DoxyCodeLine{1326     \}}
+\DoxyCodeLine{1327     \textcolor{keyword}{operator} \textcolor{keyword}{const} D3D12\_RESOURCE\_DESC\& () \textcolor{keyword}{const} \{ \textcolor{keywordflow}{return} *\textcolor{keyword}{this}; \}}
+\DoxyCodeLine{1328 \};}
+\DoxyCodeLine{1329 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} operator==(\textcolor{keyword}{const} D3D12\_RESOURCE\_DESC\& l, \textcolor{keyword}{const} D3D12\_RESOURCE\_DESC\& r)}
+\DoxyCodeLine{1330 \{}
+\DoxyCodeLine{1331     \textcolor{keywordflow}{return} l.Dimension == r.Dimension \&\&}
+\DoxyCodeLine{1332         l.Alignment == r.Alignment \&\&}
+\DoxyCodeLine{1333         l.Width == r.Width \&\&}
+\DoxyCodeLine{1334         l.Height == r.Height \&\&}
+\DoxyCodeLine{1335         l.DepthOrArraySize == r.DepthOrArraySize \&\&}
+\DoxyCodeLine{1336         l.MipLevels == r.MipLevels \&\&}
+\DoxyCodeLine{1337         l.Format == r.Format \&\&}
+\DoxyCodeLine{1338         l.SampleDesc.Count == r.SampleDesc.Count \&\&}
+\DoxyCodeLine{1339         l.SampleDesc.Quality == r.SampleDesc.Quality \&\&}
+\DoxyCodeLine{1340         l.Layout == r.Layout \&\&}
+\DoxyCodeLine{1341         l.Flags == r.Flags;}
+\DoxyCodeLine{1342 \}}
+\DoxyCodeLine{1343 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} operator!=(\textcolor{keyword}{const} D3D12\_RESOURCE\_DESC\& l, \textcolor{keyword}{const} D3D12\_RESOURCE\_DESC\& r)}
+\DoxyCodeLine{1344 \{}
+\DoxyCodeLine{1345     \textcolor{keywordflow}{return} !(l == r);}
+\DoxyCodeLine{1346 \}}
+\DoxyCodeLine{1347 }
+\DoxyCodeLine{1348 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{1349 \textcolor{comment}{// Row-\/by-\/row memcpy}}
+\DoxyCodeLine{1350 \textcolor{keyword}{inline} \textcolor{keywordtype}{void} MemcpySubresource(}
+\DoxyCodeLine{1351     \_In\_ \textcolor{keyword}{const} D3D12\_MEMCPY\_DEST* pDest,}
+\DoxyCodeLine{1352     \_In\_ \textcolor{keyword}{const} D3D12\_SUBRESOURCE\_DATA* pSrc,}
+\DoxyCodeLine{1353     SIZE\_T RowSizeInBytes,}
+\DoxyCodeLine{1354     UINT NumRows,}
+\DoxyCodeLine{1355     UINT NumSlices)}
+\DoxyCodeLine{1356 \{}
+\DoxyCodeLine{1357     \textcolor{keywordflow}{for} (UINT z = 0; z < NumSlices; ++z)}
+\DoxyCodeLine{1358     \{}
+\DoxyCodeLine{1359         BYTE* pDestSlice = \textcolor{keyword}{reinterpret\_cast<}BYTE*\textcolor{keyword}{>}(pDest-\/>pData) + pDest-\/>SlicePitch * z;}
+\DoxyCodeLine{1360         \textcolor{keyword}{const} BYTE* pSrcSlice = \textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const }BYTE*\textcolor{keyword}{>}(pSrc-\/>pData) + pSrc-\/>SlicePitch * z;}
+\DoxyCodeLine{1361         \textcolor{keywordflow}{for} (UINT y = 0; y < NumRows; ++y)}
+\DoxyCodeLine{1362         \{}
+\DoxyCodeLine{1363             memcpy(pDestSlice + pDest-\/>RowPitch * y,}
+\DoxyCodeLine{1364                 pSrcSlice + pSrc-\/>RowPitch * y,}
+\DoxyCodeLine{1365                 RowSizeInBytes);}
+\DoxyCodeLine{1366         \}}
+\DoxyCodeLine{1367     \}}
+\DoxyCodeLine{1368 \}}
+\DoxyCodeLine{1369 }
+\DoxyCodeLine{1370 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{1371 \textcolor{comment}{// Returns required size of a buffer to be used for data upload}}
+\DoxyCodeLine{1372 \textcolor{keyword}{inline} UINT64 GetRequiredIntermediateSize(}
+\DoxyCodeLine{1373     \_In\_ ID3D12Resource* pDestinationResource,}
+\DoxyCodeLine{1374     \_In\_range\_(0, D3D12\_REQ\_SUBRESOURCES) UINT FirstSubresource,}
+\DoxyCodeLine{1375     \_In\_range\_(0, D3D12\_REQ\_SUBRESOURCES -\/ FirstSubresource) UINT NumSubresources)}
+\DoxyCodeLine{1376 \{}
+\DoxyCodeLine{1377     D3D12\_RESOURCE\_DESC Desc = pDestinationResource-\/>GetDesc();}
+\DoxyCodeLine{1378     UINT64 RequiredSize = 0;}
+\DoxyCodeLine{1379 }
+\DoxyCodeLine{1380     ID3D12Device* pDevice;}
+\DoxyCodeLine{1381     pDestinationResource-\/>GetDevice(\_\_uuidof(*pDevice), \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{void}**\textcolor{keyword}{>}(\&pDevice));}
+\DoxyCodeLine{1382     pDevice-\/>GetCopyableFootprints(\&Desc, FirstSubresource, NumSubresources, 0, \textcolor{keyword}{nullptr}, \textcolor{keyword}{nullptr}, \textcolor{keyword}{nullptr}, \&RequiredSize);}
+\DoxyCodeLine{1383     pDevice-\/>Release();}
+\DoxyCodeLine{1384 }
+\DoxyCodeLine{1385     \textcolor{keywordflow}{return} RequiredSize;}
+\DoxyCodeLine{1386 \}}
+\DoxyCodeLine{1387 }
+\DoxyCodeLine{1388 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{1389 \textcolor{comment}{// All arrays must be populated (e.g. by calling GetCopyableFootprints)}}
+\DoxyCodeLine{1390 \textcolor{keyword}{inline} UINT64 UpdateSubresources(}
+\DoxyCodeLine{1391     \_In\_ ID3D12GraphicsCommandList* pCmdList,}
+\DoxyCodeLine{1392     \_In\_ ID3D12Resource* pDestinationResource,}
+\DoxyCodeLine{1393     \_In\_ ID3D12Resource* pIntermediate,}
+\DoxyCodeLine{1394     \_In\_range\_(0, D3D12\_REQ\_SUBRESOURCES) UINT FirstSubresource,}
+\DoxyCodeLine{1395     \_In\_range\_(0, D3D12\_REQ\_SUBRESOURCES -\/ FirstSubresource) UINT NumSubresources,}
+\DoxyCodeLine{1396     UINT64 RequiredSize,}
+\DoxyCodeLine{1397     \_In\_reads\_(NumSubresources) \textcolor{keyword}{const} D3D12\_PLACED\_SUBRESOURCE\_FOOTPRINT* pLayouts,}
+\DoxyCodeLine{1398     \_In\_reads\_(NumSubresources) \textcolor{keyword}{const} UINT* pNumRows,}
+\DoxyCodeLine{1399     \_In\_reads\_(NumSubresources) \textcolor{keyword}{const} UINT64* pRowSizesInBytes,}
+\DoxyCodeLine{1400     \_In\_reads\_(NumSubresources) \textcolor{keyword}{const} D3D12\_SUBRESOURCE\_DATA* pSrcData)}
+\DoxyCodeLine{1401 \{}
+\DoxyCodeLine{1402     \textcolor{comment}{// Minor validation}}
+\DoxyCodeLine{1403     D3D12\_RESOURCE\_DESC IntermediateDesc = pIntermediate-\/>GetDesc();}
+\DoxyCodeLine{1404     D3D12\_RESOURCE\_DESC DestinationDesc = pDestinationResource-\/>GetDesc();}
+\DoxyCodeLine{1405     \textcolor{keywordflow}{if} (IntermediateDesc.Dimension != D3D12\_RESOURCE\_DIMENSION\_BUFFER ||}
+\DoxyCodeLine{1406         IntermediateDesc.Width < RequiredSize + pLayouts[0].Offset ||}
+\DoxyCodeLine{1407         RequiredSize >(SIZE\_T) -\/ 1 ||}
+\DoxyCodeLine{1408         (DestinationDesc.Dimension == D3D12\_RESOURCE\_DIMENSION\_BUFFER \&\&}
+\DoxyCodeLine{1409             (FirstSubresource != 0 || NumSubresources != 1)))}
+\DoxyCodeLine{1410     \{}
+\DoxyCodeLine{1411         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{1412     \}}
+\DoxyCodeLine{1413 }
+\DoxyCodeLine{1414     BYTE* pData;}
+\DoxyCodeLine{1415     HRESULT hr = pIntermediate-\/>Map(0, NULL, \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{void}**\textcolor{keyword}{>}(\&pData));}
+\DoxyCodeLine{1416     \textcolor{keywordflow}{if} (FAILED(hr))}
+\DoxyCodeLine{1417     \{}
+\DoxyCodeLine{1418         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{1419     \}}
+\DoxyCodeLine{1420 }
+\DoxyCodeLine{1421     \textcolor{keywordflow}{for} (UINT i = 0; i < NumSubresources; ++i)}
+\DoxyCodeLine{1422     \{}
+\DoxyCodeLine{1423         \textcolor{keywordflow}{if} (pRowSizesInBytes[i] > (SIZE\_T)-\/1) \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{1424         D3D12\_MEMCPY\_DEST DestData = \{ pData + pLayouts[i].Offset, pLayouts[i].Footprint.RowPitch, pLayouts[i].Footprint.RowPitch * pNumRows[i] \};}
+\DoxyCodeLine{1425         MemcpySubresource(\&DestData, \&pSrcData[i], (SIZE\_T)pRowSizesInBytes[i], pNumRows[i], pLayouts[i].Footprint.Depth);}
+\DoxyCodeLine{1426     \}}
+\DoxyCodeLine{1427     pIntermediate-\/>Unmap(0, NULL);}
+\DoxyCodeLine{1428 }
+\DoxyCodeLine{1429     \textcolor{keywordflow}{if} (DestinationDesc.Dimension == D3D12\_RESOURCE\_DIMENSION\_BUFFER)}
+\DoxyCodeLine{1430     \{}
+\DoxyCodeLine{1431         CD3DX12\_BOX SrcBox(UINT(pLayouts[0].Offset), UINT(pLayouts[0].Offset + pLayouts[0].Footprint.Width));}
+\DoxyCodeLine{1432         pCmdList-\/>CopyBufferRegion(}
+\DoxyCodeLine{1433             pDestinationResource, 0, pIntermediate, pLayouts[0].Offset, pLayouts[0].Footprint.Width);}
+\DoxyCodeLine{1434     \}}
+\DoxyCodeLine{1435     \textcolor{keywordflow}{else}}
+\DoxyCodeLine{1436     \{}
+\DoxyCodeLine{1437         \textcolor{keywordflow}{for} (UINT i = 0; i < NumSubresources; ++i)}
+\DoxyCodeLine{1438         \{}
+\DoxyCodeLine{1439             CD3DX12\_TEXTURE\_COPY\_LOCATION Dst(pDestinationResource, i + FirstSubresource);}
+\DoxyCodeLine{1440             CD3DX12\_TEXTURE\_COPY\_LOCATION Src(pIntermediate, pLayouts[i]);}
+\DoxyCodeLine{1441             pCmdList-\/>CopyTextureRegion(\&Dst, 0, 0, 0, \&Src, \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{1442         \}}
+\DoxyCodeLine{1443     \}}
+\DoxyCodeLine{1444     \textcolor{keywordflow}{return} RequiredSize;}
+\DoxyCodeLine{1445 \}}
+\DoxyCodeLine{1446 }
+\DoxyCodeLine{1447 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{1448 \textcolor{comment}{// Heap-\/allocating UpdateSubresources implementation}}
+\DoxyCodeLine{1449 \textcolor{keyword}{inline} UINT64 UpdateSubresources(}
+\DoxyCodeLine{1450     \_In\_ ID3D12GraphicsCommandList* pCmdList,}
+\DoxyCodeLine{1451     \_In\_ ID3D12Resource* pDestinationResource,}
+\DoxyCodeLine{1452     \_In\_ ID3D12Resource* pIntermediate,}
+\DoxyCodeLine{1453     UINT64 IntermediateOffset,}
+\DoxyCodeLine{1454     \_In\_range\_(0, D3D12\_REQ\_SUBRESOURCES) UINT FirstSubresource,}
+\DoxyCodeLine{1455     \_In\_range\_(0, D3D12\_REQ\_SUBRESOURCES -\/ FirstSubresource) UINT NumSubresources,}
+\DoxyCodeLine{1456     \_In\_reads\_(NumSubresources) D3D12\_SUBRESOURCE\_DATA* pSrcData)}
+\DoxyCodeLine{1457 \{}
+\DoxyCodeLine{1458     UINT64 RequiredSize = 0;}
+\DoxyCodeLine{1459     UINT64 MemToAlloc = \textcolor{keyword}{static\_cast<}UINT64\textcolor{keyword}{>}(\textcolor{keyword}{sizeof}(D3D12\_PLACED\_SUBRESOURCE\_FOOTPRINT) + \textcolor{keyword}{sizeof}(UINT) + \textcolor{keyword}{sizeof}(UINT64)) * NumSubresources;}
+\DoxyCodeLine{1460     \textcolor{keywordflow}{if} (MemToAlloc > SIZE\_MAX)}
+\DoxyCodeLine{1461     \{}
+\DoxyCodeLine{1462         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{1463     \}}
+\DoxyCodeLine{1464     \textcolor{keywordtype}{void}* pMem = HeapAlloc(GetProcessHeap(), 0, \textcolor{keyword}{static\_cast<}SIZE\_T\textcolor{keyword}{>}(MemToAlloc));}
+\DoxyCodeLine{1465     \textcolor{keywordflow}{if} (pMem == NULL)}
+\DoxyCodeLine{1466     \{}
+\DoxyCodeLine{1467         \textcolor{keywordflow}{return} 0;}
+\DoxyCodeLine{1468     \}}
+\DoxyCodeLine{1469     D3D12\_PLACED\_SUBRESOURCE\_FOOTPRINT* pLayouts = \textcolor{keyword}{reinterpret\_cast<}D3D12\_PLACED\_SUBRESOURCE\_FOOTPRINT*\textcolor{keyword}{>}(pMem);}
+\DoxyCodeLine{1470     UINT64* pRowSizesInBytes = \textcolor{keyword}{reinterpret\_cast<}UINT64*\textcolor{keyword}{>}(pLayouts + NumSubresources);}
+\DoxyCodeLine{1471     UINT* pNumRows = \textcolor{keyword}{reinterpret\_cast<}UINT*\textcolor{keyword}{>}(pRowSizesInBytes + NumSubresources);}
+\DoxyCodeLine{1472 }
+\DoxyCodeLine{1473     D3D12\_RESOURCE\_DESC Desc = pDestinationResource-\/>GetDesc();}
+\DoxyCodeLine{1474     ID3D12Device* pDevice;}
+\DoxyCodeLine{1475     pDestinationResource-\/>GetDevice(\_\_uuidof(*pDevice), \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{void}**\textcolor{keyword}{>}(\&pDevice));}
+\DoxyCodeLine{1476     pDevice-\/>GetCopyableFootprints(\&Desc, FirstSubresource, NumSubresources, IntermediateOffset, pLayouts, pNumRows, pRowSizesInBytes, \&RequiredSize);}
+\DoxyCodeLine{1477     pDevice-\/>Release();}
+\DoxyCodeLine{1478 }
+\DoxyCodeLine{1479     UINT64 Result = UpdateSubresources(pCmdList, pDestinationResource, pIntermediate, FirstSubresource, NumSubresources, RequiredSize, pLayouts, pNumRows, pRowSizesInBytes, pSrcData);}
+\DoxyCodeLine{1480     HeapFree(GetProcessHeap(), 0, pMem);}
+\DoxyCodeLine{1481     \textcolor{keywordflow}{return} Result;}
+\DoxyCodeLine{1482 \}}
+\DoxyCodeLine{1483 }
+\DoxyCodeLine{1484 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{1485 \textcolor{comment}{// Stack-\/allocating UpdateSubresources implementation}}
+\DoxyCodeLine{1486 \textcolor{keyword}{template} <UINT MaxSubresources>}
+\DoxyCodeLine{1487 \textcolor{keyword}{inline} UINT64 UpdateSubresources(}
+\DoxyCodeLine{1488     \_In\_ ID3D12GraphicsCommandList* pCmdList,}
+\DoxyCodeLine{1489     \_In\_ ID3D12Resource* pDestinationResource,}
+\DoxyCodeLine{1490     \_In\_ ID3D12Resource* pIntermediate,}
+\DoxyCodeLine{1491     UINT64 IntermediateOffset,}
+\DoxyCodeLine{1492     \_In\_range\_(0, MaxSubresources) UINT FirstSubresource,}
+\DoxyCodeLine{1493     \_In\_range\_(1, MaxSubresources -\/ FirstSubresource) UINT NumSubresources,}
+\DoxyCodeLine{1494     \_In\_reads\_(NumSubresources) D3D12\_SUBRESOURCE\_DATA* pSrcData)}
+\DoxyCodeLine{1495 \{}
+\DoxyCodeLine{1496     UINT64 RequiredSize = 0;}
+\DoxyCodeLine{1497     D3D12\_PLACED\_SUBRESOURCE\_FOOTPRINT Layouts[MaxSubresources];}
+\DoxyCodeLine{1498     UINT NumRows[MaxSubresources];}
+\DoxyCodeLine{1499     UINT64 RowSizesInBytes[MaxSubresources];}
+\DoxyCodeLine{1500 }
+\DoxyCodeLine{1501     D3D12\_RESOURCE\_DESC Desc = pDestinationResource-\/>GetDesc();}
+\DoxyCodeLine{1502     ID3D12Device* pDevice;}
+\DoxyCodeLine{1503     pDestinationResource-\/>GetDevice(\_\_uuidof(*pDevice), \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{void}**\textcolor{keyword}{>}(\&pDevice));}
+\DoxyCodeLine{1504     pDevice-\/>GetCopyableFootprints(\&Desc, FirstSubresource, NumSubresources, IntermediateOffset, Layouts, NumRows, RowSizesInBytes, \&RequiredSize);}
+\DoxyCodeLine{1505     pDevice-\/>Release();}
+\DoxyCodeLine{1506 }
+\DoxyCodeLine{1507     \textcolor{keywordflow}{return} UpdateSubresources(pCmdList, pDestinationResource, pIntermediate, FirstSubresource, NumSubresources, RequiredSize, Layouts, NumRows, RowSizesInBytes, pSrcData);}
+\DoxyCodeLine{1508 \}}
+\DoxyCodeLine{1509 }
+\DoxyCodeLine{1510 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{1511 \textcolor{keyword}{inline} \textcolor{keywordtype}{bool} D3D12IsLayoutOpaque(D3D12\_TEXTURE\_LAYOUT Layout)}
+\DoxyCodeLine{1512 \{}
+\DoxyCodeLine{1513     \textcolor{keywordflow}{return} Layout == D3D12\_TEXTURE\_LAYOUT\_UNKNOWN || Layout == D3D12\_TEXTURE\_LAYOUT\_64KB\_UNDEFINED\_SWIZZLE;}
+\DoxyCodeLine{1514 \}}
+\DoxyCodeLine{1515 }
+\DoxyCodeLine{1516 \textcolor{comment}{//-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/-\/}}
+\DoxyCodeLine{1517 \textcolor{keyword}{inline} ID3D12CommandList* \textcolor{keyword}{const}* CommandListCast(ID3D12GraphicsCommandList* \textcolor{keyword}{const}* pp)}
+\DoxyCodeLine{1518 \{}
+\DoxyCodeLine{1519     \textcolor{comment}{// This cast is useful for passing strongly typed command list pointers into}}
+\DoxyCodeLine{1520     \textcolor{comment}{// ExecuteCommandLists.}}
+\DoxyCodeLine{1521     \textcolor{comment}{// This cast is valid as long as the const-\/ness is respected. D3D12 APIs do}}
+\DoxyCodeLine{1522     \textcolor{comment}{// respect the const-\/ness of their arguments.}}
+\DoxyCodeLine{1523     \textcolor{keywordflow}{return} \textcolor{keyword}{reinterpret\_cast<}ID3D12CommandList* const*\textcolor{keyword}{>}(pp);}
+\DoxyCodeLine{1524 \}}
+\DoxyCodeLine{1525 }
+\DoxyCodeLine{1526 }
+\DoxyCodeLine{1527 \textcolor{preprocessor}{\#endif }\textcolor{comment}{// defined( \_\_cplusplus )}}
+\DoxyCodeLine{1528 }
+\DoxyCodeLine{1529 \textcolor{preprocessor}{\#endif }\textcolor{comment}{//\_\_D3DX12\_H\_\_}}
+\DoxyCodeLine{1530 }
+\DoxyCodeLine{1531 }
+\DoxyCodeLine{1532 }
+
+\end{DoxyCode}

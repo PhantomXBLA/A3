@@ -1,0 +1,50 @@
+\hypertarget{class_state_stack}{}\doxysection{State\+Stack Class Reference}
+\label{class_state_stack}\index{StateStack@{StateStack}}
+\doxysubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_state_stack_af804142a55cd477767353e0abbcc218c}\label{class_state_stack_af804142a55cd477767353e0abbcc218c}} 
+enum {\bfseries Action} \{ {\bfseries Push}
+, {\bfseries Pop}
+, {\bfseries Clear}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_state_stack_a365f29afd04a9370f6638cbe3b4ff92a}\label{class_state_stack_a365f29afd04a9370f6638cbe3b4ff92a}} 
+{\bfseries State\+Stack} (\mbox{\hyperlink{struct_state_1_1_context}{State\+::\+Context}} context)
+\item 
+\mbox{\Hypertarget{class_state_stack_a9d64daa479c2cccad6f2ede77741a352}\label{class_state_stack_a9d64daa479c2cccad6f2ede77741a352}} 
+{\footnotesize template$<$typename T $>$ }\\void {\bfseries register\+State} (States\+::\+ID state\+ID)
+\item 
+\mbox{\Hypertarget{class_state_stack_a22c2b84575447cdcfe7fef102cb90847}\label{class_state_stack_a22c2b84575447cdcfe7fef102cb90847}} 
+void {\bfseries update} (const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&gt)
+\item 
+\mbox{\Hypertarget{class_state_stack_a0990b973b2a0bdf8fad2f326e564931a}\label{class_state_stack_a0990b973b2a0bdf8fad2f326e564931a}} 
+void {\bfseries draw} ()
+\item 
+\mbox{\Hypertarget{class_state_stack_a2a6df2bdf1d3edfb12f09fbb1dfbf67d}\label{class_state_stack_a2a6df2bdf1d3edfb12f09fbb1dfbf67d}} 
+void {\bfseries handle\+Event} (WPARAM btn\+State)
+\item 
+\mbox{\Hypertarget{class_state_stack_a3cca54c4478281d56c35806f1290a3a3}\label{class_state_stack_a3cca54c4478281d56c35806f1290a3a3}} 
+void {\bfseries handle\+Realtime\+Input} ()
+\item 
+\mbox{\Hypertarget{class_state_stack_a80ed85f0fc13039e6f4c7dfef19e608f}\label{class_state_stack_a80ed85f0fc13039e6f4c7dfef19e608f}} 
+void {\bfseries push\+State} (States\+::\+ID state\+ID)
+\item 
+\mbox{\Hypertarget{class_state_stack_a7e050a57b798295c2344f1318765b5ee}\label{class_state_stack_a7e050a57b798295c2344f1318765b5ee}} 
+void {\bfseries pop\+State} ()
+\item 
+\mbox{\Hypertarget{class_state_stack_a49f0703d4037c3bf63494e64cb09898d}\label{class_state_stack_a49f0703d4037c3bf63494e64cb09898d}} 
+void {\bfseries clear\+States} ()
+\item 
+\mbox{\Hypertarget{class_state_stack_a4d9dc16e1a69640b6a85c224fe1c3f33}\label{class_state_stack_a4d9dc16e1a69640b6a85c224fe1c3f33}} 
+bool {\bfseries is\+Empty} () const
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+A2-\/main/101251005\+\_\+101248866 -\/ lab assignment 2/101251005\+\_\+101248866 -\/ lab assignment 1/State\+Stack.\+h\item 
+A2-\/main/101251005\+\_\+101248866 -\/ lab assignment 2/101251005\+\_\+101248866 -\/ lab assignment 1/State\+Stack.\+cpp\end{DoxyCompactItemize}
