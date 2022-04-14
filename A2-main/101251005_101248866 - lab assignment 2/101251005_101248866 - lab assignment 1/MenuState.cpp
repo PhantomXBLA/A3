@@ -37,16 +37,6 @@ void MenuState::draw()
 bool MenuState::update(const GameTimer& gt)
 {
 	mContext->world->update(gt);
-	//mContext->mSceneGraph->draw();
-	CommandQueue& commands = mContext->world->getCommandQueue();
-	
-	if (GetAsyncKeyState('E'))
-	{
-		requestStackPop();
-		requestStackPush(States::GAME);
-
-	}
-
 
 
 	return true;
@@ -60,5 +50,13 @@ bool MenuState::handleEvent(WPARAM btnState)
 
 bool MenuState::handleRealtimeInput()
 {
+
+	if (GetAsyncKeyState('E'))
+	{
+		requestStackPop();
+		mContext->game->FlushCommandQueue();
+		requestStackPush(States::GAME);
+
+	}
 	return true;
 }

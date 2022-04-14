@@ -52,6 +52,7 @@ void StateStack::handleRealtimeInput()
 
 void StateStack::pushState(States::ID stateID)
 {
+	
 	mPendingList.push_back(PendingChange(Push, stateID));
 	OutputDebugString(L"State Pushed");
 }

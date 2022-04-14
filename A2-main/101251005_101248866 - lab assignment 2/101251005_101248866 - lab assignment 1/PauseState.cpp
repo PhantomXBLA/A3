@@ -6,9 +6,10 @@
 PauseState::PauseState(StateStack* stack, Context* context)
 	: State(stack, context)
 {
-	mContext->game->ResetFrameResources();
+
 
 	mAllRitems.clear();
+	mContext->game->ResetFrameResources();
 	
 
 	mContext->game->BuildMaterials();
@@ -40,14 +41,9 @@ bool PauseState::update(const GameTimer& gt)
 {
 	mContext->world->update(gt);
 	//mContext->mSceneGraph->draw();
-	CommandQueue& commands = mContext->world->getCommandQueue();
+	//CommandQueue& commands = mContext->world->getCommandQueue();
 
-	if (GetAsyncKeyState('E'))
-	{
-		requestStackPop();
-		requestStackPush(States::GAME);
 
-	}
 
 
 
@@ -62,5 +58,14 @@ bool PauseState::handleEvent(WPARAM btnState)
 
 bool PauseState::handleRealtimeInput()
 {
+	if (GetAsyncKeyState('E'))
+	{
+		mContext->game->FlushCommandQueue();
+		requestStackPop();
+		
+		requestStackPush(States::GAME);
+
+
+	}
 	return true;
 }

@@ -5,13 +5,11 @@
 GameState::GameState(StateStack* stack, Context* context): State(stack, context)
 {
 	
-	mContext->game->ResetFrameResources();
+
 
 	mAllRitems.clear();
-
+	mContext->game->ResetFrameResources();
 	mContext->game->BuildMaterials();
-	
-	mContext->mSceneGraph->build();
 	mContext->world->buildScene();
 	
 	mContext->game->BuildFrameResources();
@@ -30,28 +28,27 @@ void GameState::draw()
 bool GameState::update(const GameTimer& gt)
 {
 	mContext->world->update(gt);
-
 	CommandQueue& commands = mContext->world->getCommandQueue();
 	mContext->player->handleRealtimeInput(commands, gt);
-
-	if (GetAsyncKeyState('P'))
-	{
-		requestStackPop();
-		requestStackPush(States::PAUSE);
-	}
 
 	return true;
 }
 
 bool GameState::handleEvent(WPARAM btnState)
 {
-	requestStackPop();
-	requestStackPush(States::GAME);
 	return true;
 }
 
 bool GameState::handleRealtimeInput()
 {
+	if (GetAsyncKeyState('P'))
+	{
+		
+		requestStackPop();
+		mContext->game->FlushCommandQueue();
+		requestStackPush(States::PAUSE);
+	}
+	
 	return true;
 }
 

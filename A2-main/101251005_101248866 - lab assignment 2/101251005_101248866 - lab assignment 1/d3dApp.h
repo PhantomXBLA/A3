@@ -41,6 +41,8 @@ public:
 	virtual LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
 	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> mCommandList;
 
+	void FlushCommandQueue();
+
 protected:
 	virtual void CreateRtvAndDsvDescriptorHeaps();
 	virtual void OnResize();
@@ -59,7 +61,7 @@ protected:
 	void CreateCommandObjects();
 	void CreateSwapChain();
 
-	void FlushCommandQueue();
+
 
 	ID3D12Resource* CurrentBackBuffer()const;
 	D3D12_CPU_DESCRIPTOR_HANDLE CurrentBackBufferView()const;

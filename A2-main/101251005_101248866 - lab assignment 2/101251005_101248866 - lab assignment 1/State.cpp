@@ -25,6 +25,7 @@ void State::requestStackPush(States::ID stateID)
 void State::requestStackPop()
 {
 	mStack->popState();
+	OutputDebugString(L"State Popped");
 }
 
 void State::requestStateClear()

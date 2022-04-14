@@ -19,7 +19,7 @@ TitleState::TitleState(StateStack* stack, Context* context)
 	mContext->mSceneGraph->attachChild(std::move(background));
 
 
-	OutputDebugString(L"Hello");
+
 	mContext->mSceneGraph->build();
 	mContext->game->BuildFrameResources();
 
@@ -37,23 +37,7 @@ void TitleState::draw()
 bool TitleState::update(const GameTimer& gt)
 {
 	mContext->world->update(gt);
-	//mContext->mSceneGraph->draw();
 
-	//if (d3dUtil::IsKeyDown('W'))
-	//{
-	//	requestStackPop();
-	//	requestStackPush(States::MENU);
-	//}
-	//
-	//
-
-	CommandQueue& commands = mContext->world->getCommandQueue();
-	if (GetAsyncKeyState('W'))
-	{
-		requestStackPop();
-		requestStackPush(States::MENU);
-
-	}
 
     return true;
 }
@@ -67,5 +51,13 @@ bool TitleState::handleEvent(WPARAM btnState)
 bool TitleState::handleRealtimeInput()
 {
 
+	if (GetAsyncKeyState('W'))
+	{
+		
+		requestStackPop();
+		mContext->game->FlushCommandQueue();
+		requestStackPush(States::MENU);
+
+	}
     return true;
 }

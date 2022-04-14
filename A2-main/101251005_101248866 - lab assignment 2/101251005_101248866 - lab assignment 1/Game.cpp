@@ -122,6 +122,7 @@ void Game::Update(const GameTimer& gt)
 	OnKeyboardInput(gt);
 	UpdateCamera(gt);
 	mStateStack.update(gt);
+	mStateStack.handleRealtimeInput();
 	//world.update(gt);
 	processEvents(gt);
 
