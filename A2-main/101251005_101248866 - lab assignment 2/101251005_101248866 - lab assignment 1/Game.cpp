@@ -1470,7 +1470,7 @@ void Game::BuildMaterials()
 	mMaterials["title"] = std::move(title);
 
 	auto menu = std::make_unique<Material>();
-	menu->Name = "title";
+	menu->Name = "menu";
 	menu->MatCBIndex = MatCBIndex++;
 	menu->DiffuseSrvHeapIndex = DiffuseSrvHeapIndex++;
 	menu->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
