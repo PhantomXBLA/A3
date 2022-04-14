@@ -90,6 +90,9 @@
     <ClCompile Include="StateStack.cpp">
       <Filter>Source Files\Added</Filter>
     </ClCompile>
+    <ClCompile Include="TitleState.cpp">
+      <Filter>Source Files\Added</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -162,6 +165,9 @@
       <Filter>Header Files\Added</Filter>
     </ClInclude>
     <ClInclude Include="States.h">
+      <Filter>Header Files\Added</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleState.h">
       <Filter>Header Files\Added</Filter>
     </ClInclude>
   </ItemGroup>

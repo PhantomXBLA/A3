@@ -2,7 +2,7 @@
 #include "StateStack.h"
 
 
-State::Context::Context(Game* game, Player* player) :game(game), player(player)
+State::Context::Context(Game* game, Player* player) : game(game), player(player), mSceneGraph(new SceneNode(game))
 {
 }
 

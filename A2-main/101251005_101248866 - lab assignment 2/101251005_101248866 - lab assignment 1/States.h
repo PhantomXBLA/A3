@@ -3,11 +3,11 @@ namespace States
 {
 	enum ID
 	{
-		None,
-		Title,
-		Menu,
-		Game,
-		Loading,
-		Pause
+		NONE,
+		TITLE,
+		MENU,
+		GAME,
+		LOADING,
+		PAUSE
 	};
 }

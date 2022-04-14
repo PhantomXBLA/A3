@@ -2,6 +2,10 @@
 #include "Aircraft.h"
 #include "States.h"
 #include "GameState.h"
+#include "TitleState.h"
+//#include "MenuState.h"
+//#include "OptionState.h"
+//#include "PauseState.h"
 
 
 
@@ -66,26 +70,29 @@ bool Game::Initialize()
 	BuildLandGeometry();
 	BuildWavesGeometry();
 	BuildBoxGeometry();
-	BuildSphereGeometry();
-	BuildCylinderGeometry();
-	BuildTorusGeometry();
-	BuildWedgeGeometry();
-	BuildTriPrismGeometry();
-	BuildPyramidGeometry();
-	BuildConeGeometry();
-	BuildDiamondGeometry();
+	//BuildSphereGeometry();
+	//BuildCylinderGeometry();
+	//BuildTorusGeometry();
+	//BuildWedgeGeometry();
+	//BuildTriPrismGeometry();
+	//BuildPyramidGeometry();
+	//BuildConeGeometry();
+	//BuildDiamondGeometry();
 
 	BuildTreeSpritesGeometry();
-	registerStates();
+	RegisterStates();
 	
 	
 
 	BuildMaterials();
+	mStateStack.pushState(States::TITLE);
+	//StateStack.pushState(States::GAME);
 	BuildRenderItems();
 	BuildFrameResources();
 	
 	BuildPSOs();
-	mStateStack.pushState(States::Game);
+
+	
 
 	// Execute the initialization commands.
 	ThrowIfFailed(mCommandList->Close());
@@ -111,6 +118,7 @@ void Game::Update(const GameTimer& gt)
 {
 	OnKeyboardInput(gt);
 	UpdateCamera(gt);
+	mStateStack.update(gt);
 	//world.update(gt);
 	processEvents(gt);
 
@@ -232,34 +240,34 @@ void Game::OnMouseUp(WPARAM btnState, int x, int y)
 
 void Game::OnMouseMove(WPARAM btnState, int x, int y)
 {
-	if ((btnState & MK_LBUTTON) != 0)
-	{
-		// Make each pixel correspond to a quarter of a degree.
-		float dx = XMConvertToRadians(0.25f * static_cast<float>(x - mLastMousePos.x));
-		float dy = XMConvertToRadians(0.25f * static_cast<float>(y - mLastMousePos.y));
+	//if ((btnState & MK_LBUTTON) != 0)
+	//{
+	//	// Make each pixel correspond to a quarter of a degree.
+	//	float dx = XMConvertToRadians(0.25f * static_cast<float>(x - mLastMousePos.x));
+	//	float dy = XMConvertToRadians(0.25f * static_cast<float>(y - mLastMousePos.y));
 
-		// Update angles based on input to orbit camera around box.
-		mTheta += dx;
-		mPhi += dy;
+	//	// Update angles based on input to orbit camera around box.
+	//	mTheta += dx;
+	//	mPhi += dy;
 
-		// Restrict the angle mPhi.
-		mPhi = MathHelper::Clamp(mPhi, 0.1f, MathHelper::Pi - 0.1f);
-	}
-	else if ((btnState & MK_RBUTTON) != 0)
-	{
-		// Make each pixel correspond to 0.2 unit in the scene.
-		float dx = 0.2f * static_cast<float>(x - mLastMousePos.x);
-		float dy = 0.2f * static_cast<float>(y - mLastMousePos.y);
+	//	// Restrict the angle mPhi.
+	//	mPhi = MathHelper::Clamp(mPhi, 0.1f, MathHelper::Pi - 0.1f);
+	//}
+	//else if ((btnState & MK_RBUTTON) != 0)
+	//{
+	//	// Make each pixel correspond to 0.2 unit in the scene.
+	//	float dx = 0.2f * static_cast<float>(x - mLastMousePos.x);
+	//	float dy = 0.2f * static_cast<float>(y - mLastMousePos.y);
 
-		// Update the camera radius based on input.
-		mRadius += dx - dy;
+	//	// Update the camera radius based on input.
+	//	mRadius += dx - dy;
 
-		// Restrict the radius.
-		mRadius = MathHelper::Clamp(mRadius, 5.0f, 150.0f);
-	}
+	//	// Restrict the radius.
+	//	mRadius = MathHelper::Clamp(mRadius, 5.0f, 150.0f);
+	//}
 
-	mLastMousePos.x = x;
-	mLastMousePos.y = y;
+	//mLastMousePos.x = x;
+	//mLastMousePos.y = y;
 }
 
 void Game::OnKeyboardInput(const GameTimer& gt)
@@ -473,7 +481,12 @@ void Game::UpdateWaves(const GameTimer& gt)
 
 void Game::LoadTextures()
 {
-
+	auto titleTex = std::make_unique<Texture>();
+	titleTex->Name = "titleTex";
+	titleTex->Filename = L"../../Textures/TitleScreen.dds";
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), titleTex->Filename.c_str(),
+		titleTex->Resource, titleTex->UploadHeap));
 
 	auto desertTex = std::make_unique<Texture>();
 	desertTex->Name = "desertTex";
@@ -496,7 +509,7 @@ void Game::LoadTextures()
 		mCommandList.Get(), raptorTex->Filename.c_str(),
 		raptorTex->Resource, raptorTex->UploadHeap));
 
-
+	mTextures[titleTex->Name] = std::move(titleTex);
 	mTextures[desertTex->Name] = std::move(desertTex);
 	mTextures[eagleTex->Name] = std::move(eagleTex);
 	mTextures[raptorTex->Name] = std::move(raptorTex);
@@ -559,6 +572,7 @@ void Game::BuildDescriptorHeaps()
 	//
 	CD3DX12_CPU_DESCRIPTOR_HANDLE hDescriptor(mSrvDescriptorHeap->GetCPUDescriptorHandleForHeapStart());
 
+	auto titleTex = mTextures["titleTex"]->Resource;
 	auto desertTex = mTextures["desertTex"]->Resource;
 	auto eagleTex = mTextures["eagleTex"]->Resource;
 	auto raptorTex = mTextures["raptorTex"]->Resource;
@@ -580,6 +594,11 @@ void Game::BuildDescriptorHeaps()
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 	srvDesc.Format = raptorTex->GetDesc().Format;
 	md3dDevice->CreateShaderResourceView(raptorTex.Get(), &srvDesc, hDescriptor);
+
+	//Title Descriptor
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = titleTex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(titleTex.Get(), &srvDesc, hDescriptor);
 
 }
 
@@ -1372,6 +1391,11 @@ void Game::BuildFrameResources() //change 5 to mwaves->vertex count
 	}
 }
 
+void Game::ResetFrameResources()
+{
+	mFrameResources.clear();
+}
+
 void Game::BuildMaterials()
 {
 	UINT MatCBIndex = 0;
@@ -1404,6 +1428,24 @@ void Game::BuildMaterials()
 	raptor->Roughness = 0.0f;
 	mMaterials["raptor"] = std::move(raptor);
 
+	auto title = std::make_unique<Material>();
+	title->Name = "title";
+	title->MatCBIndex = MatCBIndex++;
+	title->DiffuseSrvHeapIndex = DiffuseSrvHeapIndex++;
+	title->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	title->FresnelR0 = XMFLOAT3(0.2f, 0.2f, 0.2f);
+	title->Roughness = 0.0f;
+	mMaterials["title"] = std::move(title);
+
+}
+
+void Game::RegisterStates()
+{
+	mStateStack.registerState<TitleState>(States::TITLE);
+	mStateStack.registerState<GameState>(States::GAME);
+	//mStateStack.registerState<MenuState>(States::Menu);
+	//mStateStack.registerState<PauseState>(States::Pause);
+	//mStateStack.registerState<OptionState>(States::Options);
 }
 
 void Game::BuildRenderItems()
@@ -1418,23 +1460,20 @@ void Game::BuildRenderItems()
 
 	UINT objCBIndex = 0;
 
-	auto wavesRitem = std::make_unique<RenderItem>();
-	wavesRitem->World = MathHelper::Identity4x4();
-	//XMStoreFloat4x4(&wavesRitem->TexTransform, XMMatrixScaling(10.0f, 10.0f, 10.0) * XMMatrixTranslation(500.0f, 100.0f, 800.0f));
-	XMStoreFloat4x4(&wavesRitem->World, XMMatrixScaling(10.0f, 10.0f, 10.0f) * XMMatrixRotationX(XM_PI * -0.5f) * XMMatrixTranslation(0.0f, 0.0f, 800.0f));
-	wavesRitem->ObjCBIndex = objCBIndex++;
-	wavesRitem->Mat = mMaterials["desert"].get();
-	wavesRitem->Geo = mGeometries["desertGeo"].get();
-	wavesRitem->PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-	wavesRitem->IndexCount = wavesRitem->Geo->DrawArgs["grid"].IndexCount;
-	wavesRitem->StartIndexLocation = wavesRitem->Geo->DrawArgs["grid"].StartIndexLocation;
-	wavesRitem->BaseVertexLocation = wavesRitem->Geo->DrawArgs["grid"].BaseVertexLocation;
-	mWavesRitem = wavesRitem.get(); //The randomness of waves/ this has been set to be almost non existent
-	mRitemLayer[(int)RenderLayer::Opaque].push_back(wavesRitem.get());
-
-	mAllRitems.push_back(std::move(wavesRitem));
-
-
+	auto desertRitem = std::make_unique<RenderItem>();
+	desertRitem->World = MathHelper::Identity4x4();
+	//XMStoreFloat4x4(&desertRitem->TexTransform, XMMatrixScaling(10.0f, 10.0f, 10.0) * XMMatrixTranslation(500.0f, 100.0f, 10.0f));
+	XMStoreFloat4x4(&desertRitem->World, XMMatrixScaling(10.0f, 10.0f, 10.0f) * XMMatrixRotationX(XM_PI * -0.5f) * XMMatrixTranslation(0.0f, 0.0f, 800.0f));
+	desertRitem->ObjCBIndex = objCBIndex++;
+	desertRitem->Mat = mMaterials["desert"].get();
+	desertRitem->Geo = mGeometries["desertGeo"].get();
+	desertRitem->PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+	desertRitem->IndexCount = desertRitem->Geo->DrawArgs["grid"].IndexCount;
+	desertRitem->StartIndexLocation = desertRitem->Geo->DrawArgs["grid"].StartIndexLocation;
+	desertRitem->BaseVertexLocation = desertRitem->Geo->DrawArgs["grid"].BaseVertexLocation;
+	mDesertRitem = desertRitem.get();
+	mRitemLayer[(int)RenderLayer::Opaque].push_back(desertRitem.get());
+	mAllRitems.push_back(std::move(desertRitem));
 	
 	//world.buildScene();
 	
@@ -1529,16 +1568,3 @@ std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> Game::GetStaticSamplers()
 		linearWrap, linearClamp,
 		anisotropicWrap, anisotropicClamp };
 }
-
-void Game::registerStates()
-{
-	//mStateStack.registerState<TitleState>(States::Title);
-	//mStateStack.registerState<MenuState>(States::Menu);
-	mStateStack.registerState<GameState>(States::Game);
-	OutputDebugString(L"Registered States");
-
-}
-
-
-
-

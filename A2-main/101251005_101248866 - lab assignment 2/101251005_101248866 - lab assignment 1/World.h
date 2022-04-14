@@ -4,7 +4,7 @@
 #include "FrameResource.h"
 #include "CommandQueue.h"
 #include "Command.h"
-#include "Waves.h"
+//#include "Waves.h"
 
 class World
 {
@@ -17,8 +17,8 @@ public:
 	CommandQueue&						getCommandQueue();
 	CommandQueue						mCommandQueue;
 
-	RenderItem* mWavesRitem = nullptr;
-	std::unique_ptr<Waves> mWaves;
+	//RenderItem* mWavesRitem = nullptr;
+	//std::unique_ptr<Waves> mWaves;
 
 
 private:

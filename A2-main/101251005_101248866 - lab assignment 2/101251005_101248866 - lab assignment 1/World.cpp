@@ -64,14 +64,11 @@ void World::buildScene()
 	mPlayerAircraft->objCBIndex = 1;
 	mSceneGraph->attachChild(std::move(playerAircraft));
 
-	
-
 	std::unique_ptr<Aircraft> raptorOne(new Aircraft(Aircraft::Raptor, mGame));
 	raptorOne->mPosition.x = 6;
 	raptorOne->mPosition.y = -15;
 	raptorOne->objCBIndex = 2;
 	mPlayerAircraft->attachChild(std::move(raptorOne));
-
 
 	std::unique_ptr<Aircraft> raptorTwo(new Aircraft(Aircraft::Raptor, mGame));
 	raptorTwo->mPosition.x = -6;

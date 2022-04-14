@@ -173,7 +173,10 @@
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateStack.cpp" />
-    <ClCompile Include="Waves.cpp" />
+    <ClCompile Include="TitleState.cpp" />
+    <ClCompile Include="Waves.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="Week5-1-TexWavesApp.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</ExcludedFromBuild>
@@ -215,9 +218,12 @@
     <ClInclude Include="State.h" />
     <ClInclude Include="States.h" />
     <ClInclude Include="StateStack.h" />
+    <ClInclude Include="TitleState.h" />
     <ClInclude Include="UploadBuffer.h" />
     <ClInclude Include="FrameResource.h" />
-    <ClInclude Include="Waves.h" />
+    <ClInclude Include="Waves.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="World.h" />
   </ItemGroup>
   <ItemGroup>

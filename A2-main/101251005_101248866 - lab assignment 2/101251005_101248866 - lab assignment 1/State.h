@@ -22,6 +22,7 @@ public:
 		Player* player;
 		Game* game;
 		World* world;
+		SceneNode* mSceneGraph;
 		
 	};
 
@@ -35,17 +36,19 @@ public:
 	//virtual bool		handleEvent(const sf::Event& event) = 0;
 
 
-protected:
+public:
+	
 	void				requestStackPush(States::ID stateID);
 	void				requestStackPop();
 	void				requestStateClear();
 
 	Context				getContext() const;
-	StateStack* mStack;
-
-
-private:
+	StateStack*			mStack;
 
 	Context*				mContext;
+
+	//std::unique_ptr<SceneNode> mSceneGraph;
+
+	std::vector<std::unique_ptr<RenderItem>> mAllRitems;
 };
 

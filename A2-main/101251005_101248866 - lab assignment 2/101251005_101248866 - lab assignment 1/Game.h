@@ -6,7 +6,7 @@
 
 
 
-#include "Waves.h"
+//#include "Waves.h"
 #include "World.h"
 #include "Player.h"
 #include "StateStack.h"
@@ -53,7 +53,7 @@ private:
 	//	LayerCount
 	//};
 
-private:
+public:
 	virtual void OnResize()override;
 
 	///Update Function
@@ -81,7 +81,7 @@ private:
 	void UpdateMaterialCBs(const GameTimer& gt);
 	void UpdateMainPassCB(const GameTimer& gt);
 	void UpdateWaves(const GameTimer& gt);
-	void					registerStates();
+	void RegisterStates();
 
 	///Load Textures function
 	///
@@ -117,6 +117,8 @@ private:
 	void BuildTriPrismGeometry();
 	void BuildTreeSpritesGeometry();
 
+	void ResetFrameResources();
+
 	void BuildShapeGeometry();
 	void BuildPSOs();
 	void BuildFrameResources();
@@ -139,6 +141,8 @@ private:
 	//XMFLOAT3 GetHillsNormal(float x, float z)const;
 
 public:
+	
+
 	void BuildWavesGeometry();
 	std::vector<std::unique_ptr<FrameResource>> mFrameResources;
 	FrameResource* mCurrFrameResource = nullptr;
@@ -159,7 +163,8 @@ public:
 	std::vector<D3D12_INPUT_ELEMENT_DESC> mInputLayout;
 	std::vector<D3D12_INPUT_ELEMENT_DESC> mTreeSpriteInputLayout;
 
-	RenderItem* mWavesRitem = nullptr;
+	RenderItem* mDesertRitem = nullptr;
+	RenderItem* mTitleRitem = nullptr;
 
 	// List of all the render items.
 	std::vector<std::unique_ptr<RenderItem>> mAllRitems;
@@ -167,7 +172,7 @@ public:
 	// Render items divided by PSO.
 	std::vector<RenderItem*> mRitemLayer[(int)RenderLayer::Count];
 
-	std::unique_ptr<Waves> mWaves;
+	//std::unique_ptr<Waves> mWaves;
 
 	//World					world;
 	PassConstants mMainPassCB;

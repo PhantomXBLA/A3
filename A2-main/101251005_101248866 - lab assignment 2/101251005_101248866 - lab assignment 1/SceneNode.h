@@ -1,21 +1,13 @@
 #pragma once
-
 #include <vector>
 #include <memory>
-
 #include "d3dApp.h"
 #include "FrameResource.h"
-
 #include "MathHelper.h"
 #include "UploadBuffer.h"
 #include "GeometryGenerator.h"
-
 #include "Category.h"
-
-
 //#include "d3dUtil.h"
-
-
 
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
@@ -67,7 +59,7 @@ class SceneNode
 
 	public:
 		SceneNode(Game* game);
-		void attachChild(Ptr child);
+		void attachChild (Ptr child);
 		Ptr detachChild(const SceneNode& node);
 
 		void update(const GameTimer& gt);

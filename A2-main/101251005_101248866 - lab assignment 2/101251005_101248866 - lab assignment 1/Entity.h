@@ -40,7 +40,7 @@ public:
 
 private:
 
-	///Recieves enetities updated velocity
+	///Recieves entities updated velocity
 	///
 	/// @param (gt) passed in to update the entity via time
 	virtual void updateCurrent(const GameTimer& gt);
