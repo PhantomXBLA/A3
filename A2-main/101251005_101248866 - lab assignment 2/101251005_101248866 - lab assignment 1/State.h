@@ -5,6 +5,7 @@
 #include "World.h"
 
 
+
 class StateStack;
 
 class Player;
@@ -19,8 +20,9 @@ public:
 	struct Context
 	{
 		Context(Game* game, Player* player);
-		Player* player;
 		Game* game;
+		Player* player;
+
 		World* world;
 		SceneNode* mSceneGraph;
 		
@@ -33,7 +35,8 @@ public:
 
 	virtual void		draw() = 0;
 	virtual bool		update(const GameTimer& gt) = 0;
-	//virtual bool		handleEvent(const sf::Event& event) = 0;
+	virtual bool		handleEvent(WPARAM btnState) = 0;
+	virtual bool		handleRealtimeInput() = 0;
 
 
 public:
@@ -50,5 +53,6 @@ public:
 	//std::unique_ptr<SceneNode> mSceneGraph;
 
 	std::vector<std::unique_ptr<RenderItem>> mAllRitems;
+	Game* game;
 };
 

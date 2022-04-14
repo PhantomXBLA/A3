@@ -8,15 +8,18 @@ class GameState : public State
 {
 public:
 	GameState(StateStack* stack, Context* context);
-
-	virtual void		draw();
-	virtual bool		update(const GameTimer& gt);
-	//virtual bool		handleEvent(const sf::Event& event);
+	virtual ~GameState();
+	virtual void		draw() override;
+	virtual bool		update(const GameTimer& gt) override;
+	
+	virtual bool handleEvent(WPARAM btnState)override;
+	virtual bool handleRealtimeInput()override;
 
 
 private:
-	World				mWorld;
-	Player				mPlayer;
-	Game*				game;
+
+	//World				mWorld;
+	//Player				mPlayer;
+	//Game*				game;
 };
 

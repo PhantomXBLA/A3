@@ -1,37 +1,52 @@
 #include "GameState.h"
+#include "Game.h"
 
-GameState::GameState(StateStack* stack, Context* context): State(stack, context), mWorld(game, this)
+
+GameState::GameState(StateStack* stack, Context* context): State(stack, context)
 {
-	mWorld.buildScene();
+	
+	mContext->game->ResetFrameResources();
+
+	mAllRitems.clear();
+
+	mContext->game->BuildMaterials();
+	
+	mContext->mSceneGraph->build();
+	mContext->world->buildScene();
+	
+	mContext->game->BuildFrameResources();
 	OutputDebugString(L"function Called");
+}
+
+GameState::~GameState()
+{
 }
 
 void GameState::draw()
 {
-	mWorld.draw();
+	mContext->world->draw();
 }
 
 bool GameState::update(const GameTimer& gt)
 {
-	mWorld.update(gt);
+	mContext->world->update(gt);
 
-	CommandQueue& commands = mWorld.getCommandQueue();
-	mPlayer.handleRealtimeInput(commands, gt);
+	CommandQueue& commands = mContext->world->getCommandQueue();
+	mContext->player->handleRealtimeInput(commands, gt);
 
 	return true;
 }
 
-//bool GameState::handleEvent(const sf::Event& event)
-//{
-//	// Game input handling
-//	CommandQueue& commands = mWorld.getCommandQueue();
-//	mPlayer.handleEvent(event, commands);
-//
-//	// Escape pressed, trigger the pause screen
-//	//if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)
-//	//	requestStackPush(States::Pause);
-//
-//	return true;
-//}
+bool GameState::handleEvent(WPARAM btnState)
+{
+	requestStackPop();
+	requestStackPush(States::GAME);
+	return true;
+}
+
+bool GameState::handleRealtimeInput()
+{
+	return true;
+}
 
 #pragma endregion

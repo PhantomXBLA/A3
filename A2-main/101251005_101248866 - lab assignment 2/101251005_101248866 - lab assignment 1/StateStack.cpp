@@ -29,17 +29,26 @@ void StateStack::draw()
 		state->draw();
 }
 
-//void StateStack::handleEvent(const sf::Event& event)
-//{
-//	// Iterate from top to bottom, stop as soon as handleEvent() returns false
-//	for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)
-//	{
-//		if (!(*itr)->handleEvent(event))
-//			break;
-//	}
-//
-//	applyPendingChanges();
-//}
+void StateStack::handleEvent(WPARAM btnState)
+{
+	// Iterate from top to bottom, stop as soon as handleEvent() returns false
+	for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)
+	{
+		if (!(*itr)->handleEvent(btnState))
+			break;
+	}
+
+	applyPendingChanges();
+}
+
+void StateStack::handleRealtimeInput()
+{
+	for (auto itr = mStack.rbegin(); itr != mStack.rend(); ++itr)
+	{
+		if (!(*itr)->handleRealtimeInput())
+			break;
+	}
+}
 
 void StateStack::pushState(States::ID stateID)
 {

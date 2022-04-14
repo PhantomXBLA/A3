@@ -10,7 +10,7 @@ public:
     virtual bool update(const GameTimer& gt)override;
     
     RenderItem* mTitleRitem = nullptr;
-    //virtual bool handleEvent(WPARAM btnState)override;
-    //virtual bool handleRealtimeInput()override;
+    virtual bool handleEvent(WPARAM btnState)override;
+    virtual bool handleRealtimeInput()override;
 
 };

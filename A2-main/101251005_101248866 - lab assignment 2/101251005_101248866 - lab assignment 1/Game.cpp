@@ -3,6 +3,7 @@
 #include "States.h"
 #include "GameState.h"
 #include "TitleState.h"
+#include "MenuState.h"
 //#include "MenuState.h"
 //#include "OptionState.h"
 //#include "PauseState.h"
@@ -85,8 +86,9 @@ bool Game::Initialize()
 	
 
 	BuildMaterials();
+	//mStateStack.pushState(States::MENU);
 	mStateStack.pushState(States::TITLE);
-	//StateStack.pushState(States::GAME);
+	//mStateStack.pushState(States::GAME);
 	BuildRenderItems();
 	BuildFrameResources();
 	
@@ -179,6 +181,8 @@ void Game::Draw(const GameTimer& gt)
 	auto passCB = mCurrFrameResource->PassCB->Resource();
 	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
 
+	mStateStack.draw();
+	
 	DrawRenderItems(mCommandList.Get(), mRitemLayer[(int)RenderLayer::Opaque]);
 
 	mCommandList->SetPipelineState(mPSOs["alphaTested"].Get());
@@ -213,7 +217,7 @@ void Game::Draw(const GameTimer& gt)
 	// set until the GPU finishes processing all the commands prior to this Signal().
 	mCommandQueue->Signal(mFence.Get(), mCurrentFence);
 	//sceneNode.draw(this);
-
+	
 	//world.draw();
 }
 
@@ -488,6 +492,13 @@ void Game::LoadTextures()
 		mCommandList.Get(), titleTex->Filename.c_str(),
 		titleTex->Resource, titleTex->UploadHeap));
 
+	auto menuTex = std::make_unique<Texture>();
+	menuTex->Name = "menuTex";
+	menuTex->Filename = L"../../Textures/MenuScreen.dds";
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), menuTex->Filename.c_str(),
+		menuTex->Resource, menuTex->UploadHeap));
+
 	auto desertTex = std::make_unique<Texture>();
 	desertTex->Name = "desertTex";
 	desertTex->Filename = L"../../Textures/desert.dds";
@@ -510,6 +521,7 @@ void Game::LoadTextures()
 		raptorTex->Resource, raptorTex->UploadHeap));
 
 	mTextures[titleTex->Name] = std::move(titleTex);
+	mTextures[menuTex->Name] = std::move(menuTex);
 	mTextures[desertTex->Name] = std::move(desertTex);
 	mTextures[eagleTex->Name] = std::move(eagleTex);
 	mTextures[raptorTex->Name] = std::move(raptorTex);
@@ -573,6 +585,7 @@ void Game::BuildDescriptorHeaps()
 	CD3DX12_CPU_DESCRIPTOR_HANDLE hDescriptor(mSrvDescriptorHeap->GetCPUDescriptorHandleForHeapStart());
 
 	auto titleTex = mTextures["titleTex"]->Resource;
+	auto menuTex = mTextures["menuTex"]->Resource;
 	auto desertTex = mTextures["desertTex"]->Resource;
 	auto eagleTex = mTextures["eagleTex"]->Resource;
 	auto raptorTex = mTextures["raptorTex"]->Resource;
@@ -599,6 +612,11 @@ void Game::BuildDescriptorHeaps()
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 	srvDesc.Format = titleTex->GetDesc().Format;
 	md3dDevice->CreateShaderResourceView(titleTex.Get(), &srvDesc, hDescriptor);
+
+	//Title Descriptor
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = menuTex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(menuTex.Get(), &srvDesc, hDescriptor);
 
 }
 
@@ -1387,7 +1405,7 @@ void Game::BuildFrameResources() //change 5 to mwaves->vertex count
 	for (int i = 0; i < gNumFrameResources; ++i)
 	{
 		mFrameResources.push_back(std::make_unique<FrameResource>(md3dDevice.Get(),
-			1, (UINT)mAllRitems.size(), (UINT)mMaterials.size(),5));
+			1, (UINT)mAllRitems.size(), (UINT)mMaterials.size(), 10));
 	}
 }
 
@@ -1437,13 +1455,22 @@ void Game::BuildMaterials()
 	title->Roughness = 0.0f;
 	mMaterials["title"] = std::move(title);
 
+	auto menu = std::make_unique<Material>();
+	menu->Name = "title";
+	menu->MatCBIndex = MatCBIndex++;
+	menu->DiffuseSrvHeapIndex = DiffuseSrvHeapIndex++;
+	menu->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	menu->FresnelR0 = XMFLOAT3(0.2f, 0.2f, 0.2f);
+	menu->Roughness = 0.0f;
+	mMaterials["menu"] = std::move(menu);
+
 }
 
 void Game::RegisterStates()
 {
 	mStateStack.registerState<TitleState>(States::TITLE);
 	mStateStack.registerState<GameState>(States::GAME);
-	//mStateStack.registerState<MenuState>(States::Menu);
+	mStateStack.registerState<MenuState>(States::MENU);
 	//mStateStack.registerState<PauseState>(States::Pause);
 	//mStateStack.registerState<OptionState>(States::Options);
 }
@@ -1481,33 +1508,34 @@ void Game::BuildRenderItems()
 
 void Game::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vector<RenderItem*>& ritems)
 {
-	UINT objCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(ObjectConstants));
-	UINT matCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(MaterialConstants));
 
-	auto objectCB = mCurrFrameResource->ObjectCB->Resource();
-	auto matCB = mCurrFrameResource->MaterialCB->Resource();
+	//UINT objCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(ObjectConstants));
+	//UINT matCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(MaterialConstants));
 
-	// For each render item...
-	for (size_t i = 0; i < ritems.size(); ++i)
-	{
-		auto ri = ritems[i];
+	//auto objectCB = mCurrFrameResource->ObjectCB->Resource();
+	//auto matCB = mCurrFrameResource->MaterialCB->Resource();
 
-		cmdList->IASetVertexBuffers(0, 1, &ri->Geo->VertexBufferView());
-		cmdList->IASetIndexBuffer(&ri->Geo->IndexBufferView());
-		cmdList->IASetPrimitiveTopology(ri->PrimitiveType);
+	//// For each render item...
+	//for (size_t i = 0; i < ritems.size(); ++i)
+	//{
+	//	auto ri = ritems[i];
 
-		CD3DX12_GPU_DESCRIPTOR_HANDLE tex(mSrvDescriptorHeap->GetGPUDescriptorHandleForHeapStart());
-		tex.Offset(ri->Mat->DiffuseSrvHeapIndex, mCbvSrvDescriptorSize);
+	//	cmdList->IASetVertexBuffers(0, 1, &ri->Geo->VertexBufferView());
+	//	cmdList->IASetIndexBuffer(&ri->Geo->IndexBufferView());
+	//	cmdList->IASetPrimitiveTopology(ri->PrimitiveType);
 
-		D3D12_GPU_VIRTUAL_ADDRESS objCBAddress = objectCB->GetGPUVirtualAddress() + ri->ObjCBIndex * objCBByteSize;
-		D3D12_GPU_VIRTUAL_ADDRESS matCBAddress = matCB->GetGPUVirtualAddress() + ri->Mat->MatCBIndex * matCBByteSize;
+	//	CD3DX12_GPU_DESCRIPTOR_HANDLE tex(mSrvDescriptorHeap->GetGPUDescriptorHandleForHeapStart());
+	//	tex.Offset(ri->Mat->DiffuseSrvHeapIndex, mCbvSrvDescriptorSize);
 
-		cmdList->SetGraphicsRootDescriptorTable(0, tex);
-		cmdList->SetGraphicsRootConstantBufferView(1, objCBAddress);
-		cmdList->SetGraphicsRootConstantBufferView(3, matCBAddress);
+	//	D3D12_GPU_VIRTUAL_ADDRESS objCBAddress = objectCB->GetGPUVirtualAddress() + ri->ObjCBIndex * objCBByteSize;
+	//	D3D12_GPU_VIRTUAL_ADDRESS matCBAddress = matCB->GetGPUVirtualAddress() + ri->Mat->MatCBIndex * matCBByteSize;
 
-		cmdList->DrawIndexedInstanced(ri->IndexCount, 1, ri->StartIndexLocation, ri->BaseVertexLocation, 0);
-	}
+	//	cmdList->SetGraphicsRootDescriptorTable(0, tex);
+	//	cmdList->SetGraphicsRootConstantBufferView(1, objCBAddress);
+	//	cmdList->SetGraphicsRootConstantBufferView(3, matCBAddress);
+
+	//	cmdList->DrawIndexedInstanced(ri->IndexCount, 1, ri->StartIndexLocation, ri->BaseVertexLocation, 0);
+	//}
 
 
 }

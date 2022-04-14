@@ -1,8 +1,9 @@
 #include "State.h"
 #include "StateStack.h"
+#include "Game.h"
 
 
-State::Context::Context(Game* game, Player* player) : game(game), player(player), mSceneGraph(new SceneNode(game))
+State::Context::Context(Game* game, Player* player) : game(game), player(player), mSceneGraph(new SceneNode(game)), world(new World(game))
 {
 }
 
@@ -31,9 +32,5 @@ void State::requestStateClear()
 	mStack->clearStates();
 }
 
-//State::Context State::getContext() const
-//{
-//	return mContext;
-//}
 
 

@@ -39,6 +39,7 @@ public:
 
 	virtual bool Initialize();
 	virtual LRESULT MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam);
+	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> mCommandList;
 
 protected:
 	virtual void CreateRtvAndDsvDescriptorHeaps();
@@ -98,7 +99,8 @@ protected:
 
 	Microsoft::WRL::ComPtr<ID3D12CommandQueue> mCommandQueue;
 	Microsoft::WRL::ComPtr<ID3D12CommandAllocator> mDirectCmdListAlloc;
-	Microsoft::WRL::ComPtr<ID3D12GraphicsCommandList> mCommandList;
+
+
 
 	static const int SwapChainBufferCount = 2;
 	int mCurrBackBuffer = 0;

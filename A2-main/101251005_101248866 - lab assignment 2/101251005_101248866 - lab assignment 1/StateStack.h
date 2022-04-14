@@ -21,7 +21,8 @@ public:
 
 	void				update(const GameTimer& gt);
 	void				draw();
-	//void				handleEvent(const GameTimer& gt);
+	void				handleEvent(WPARAM btnState);
+	void				handleRealtimeInput();
 
 	void				pushState(States::ID stateID);
 	void				popState();

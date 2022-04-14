@@ -9,7 +9,7 @@
 class World
 {
 public:
-	World(Game* game, State* state);
+	World(Game* game);
 	void								update(const GameTimer& gt);
 	void								drawOcean(Game* gameRef);
 	void								buildScene();

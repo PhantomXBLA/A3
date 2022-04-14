@@ -75,7 +75,7 @@ class SceneNode
 		virtual unsigned int	getCategory() const;
 		void					onCommand(const Command& command, const GameTimer& gt);
 		XMFLOAT2 mPosition;
-
+		Game* game;
 
 		
 
@@ -92,13 +92,13 @@ class SceneNode
 	
 		std::vector<Ptr> mChildren;
 		SceneNode* mParent;
-	
+
 		
 		
 
 
 	protected:
-		Game* game;
+
 		RenderItem* mRenderItem;
 	
 };
