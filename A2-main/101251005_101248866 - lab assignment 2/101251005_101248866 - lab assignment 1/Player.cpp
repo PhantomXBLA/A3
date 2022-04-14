@@ -88,7 +88,12 @@ void Player::handleRealtimeInput(CommandQueue& commands, const GameTimer& gt)
 		if (found != mKeyBinding.end())
 			commands.push(mActionBinding[found->second]);
 
-	}else
+	}
+
+	
+
+
+	else
 	{
 		commands.push(mActionBinding[Stop]);
 	}

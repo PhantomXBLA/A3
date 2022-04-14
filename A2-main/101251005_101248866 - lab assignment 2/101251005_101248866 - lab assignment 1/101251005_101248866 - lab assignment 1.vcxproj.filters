@@ -99,6 +99,9 @@
     <ClCompile Include="Background.cpp">
       <Filter>Source Files\Added</Filter>
     </ClCompile>
+    <ClCompile Include="PauseState.cpp">
+      <Filter>Source Files\Added</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -180,6 +183,9 @@
       <Filter>Header Files\Added</Filter>
     </ClInclude>
     <ClInclude Include="Background.h">
+      <Filter>Header Files\Added</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseState.h">
       <Filter>Header Files\Added</Filter>
     </ClInclude>
   </ItemGroup>

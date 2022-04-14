@@ -34,6 +34,12 @@ bool GameState::update(const GameTimer& gt)
 	CommandQueue& commands = mContext->world->getCommandQueue();
 	mContext->player->handleRealtimeInput(commands, gt);
 
+	if (GetAsyncKeyState('P'))
+	{
+		requestStackPop();
+		requestStackPush(States::PAUSE);
+	}
+
 	return true;
 }
 

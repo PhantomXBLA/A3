@@ -4,6 +4,7 @@
 #include "GameState.h"
 #include "TitleState.h"
 #include "MenuState.h"
+#include "PauseState.h"
 //#include "MenuState.h"
 //#include "OptionState.h"
 //#include "PauseState.h"
@@ -498,6 +499,13 @@ void Game::LoadTextures()
 	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
 		mCommandList.Get(), menuTex->Filename.c_str(),
 		menuTex->Resource, menuTex->UploadHeap));
+	
+	auto pauseTex = std::make_unique<Texture>();
+	pauseTex->Name = "pauseTex";
+	pauseTex->Filename = L"../../Textures/PauseScreen.dds";
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), pauseTex->Filename.c_str(),
+		pauseTex->Resource, pauseTex->UploadHeap));
 
 	auto desertTex = std::make_unique<Texture>();
 	desertTex->Name = "desertTex";
@@ -522,6 +530,7 @@ void Game::LoadTextures()
 
 	mTextures[titleTex->Name] = std::move(titleTex);
 	mTextures[menuTex->Name] = std::move(menuTex);
+	mTextures[pauseTex->Name] = std::move(pauseTex);
 	mTextures[desertTex->Name] = std::move(desertTex);
 	mTextures[eagleTex->Name] = std::move(eagleTex);
 	mTextures[raptorTex->Name] = std::move(raptorTex);
@@ -586,6 +595,7 @@ void Game::BuildDescriptorHeaps()
 
 	auto titleTex = mTextures["titleTex"]->Resource;
 	auto menuTex = mTextures["menuTex"]->Resource;
+	auto pauseTex = mTextures["pauseTex"]->Resource;
 	auto desertTex = mTextures["desertTex"]->Resource;
 	auto eagleTex = mTextures["eagleTex"]->Resource;
 	auto raptorTex = mTextures["raptorTex"]->Resource;
@@ -618,6 +628,10 @@ void Game::BuildDescriptorHeaps()
 	srvDesc.Format = menuTex->GetDesc().Format;
 	md3dDevice->CreateShaderResourceView(menuTex.Get(), &srvDesc, hDescriptor);
 
+	//Title Descriptor
+	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
+	srvDesc.Format = pauseTex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(pauseTex.Get(), &srvDesc, hDescriptor);
 }
 
 void Game::BuildShadersAndInputLayout()
@@ -1464,6 +1478,15 @@ void Game::BuildMaterials()
 	menu->Roughness = 0.0f;
 	mMaterials["menu"] = std::move(menu);
 
+	auto pause = std::make_unique<Material>();
+	pause->Name = "pause";
+	pause->MatCBIndex = MatCBIndex++;
+	pause->DiffuseSrvHeapIndex = DiffuseSrvHeapIndex++;
+	pause->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
+	pause->FresnelR0 = XMFLOAT3(0.2f, 0.2f, 0.2f);
+	pause->Roughness = 0.0f;
+	mMaterials["pause"] = std::move(pause);
+
 }
 
 void Game::RegisterStates()
@@ -1471,8 +1494,7 @@ void Game::RegisterStates()
 	mStateStack.registerState<TitleState>(States::TITLE);
 	mStateStack.registerState<GameState>(States::GAME);
 	mStateStack.registerState<MenuState>(States::MENU);
-	//mStateStack.registerState<PauseState>(States::Pause);
-	//mStateStack.registerState<OptionState>(States::Options);
+	mStateStack.registerState<PauseState>(States::PAUSE);
 }
 
 void Game::BuildRenderItems()
