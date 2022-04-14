@@ -93,6 +93,9 @@
     <ClCompile Include="TitleState.cpp">
       <Filter>Source Files\Added</Filter>
     </ClCompile>
+    <ClCompile Include="MenuState.cpp">
+      <Filter>Source Files\Added</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h">
@@ -168,6 +171,9 @@
       <Filter>Header Files\Added</Filter>
     </ClInclude>
     <ClInclude Include="TitleState.h">
+      <Filter>Header Files\Added</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuState.h">
       <Filter>Header Files\Added</Filter>
     </ClInclude>
   </ItemGroup>

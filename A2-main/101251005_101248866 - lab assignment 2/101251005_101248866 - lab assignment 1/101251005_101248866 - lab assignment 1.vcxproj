@@ -169,6 +169,7 @@
     <ClCompile Include="GeometryGenerator.cpp" />
     <ClCompile Include="MathHelper.cpp" />
     <ClCompile Include="FrameResource.cpp" />
+    <ClCompile Include="MenuState.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="State.cpp" />
@@ -213,6 +214,7 @@
     <ClInclude Include="GameTimer.h" />
     <ClInclude Include="GeometryGenerator.h" />
     <ClInclude Include="MathHelper.h" />
+    <ClInclude Include="MenuState.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneNode.h" />
     <ClInclude Include="State.h" />
