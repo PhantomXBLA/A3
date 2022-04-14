@@ -58,5 +58,10 @@ bool MenuState::handleRealtimeInput()
 		requestStackPush(States::GAME);
 
 	}
+
+	if (GetAsyncKeyState('Q'))
+	{
+		PostQuitMessage(0);
+	}
 	return true;
 }

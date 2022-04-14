@@ -67,5 +67,12 @@ bool PauseState::handleRealtimeInput()
 
 
 	}
+
+	if (GetAsyncKeyState('M'))
+	{
+		mContext->game->FlushCommandQueue();
+		requestStackPop();
+		requestStackPush(States::MENU);
+	}
 	return true;
 }
