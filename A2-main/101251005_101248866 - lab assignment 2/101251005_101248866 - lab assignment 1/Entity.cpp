@@ -9,7 +9,7 @@ Entity::Entity(Game* game) : SceneNode(game)
 void Entity::setVelocity(DirectX::XMFLOAT2 velocity)
 {
 	mVelocity = velocity;
-	OutputDebugStringA(std::string("Acceleration Set").c_str());
+	//OutputDebugStringA(std::string("Acceleration Set").c_str());
 }
 
 void Entity::setVelocity(float vx, float vy)

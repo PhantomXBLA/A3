@@ -37,12 +37,22 @@ void TitleState::draw()
 bool TitleState::update(const GameTimer& gt)
 {
 	mContext->world->update(gt);
-	mContext->mSceneGraph->draw();
+	//mContext->mSceneGraph->draw();
 
-	if (d3dUtil::IsKeyDown('W'))
+	//if (d3dUtil::IsKeyDown('W'))
+	//{
+	//	requestStackPop();
+	//	requestStackPush(States::MENU);
+	//}
+	//
+	//
+
+	CommandQueue& commands = mContext->world->getCommandQueue();
+	if (GetAsyncKeyState('W'))
 	{
 		requestStackPop();
 		requestStackPush(States::MENU);
+
 	}
 
     return true;

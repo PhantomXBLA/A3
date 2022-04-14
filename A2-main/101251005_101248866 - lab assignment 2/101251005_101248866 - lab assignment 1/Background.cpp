@@ -23,7 +23,6 @@ void Background::drawCurrent() const
 
 	if (mRenderItem)
 	{
-
 		game->mCommandList.Get()->IASetVertexBuffers(0, 1, &mRenderItem->Geo->VertexBufferView());
 		game->mCommandList.Get()->IASetIndexBuffer(&mRenderItem->Geo->IndexBufferView());
 		game->mCommandList.Get()->IASetPrimitiveTopology(mRenderItem->PrimitiveType);
